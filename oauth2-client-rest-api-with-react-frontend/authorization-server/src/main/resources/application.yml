@@ -1,0 +1,44 @@
+### Spring ###
+spring:
+  # Application
+  application:
+    name: spring-boot-oauth2-client-authorization-server
+  # Security
+  security:
+    user:
+      name: john.doe
+      password: "{noop}abcd1234"
+      roles:
+        - USER
+    oauth2:
+      authorizationserver:
+        client:
+          generic-client:
+            registration:
+              client-id: generic-client
+              client-secret: "{noop}abcd1234"
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
+              scopes:
+                - openid
+                - profile
+                - roles
+              redirect-uris:
+                - http://localhost:3000/login/oauth2/code/generic-client
+              client-authentication-methods:
+                - client_secret_basic
+
+### Logging ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+
+### Server ###
+server:
+  port: 8888
+  error:
+    include-stacktrace: ALWAYS
+    whitelabel:
+      enabled: false
