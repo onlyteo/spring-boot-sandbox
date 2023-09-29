@@ -1,0 +1,45 @@
+### APP ###
+app:
+  # Security
+  security:
+    whitelisted-paths:
+      - /webjars/**
+      - /assets/**
+      - /favicon.ico
+      - /error
+
+### Spring ###
+spring:
+  # Application
+  application:
+    name: spring-boot-oauth2-client-frontend-api
+  # Security
+  security:
+    oauth2:
+      client:
+        registration:
+          generic-client:
+            provider: authorization-server
+            client-id: generic-client
+            client-secret: abcd1234
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+              - profile
+              - roles
+            redirect-uri: http://localhost:3000/login/oauth2/code/generic-client
+        provider:
+          authorization-server:
+            issuer-uri: http://127.0.0.1:8888 # Use IP to avoid session cookie collision
+
+### Logging ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+
+### Server ###
+server:
+  port: 8080
+  error:
+    include-stacktrace: ALWAYS

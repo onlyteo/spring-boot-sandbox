@@ -43,7 +43,8 @@
 
     <!-- MODULES -->
     <modules>
-        <module>oauth2-client-rest-api-with-react-frontend</module>
+        <module>oauth2-react-client</module>
+        <module>oauth2-extended-authorization-server</module>
     </modules>
 
     <!-- DEPENDENCIES -->

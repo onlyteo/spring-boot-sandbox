@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<body>
+<main layout:fragment="content" class="container" role="main">
+    <div class="description-box px-3 py-5 rounded-3">
+        <h2 class="emphasized-text" th:text="#{error.page.title}"></h2>
+        <table>
+            <tr>
+                <th th:text="#{error.table.timestamp}"></th>
+                <td class="ps-3" th:text="${timestamp}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{error.table.error}"></th>
+                <td class="ps-3" th:text="${error}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{error.table.status}"></th>
+                <td class="ps-3" th:text="${status}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{error.table.path}"></th>
+                <td class="ps-3" th:text="${path}"></td>
+            </tr>
+            <tr th:if="${message != null}">
+                <th th:text="#{error.table.message}"></th>
+                <td class="ps-3" th:text="${message}"></td>
+            </tr>
+            <tr th:if="${exception != null}">
+                <th th:text="#{error.table.exception}"></th>
+                <td class="ps-3" th:text="${exception}"></td>
+            </tr>
+            <tr th:if="${trace != null}">
+                <th th:text="#{error.table.trace}"></th>
+                <td class="ps-3">
+                    <pre th:text="${trace}"></pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+</main>
+</body>
+</html>

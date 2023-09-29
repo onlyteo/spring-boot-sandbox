@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<body>
+<main layout:fragment="content" class="container" role="main">
+    <div class="login-box px-3 py-5 mx-auto rounded-3">
+        <h2 class="emphasized-text" th:text="#{register.page.title}"></h2>
+        <form th:action="@{/register}" th:object="${registerFormData}" method="post">
+            <div class="form-group mb-3">
+                <label for="username" th:text="#{register.form.username}"></label>
+                <input id="username" th:class="form-control" th:type="text"
+                       th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : ''">
+                <div id="usernameFeedback" class="invalid-feedback fs-6">
+                    <span th:errors="*{username}"></span>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password" th:text="#{register.form.password}"></label>
+                <input id="password" th:class="form-control" th:type="password"
+                       th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''">
+                <div id="passwordFeedback" class="invalid-feedback fs-6">
+                    <span th:errors="*{password}"></span>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="confirmPassword" th:text="#{register.form.confirmPassword}"></label>
+                <input id="confirmPassword" th:class="form-control" th:type="password"
+                       th:field="*{confirmPassword}"
+                       th:classappend="${#fields.hasErrors('confirmPassword')} ? 'is-invalid' : ''">
+                <div id="confirmPasswordFeedback" class="invalid-feedback fs-6">
+                    <span th:errors="*{confirmPassword}"></span>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <a class="btn btn-secondary" th:href="@{/login}" th:text="#{register.form.cancel-button}"></a>
+                <button class="btn btn-success float-end" th:type="submit"
+                        th:text="#{register.form.register-button}"></button>
+            </div>
+            <input th:type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+    </div>
+    <div class="alert alert-danger" role="alert" th:if="${param.error != null}">
+        <span th:text="#{register.message.error}"></span>
+    </div>
+</main>
+</body>
+</html>
