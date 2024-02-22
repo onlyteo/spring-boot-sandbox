@@ -1,0 +1,60 @@
+version: "3.7"
+
+services:
+  sandbox.kafka-connect:
+    image: confluentinc/cp-kafka-connect:latest
+    container_name: sandbox.kafka-connect
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: sandbox.kafka:29092
+      CONNECT_GROUP_ID: kafka-connect
+      CONNECT_CONFIG_STORAGE_TOPIC: __connect_configs
+      CONNECT_OFFSET_STORAGE_TOPIC: __connect_offsets
+      CONNECT_STATUS_STORAGE_TOPIC: __connect_status
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_REST_ADVERTISED_HOST_NAME: "localhost"
+      #CONNECT_LOG4J_ROOT_LOGLEVEL: DEBUG
+      CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components,/usr/share/kafka-connect"
+    command:
+      - bash
+      - -c
+      - |
+        echo "Installing Connectors"
+        confluent-hub install --no-prompt debezium/debezium-connector-mysql:2.2.1
+        echo "Launching Kafka Connect Worker"
+        /etc/confluent/docker/run &
+        sleep infinity
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./resources/connectors:/usr/share/kafka-connect/connectors
+      - kafka.secrets:/etc/kafka/secrets
+      - kafka.data:/var/lib/kafka/data
+      - kafka-connect.secrets:/etc/kafka-connect/secrets
+      - kafka-connect.jars:/etc/kafka-connect/jars
+    networks:
+      - kafka
+      - mssql
+
+volumes:
+  kafka.secrets:
+    name: sandbox.kafka-connect.kafka-secrets
+  kafka.data:
+    name: sandbox.kafka-connect.kafka-data
+  kafka-connect.secrets:
+    name: sandbox.kafka-connect.connect-secrets
+  kafka-connect.jars:
+    name: sandbox.kafka-connect.connect-jars
+
+networks:
+  kafka:
+    name: sandbox.kafka
+    external: true
+  mssql:
+    name: sandbox.mssql
+    external: true

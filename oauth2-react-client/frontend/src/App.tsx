@@ -23,10 +23,10 @@ const App: FC = (): ReactElement => {
 
     useEffect(() => {
         GET<User>("/api/user")
-            .then(response => userDispatch({type: 'SUCCESS', data: response.data}))
+            .then(response => userDispatch({status: 'SUCCESS', data: response.data}))
             .catch(error => {
                 console.log("ERROR", error)
-                userDispatch({type: 'FAILED'})
+                userDispatch({status: 'FAILED'})
             });
     }, []);
 

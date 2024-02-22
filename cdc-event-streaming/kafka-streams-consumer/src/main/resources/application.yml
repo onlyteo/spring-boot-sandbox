@@ -1,0 +1,27 @@
+### Spring ###
+spring:
+  # Application
+  application:
+    name: spring-boot-cdc-event-streaming-kafka-streams-pipeline
+  # Profiles
+  profiles:
+    active: local
+  # AOP
+  aop:
+    proxy-target-class: true
+  # JMX
+  jmx:
+    enabled: false
+  # Jackson
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.StdDateFormat
+    default-property-inclusion: NON_NULL
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+      WRITE_DURATIONS_AS_TIMESTAMPS: false
+    deserialization:
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+    generator:
+      WRITE_BIGDECIMAL_AS_PLAIN: true
+    mapper:
+      ACCEPT_CASE_INSENSITIVE_PROPERTIES: true

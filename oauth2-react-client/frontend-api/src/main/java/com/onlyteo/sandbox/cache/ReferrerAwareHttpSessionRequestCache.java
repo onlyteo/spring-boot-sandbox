@@ -7,6 +7,10 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SimpleSavedRequest;
 import org.springframework.util.StringUtils;
 
+/**
+ * Custom request cache implementation that will save the URL from the {@code Referer} HTTP header. If the
+ * {@code Referer} header is not present in the request it will save the original request URL.
+ */
 public class ReferrerAwareHttpSessionRequestCache extends HttpSessionRequestCache {
 
     private static final String SAVED_REQUEST_ATTRIBUTE_NAME = "SPRING_SECURITY_SAVED_REQUEST";

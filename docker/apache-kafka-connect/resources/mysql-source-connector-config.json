@@ -1,0 +1,26 @@
+{
+  "name" : "debezium-mysql-source-connector",
+  "config" : {
+    "heartbeat.interval.ms" : "3000",
+    "autoReconnect" : "true",
+    "connector.class" : "io.debezium.connector.mysql.MySqlConnector",
+    "tasks.max" : "1",
+    "topic.prefix" : "cdc.source",
+    "table.include.list" : "sandbox.account,sandbox.status",
+    "topic.creation.enable" : "true",
+    "topic.creation.default.replication.factor" : 1,
+    "topic.creation.default.partitions" : 1,
+    "database.hostname" : "sandbox.mysql",
+    "database.port" : "3306",
+    "database.user" : "sandbox_debezium",
+    "database.password" : "G4nd4lf",
+    "database.server.id" : "1",
+    "database.include.list" : "sandbox",
+    "database.whitelist" : "sandbox",
+    "database.allowPublicKeyRetrieval" : "true",
+    "schema.history.internal.kafka.bootstrap.servers" : "sandbox.kafka:29092",
+    "schema.history.internal.kafka.topic" : "__connect_schema_history",
+    "schema.history.internal.consumer.security.protocol" : "PLAINTEXT",
+    "schema.history.internal.producer.security.protocol" : "PLAINTEXT"
+  }
+}

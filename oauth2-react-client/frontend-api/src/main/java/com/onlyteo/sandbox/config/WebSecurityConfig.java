@@ -3,12 +3,14 @@ package com.onlyteo.sandbox.config;
 import com.onlyteo.sandbox.cache.ReferrerAwareHttpSessionRequestCache;
 import com.onlyteo.sandbox.login.UnauthenticatedEntryPoint;
 import com.onlyteo.sandbox.properties.AppSecurityProperties;
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -20,6 +22,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @EnableConfigurationProperties(AppSecurityProperties.class)
+@EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class WebSecurityConfig {
 
@@ -81,12 +84,12 @@ public class WebSecurityConfig {
      * to the OAuth2 login endpoint. When the JavScript frontend tries to fetch data from the REST API and receives a
      * 401 HTTP status it can retrieve the login URL from the {@code Location} HTTP header and redirect the browser to
      * that URL in order to initiate the OAuth2 Authorization Code Grant login flow.
-     *
+     * @param clientProperties - OAuth2 client properties.
      * @return The {@link UnauthenticatedEntryPoint} bean.
      */
     @Bean
-    public AuthenticationEntryPoint authenticationEntryPoint() {
-        return new UnauthenticatedEntryPoint("generic-client");
+    public AuthenticationEntryPoint authenticationEntryPoint(final OAuth2ClientProperties clientProperties) {
+        return new UnauthenticatedEntryPoint(clientProperties);
     }
 
     /**

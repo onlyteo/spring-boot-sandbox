@@ -1,0 +1,4 @@
+CREATE USER sandbox WITH PASSWORD 'G4nd4lf';
+CREATE USER sandbox_debezium WITH PASSWORD 'G4nd4lf';
+
+CREATE DATABASE sandbox WITH OWNER sandbox;

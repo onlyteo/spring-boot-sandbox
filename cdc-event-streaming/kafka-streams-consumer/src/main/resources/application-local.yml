@@ -1,0 +1,31 @@
+### APP ###
+app:
+  # Kafka
+  kafka:
+    stream:
+      account-source-topic: cdc.source.account
+      status-source-topic: cdc.source.status
+
+### Spring ###
+spring:
+  # Kafka
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    consumer:
+      client-id: ${spring.application.name}
+      group-id: ${spring.application.name}
+      properties:
+        spring.json.trusted.packages: "*"
+
+### Logging ###
+logging:
+  # Level
+  level:
+    org.apache.kafka: WARN
+    org.springframework: INFO
+    com.onlyteo: DEBUG
+
+### Server ###
+server:
+  port: 8081

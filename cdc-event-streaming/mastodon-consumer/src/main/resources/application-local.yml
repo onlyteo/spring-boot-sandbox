@@ -1,0 +1,28 @@
+### APP ###
+app:
+  # REST
+  rest:
+    consumer:
+      mastodon:
+        url: <MASTODON URL>
+        bearer-token: <MASTODON BEARER TOKEN>
+
+### Spring ###
+spring:
+  # Datasource
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sandbox
+    username: sandbox
+    password: G4nd4lf
+
+### Logging ###
+logging:
+  # Level
+  level:
+    org.springframework: INFO
+    com.onlyteo: DEBUG
+
+### Server ###
+server:
+  port: 8080

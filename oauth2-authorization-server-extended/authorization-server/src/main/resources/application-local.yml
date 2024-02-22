@@ -1,0 +1,56 @@
+### APP ###
+app:
+  # Security
+  security:
+    users:
+      - username: bilbo
+        password: G4nd4lf
+        roles:
+          - USER
+    keys:
+      - key-id: 7530e691-49f8-4284-bc07-11825cb23b50
+        public-key-location: classpath:keys/public.pem
+        private-key-location: classpath:keys/private.pem
+
+### Spring ###
+spring:
+  # Datasource
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:sandbox;MODE=PostgreSQL;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  # Security
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          generic-client:
+            registration:
+              client-id: generic-client
+              client-secret: "{noop}G4nd4lf"
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
+              scopes:
+                - openid
+                - profile
+                - roles
+              redirect-uris:
+                - http://localhost:8080/login/oauth2/code/generic-client
+              client-authentication-methods:
+                - client_secret_basic
+
+### Logging ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+
+### Server ###
+server:
+  port: 8888
+  error:
+    include-stacktrace: ALWAYS
+    whitelabel:
+      enabled: false

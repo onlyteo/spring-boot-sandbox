@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  sandbox.mysql:
+    image: mysql
+    container_name: sandbox.mysql
+    environment:
+      MYSQL_USER: sandbox
+      MYSQL_PASSWORD: G4nd4lf
+      MYSQL_DATABASE: sandbox
+      MYSQL_ROOT_PASSWORD: G4nd4lf
+    command: --lower_case_table_names=1 --log-bin=bin.log --log-bin-index=bin.log.index --binlog_do_db=sandbox
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./resources/initdb.d:/docker-entrypoint-initdb.d
+      - mysql.conf:/etc/mysql/conf.d
+      - mysql.data:/var/lib/mysql
+    networks:
+      - mysql
+
+volumes:
+  mysql.conf:
+    name: sandbox.mysql.conf
+  mysql.data:
+    name: sandbox.mysql.data
+
+networks:
+  mysql:
+    name: sandbox.mysql
