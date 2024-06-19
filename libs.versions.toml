@@ -30,6 +30,7 @@ git-properties = { id = "com.gorylenko.gradle-git-properties", version.ref = "gi
 
 [libraries]
 # Kotlin
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit" }
 # Spring Boot
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }

@@ -2,10 +2,13 @@
 spring:
   # Application
   application:
-    name: spring-boot-oauth2-client-authorization-server
+    name: spring-boot-oauth2-react-client-authorization-server
   # Profiles
   profiles:
     active: local
+  # Messages
+  messages:
+    basename: locale/messages
   # Jackson
   jackson:
     date-format: com.fasterxml.jackson.databind.util.StdDateFormat
@@ -17,3 +20,9 @@ spring:
       ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
     generator:
       WRITE_BIGDECIMAL_AS_PLAIN: true
+
+### Server ###
+server:
+  error:
+    whitelabel:
+      enabled: false
