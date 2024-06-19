@@ -1,0 +1,113 @@
+[versions]
+kotlin = "1.9.23"
+spring-boot = "3.2.5"
+spring-dependencies = "1.1.4"
+jackson = "2.17.1"
+logback = "1.5.6"
+logstash-logback = "7.4"
+micrometer = "1.12.5"
+opentelemetry = "1.39.0"
+opentelemetry-instrumentation = "2.4.0"
+kafka = "3.7.0"
+webjars-jquery = "3.7.0"
+webjars-bootstrap = "5.3.1"
+webjars-popper = "2.11.7"
+webjars-locator = "0.47"
+webjars-fontawesome = "6.4.2"
+kotest = "5.9.0"
+mockk = "1.13.11"
+google-cloud-jib = "3.4.3"
+git-properties = "2.4.2"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependencies = { id = "io.spring.dependency-management", version.ref = "spring-dependencies" }
+google-cloud-jib = { id = "com.google.cloud.tools.jib", version.ref = "google-cloud-jib" }
+git-properties = { id = "com.gorylenko.gradle-git-properties", version.ref = "git-properties" }
+
+[libraries]
+# Kotlin
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit" }
+# Spring Boot
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
+spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc" }
+spring-boot-starter-logging = { module = "org.springframework.boot:spring-boot-starter-logging" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+# Spring Security
+spring-security-oauth2-authorization-server = { module = "org.springframework.security:spring-security-oauth2-authorization-server" }
+# Spring Kafka
+spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
+# Jackson
+jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
+# Logback
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-logback" }
+# Micrometer
+micrometer-prometheus-registry = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "micrometer" }
+# OpenTelemetry
+opentelemetry-kotlin = { module = "io.opentelemetry:opentelemetry-extension-kotlin", version.ref = "opentelemetry" }
+opentelemetry-instrumentation-annotations = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations", version.ref = "opentelemetry-instrumentation" }
+opentelemetry-java-agent = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent", version.ref = "opentelemetry-instrumentation" }
+# Flyway
+flyway-mysql = { module = "org.flywaydb:flyway-mysql" }
+# H2
+h2-database = { module = "com.h2database:h2" }
+# MySQL
+mysql-connector = { module = "com.mysql:mysql-connector-j" }
+# Kafka
+kafka-clients = { module = "org.apache.kafka:kafka-clients", version.ref = "kafka" }
+kafka-streams = { module = "org.apache.kafka:kafka-streams", version.ref = "kafka" }
+kafka-streams-test-utils = { module = "org.apache.kafka:kafka-streams-test-utils", version.ref = "kafka" }
+# Thymeleaf
+thymeleaf-layout-dialect = { module = "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect" }
+thymeleaf-extras-spring-security = { module = "org.thymeleaf.extras:thymeleaf-extras-springsecurity6" }
+# Webjars
+webjars-jquery = { module = "org.webjars:jquery", version.ref = "webjars-jquery" }
+webjars-bootstrap = { module = "org.webjars:bootstrap", version.ref = "webjars-bootstrap" }
+webjars-popper = { module = "org.webjars:popper.js", version.ref = "webjars-popper" }
+webjars-locator = { module = "org.webjars:webjars-locator", version.ref = "webjars-locator" }
+webjars-fontawesome = { module = "org.webjars:font-awesome", version.ref = "webjars-fontawesome" }
+# JUnit
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+# Kotest
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
+# Mockk
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+
+[bundles]
+logback = [
+    "logback-classic",
+    "logstash-logback-encoder"
+]
+webjars = [
+    "webjars-jquery",
+    "webjars-bootstrap",
+    "webjars-popper",
+    "webjars-locator",
+    "webjars-fontawesome"
+]
+kafka = [
+    "kafka-clients",
+    "kafka-streams"
+]
+junit = [
+    "kotlin-test-junit",
+    "junit-jupiter",
+    "junit-platform-launcher"
+]
+kotest = [
+    "kotest-runner-junit5",
+    "kotest-assertions-core",
+    "kotest-property"
+]

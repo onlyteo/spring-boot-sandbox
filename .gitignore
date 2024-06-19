@@ -1,63 +1,44 @@
-# General
-**/build-details.properties
-classes/
-eclipse-classes/
-.classpath
-.project
-.settings/
-target/
-version.txt
-*.lst
-blaze.properties
-*.orig
-*.mine
-*.mymetadata
-generated/
-ignoreme.txt
-*.log
-*.gz
-
-sql.log.*
-
-# Intellij
-.idea/
-*.swp
-*.iml
-*.iws
-*.ipr
-atlassian-ide-plugin.xml
-
-# VS Code
-*.code-workspace
-.factorypath
-
-# Sublime
-*.sublime-project
-*.sublime-workspace
-
-json2html.pyc
-stats.html
-jsconfig.json
-
-# Node
-node_modules/
+### Gradle ###
+.gradle/
 build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Maven ###
+target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Node ###
+node_modules/
 dist/
-yarn.lock
-package-lock.json
-
-# Ignore test-related files
-/coverage.data
-/coverage/
-
-
-Session.vim
-.DS_Store
-
-# JRebel
-rebel.xml
-.rebel.xml.bak
-rebel-remote.xml
-.rebel-remote.xml.bak
-grunt.status
-docker-compose.local.yml

@@ -1,0 +1,32 @@
+### Spring ###
+spring:
+  # Security
+  security:
+    oauth2:
+      client:
+        registration:
+          sandbox-oauth2-client:
+            provider: spring-authorization-server
+            client-id: sandbox-oauth2-client
+            client-secret: G4nd4lf
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+              - profile
+              - roles
+            redirect-uri: http://localhost:3000/login/oauth2/code/sandbox-oauth2-client # Use frontend host to allow login flow to go through browser
+        provider:
+          spring-authorization-server:
+            issuer-uri: http://127.0.0.1:8888 # Use IP to avoid session cookie collision
+
+### Logging ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+
+### Server ###
+server:
+  port: 8080
+  error:
+    include-stacktrace: ALWAYS
