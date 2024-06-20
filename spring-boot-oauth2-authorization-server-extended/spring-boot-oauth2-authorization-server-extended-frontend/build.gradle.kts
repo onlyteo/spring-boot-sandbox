@@ -2,12 +2,14 @@ val jvmMajorVersion: String by project
 val jvmVersion = JavaVersion.toVersion(jvmMajorVersion)
 
 plugins {
-    java
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependencies)
 }
 
 dependencies {
+    implementation(libs.kotlin.reflect)
     implementation(libs.spring.boot.starter.web)
     implementation(libs.spring.boot.starter.thymeleaf)
     implementation(libs.spring.boot.starter.validation)

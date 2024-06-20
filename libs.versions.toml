@@ -58,6 +58,7 @@ opentelemetry-kotlin = { module = "io.opentelemetry:opentelemetry-extension-kotl
 opentelemetry-instrumentation-annotations = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations", version.ref = "opentelemetry-instrumentation" }
 opentelemetry-java-agent = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent", version.ref = "opentelemetry-instrumentation" }
 # Flyway
+flyway-core = { module = "org.flywaydb:flyway-core" }
 flyway-mysql = { module = "org.flywaydb:flyway-mysql" }
 # H2
 h2-database = { module = "com.h2database:h2" }
