@@ -14,3 +14,23 @@ export async function GET<T>(url: string): Promise<ClientResponse<T>> {
         return {status}
     }
 }
+
+export async function POST<T, U>(url: string, body: U): Promise<ClientResponse<T>> {
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {"Content-Type": "application/json;charset=UTF-8"},
+        redirect: "manual",
+        body: JSON.stringify(body)
+    });
+    const {status} = response;
+    if (status === 401) {
+        window.location.pathname = response.headers.get("Location");
+        window.location.hash = '';
+        return {status}
+    } else if (status === 200) {
+        const data = await response.json();
+        return {status, data}
+    } else {
+        return {status}
+    }
+}

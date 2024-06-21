@@ -14,10 +14,10 @@ class MastodonRestConsumer(
     @Qualifier("mastodonRestClient") private val restClient: RestClient
 ) {
     fun search(
-        query: @NotBlank String?,
-        type: @NotBlank String?,
-        offset: @NotNull Int?,
-        limit: @NotNull Int?
+        @NotBlank query: String?,
+        @NotBlank type: String?,
+        @NotNull offset: Int?,
+        @NotNull limit: Int?
     ): ResponseEntity<SearchResultDto> {
         return restClient.get()
             .uri { url: UriBuilder ->

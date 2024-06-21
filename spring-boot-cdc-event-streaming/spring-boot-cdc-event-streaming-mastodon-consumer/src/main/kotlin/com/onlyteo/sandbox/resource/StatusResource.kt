@@ -17,7 +17,7 @@ class StatusResource(
     private val statusService: StatusService,
     private val mastodonRestConsumer: MastodonRestConsumer
 ) {
-    val logger: Logger = LoggerFactory.getLogger(StatusResource::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(StatusResource::class.java)
 
     @PostMapping
     fun post(

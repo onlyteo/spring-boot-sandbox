@@ -1,3 +1,13 @@
+### APP ###
+app:
+  # Security
+  security:
+    whitelisted-paths:
+      - /webjars/**
+      - /assets/**
+      - /favicon.ico
+      - /error
+
 ### Spring ###
 spring:
   # Application

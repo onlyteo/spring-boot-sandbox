@@ -4,7 +4,9 @@ export interface State<T> {
     error?: string
 }
 
+export type ActionStatus = 'LOADING' | 'SUCCESS' | 'FAILED'
+
 export interface Action<T> {
-    status: 'LOADING' | 'SUCCESS' | 'FAILED',
+    status: ActionStatus,
     data?: T
 }

@@ -13,9 +13,9 @@ data class AppSecurityProperties(
 )
 
 data class AppUserProperties(
-    @NotBlank val username: String,
-    @NotBlank val password: String,
-    @NotNull val roles: List<String>
+    @field:NotBlank val username: String,
+    @field:NotBlank val password: String,
+    @field:NotNull val roles: List<String>
 )
 
 data class AppKeyProperties(

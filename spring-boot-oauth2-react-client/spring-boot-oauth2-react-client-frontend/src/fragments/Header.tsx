@@ -13,16 +13,12 @@ import {
 
 library.add(faCircleInfo, faCircleUser, faHouse, faRightFromBracket, faScrewdriverWrench);
 
-const defaultUser: User = {
-    sub: 'N/A',
-}
-
 interface HomeProps {
-    userInfo: User
+    user: User
 }
 
 export const Header: FC<HomeProps> = (props: HomeProps): ReactElement => {
-    const {sub: username} = props.userInfo || defaultUser;
+    const {sub: username} = props.user;
 
     return (
         <header className="header mb-5">

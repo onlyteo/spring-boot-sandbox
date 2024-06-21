@@ -21,7 +21,7 @@ class StatusService(
     private val accountRepository: AccountRepository,
     private val statusRepository: StatusRepository
 ) {
-    val logger: Logger = LoggerFactory.getLogger(StatusService::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(StatusService::class.java)
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     fun upsert(@Valid @NotNull statusDto: StatusDto) {

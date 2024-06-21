@@ -1,9 +1,7 @@
 [versions]
-kotlin = "1.9.23"
-spring-boot = "3.2.5"
-spring-dependencies = "1.1.4"
-jackson = "2.17.1"
-logback = "1.5.6"
+kotlin = "1.9.24"
+spring-boot = "3.3.0"
+spring-dependencies = "1.1.5"
 logstash-logback = "7.4"
 micrometer = "1.12.5"
 opentelemetry = "1.39.0"
@@ -41,15 +39,13 @@ spring-boot-starter-validation = { module = "org.springframework.boot:spring-boo
 spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
 spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
 spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
+spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 # Spring Security
 spring-security-oauth2-authorization-server = { module = "org.springframework.security:spring-security-oauth2-authorization-server" }
 # Spring Kafka
 spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
-# Jackson
-jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
 # Logback
-logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-logback" }
 # Micrometer
 micrometer-prometheus-registry = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "micrometer" }
@@ -88,10 +84,6 @@ kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest"
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [bundles]
-logback = [
-    "logback-classic",
-    "logstash-logback-encoder"
-]
 webjars = [
     "webjars-jquery",
     "webjars-bootstrap",

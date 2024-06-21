@@ -1,12 +1,35 @@
 import path from "path";
-import webpack, {Configuration} from "webpack";
-import * as webPackDevServer from "webpack-dev-server";
+import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
+import ESLintWebpackPlugin from "eslint-webpack-plugin";
 import {TsconfigPathsPlugin} from "tsconfig-paths-webpack-plugin";
 
-const webpackConfig = (env): Configuration => ({
+const webpackConfig = (env): {
+    devtool: string;
+    output: { path: string; filename: string };
+    devServer: {
+        proxy: { context: string[]; secure: boolean; target: string }[];
+        static: string;
+        historyApiFallback: boolean;
+        port: number;
+        compress: boolean;
+        hot: boolean;
+        open: boolean
+    };
+    entry: string;
+    resolve: { extensions: string[]; plugins: TsconfigPathsPlugin[] };
+    plugins: (HtmlWebpackPlugin | webpack.DefinePlugin | ForkTsCheckerWebpackPlugin | ESLintWebpackPlugin)[];
+    module: {
+        rules: ({ test: RegExp; loader: string } | {
+            test: RegExp;
+            loader: string;
+            options: { transpileOnly: boolean };
+            exclude: RegExp
+        } | { test: RegExp; use: string[] } | { test: RegExp; use: string[]; enforce: string })[]
+    }
+} => ({
     entry: "./src/index.tsx",
     devtool: 'inline-source-map',
     resolve: {

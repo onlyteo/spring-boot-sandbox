@@ -54,6 +54,9 @@ class WebSecurityConfig {
         securityProperties: AppSecurityProperties
     ): SecurityFilterChain {
         return http
+            .csrf { config ->
+                config.disable()
+            }
             .authorizeHttpRequests { config ->
                 config
                     .requestMatchers(*securityProperties.whitelistedPaths.toTypedArray()).permitAll()

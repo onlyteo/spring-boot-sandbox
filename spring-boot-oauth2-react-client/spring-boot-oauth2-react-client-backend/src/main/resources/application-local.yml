@@ -1,0 +1,20 @@
+### Spring ###
+spring:
+  # Security
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8888
+
+### Logging ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+
+### Server ###
+server:
+  port: 8081
+  error:
+    include-stacktrace: ALWAYS

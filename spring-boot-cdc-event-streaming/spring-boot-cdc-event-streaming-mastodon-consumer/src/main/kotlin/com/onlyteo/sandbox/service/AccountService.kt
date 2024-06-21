@@ -19,7 +19,7 @@ class AccountService(
     private val conversionService: ConversionService,
     private val accountRepository: AccountRepository
 ) {
-    val logger: Logger = LoggerFactory.getLogger(AccountService::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(AccountService::class.java)
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     fun upsert(@Valid @NotNull accountDto: AccountDto) {

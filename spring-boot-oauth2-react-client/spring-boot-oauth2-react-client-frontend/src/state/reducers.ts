@@ -1,7 +1,31 @@
-import {Action, State, User} from "../types";
+import {Action, Greeting, State, User} from "../types";
+
+export const initialGreetingState: State<Greeting> = {
+    loading: false
+}
+
+export const greetingReducer = (state: State<Greeting>, action: Action<Greeting>): State<Greeting> => {
+    const {status, data} = action;
+
+    switch (status) {
+        case 'SUCCESS':
+            return {
+                loading: false,
+                data
+            }
+        case 'FAILED':
+            return {
+                loading: false,
+                error: 'BOOM!'
+            }
+        default:
+            return state
+    }
+};
 
 export const userInitialState: State<User> = {
-    loading: true
+    loading: true,
+    data: {sub: 'N/A'}
 }
 
 export const userReducer = (state: State<User>, action: Action<User>): State<User> => {
@@ -15,6 +39,7 @@ export const userReducer = (state: State<User>, action: Action<User>): State<Use
         case 'FAILED':
             return {
                 loading: false,
+                data: {sub: 'N/A'},
                 error: 'BOOM!'
             }
         default:

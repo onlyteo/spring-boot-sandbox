@@ -25,7 +25,7 @@ import org.springframework.kafka.support.serializer.JsonSerde
 @Configuration(proxyBeanMethods = false)
 class StatusKafkaConfig {
 
-    val logger: Logger = LoggerFactory.getLogger(StatusKafkaConfig::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(StatusKafkaConfig::class.java)
 
     @Bean
     fun statusEventValueSerde(objectMapper: ObjectMapper): JsonSerde<EventEnvelope<EventValue<StatusEvent>>> {

@@ -7,12 +7,12 @@ import {Home, NotFound} from "./pages";
 import {GET} from "./state/client";
 
 interface LayoutProps {
-    userInfo: User
+    user: User
 }
 
 const Layout: FC<LayoutProps> = (props: LayoutProps): ReactElement => (
     <>
-        <Header userInfo={props.userInfo}/>
+        <Header user={props.user}/>
         <Outlet/>
         <Footer/>
     </>
@@ -32,7 +32,7 @@ const App: FC = (): ReactElement => {
 
     const router = createBrowserRouter([
         {
-            element: <Layout userInfo={userState.data}/>,
+            element: <Layout user={userState.data}/>,
             children: [
                 {
                     path: "/",
