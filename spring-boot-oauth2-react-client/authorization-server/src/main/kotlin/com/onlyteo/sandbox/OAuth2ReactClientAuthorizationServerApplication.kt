@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class SpringBootCdcEventStreamingKafkaStreamsApplication
+class OAuth2ReactClientAuthorizationServerApplication
 
 fun main(args: Array<String>) {
-    runApplication<SpringBootCdcEventStreamingKafkaStreamsApplication>(*args)
+    runApplication<OAuth2ReactClientAuthorizationServerApplication>(*args)
 }

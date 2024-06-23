@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class SpringBootOAuth2AuthorizationServerExtendedClientApplication
+class OAuth2AuthorizationServerExtendedServerApplication
 
 fun main(args: Array<String>) {
-    runApplication<SpringBootOAuth2AuthorizationServerExtendedClientApplication>(*args)
+    runApplication<OAuth2AuthorizationServerExtendedServerApplication>(*args)
 }

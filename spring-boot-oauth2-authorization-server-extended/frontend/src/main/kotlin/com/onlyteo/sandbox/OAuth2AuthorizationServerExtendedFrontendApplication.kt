@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class SpringBootCdcEventStreamingMastodonConsumerApplication
+class OAuth2AuthorizationServerExtendedFrontendApplication
 
 fun main(args: Array<String>) {
-    runApplication<SpringBootCdcEventStreamingMastodonConsumerApplication>(*args)
+    runApplication<OAuth2AuthorizationServerExtendedFrontendApplication>(*args)
 }
