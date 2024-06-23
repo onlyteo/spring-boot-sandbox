@@ -25,8 +25,7 @@ The Authorization Server is an OAuth2 Authorization Server application based on 
 [spring-security-oauth2-authorization-server](https://spring.io/projects/spring-authorization-server) project.
 
 ```bash
-cd ./authorization-server
-mvn spring-boot:run
+../gradlew :spring-boot-oauth2-authorization-server-extended:authorization-server:bootRun
 ```
 
 Look at the `WebSecurityConfig` and the `AuthorizationServerConfig` class, as well as the `application.yml` files for
@@ -37,6 +36,5 @@ This is a Thymeleaf webapp based on Spring Boot and with an OAuth2 Client securi
 is only used to invoke a OAuth2 login flow together with the OAuth2 Authorization Server.
 
 ```bash
-cd ./client
-mvn spring-boot:run
+../gradlew :spring-boot-oauth2-authorization-server-extended:frontend:bootRun
 ```

@@ -79,8 +79,7 @@ This Spring Boot application is for ingesting Mastodon posts into the database.
 
 #### Run
 ```bash
-cd ./mastodon-consumer
-mvn spring-boot:run
+../gradlew :spring-boot-cdc-event-streaming:mastodon-consumer:bootRun
 ```
 
 The application will fetch posts from the Mastodon REST API and write them to the database together with a record with
@@ -110,6 +109,5 @@ docker-compose up -d
 
 #### Run
 ```bash
-cd ./kafka-streams-consumer
-mvn spring-boot:run
+../gradlew :spring-boot-cdc-event-streaming:kafka-streams-consumer:bootRun
 ```

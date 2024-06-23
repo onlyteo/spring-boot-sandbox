@@ -38,8 +38,7 @@ The Authorization Server is an OAuth2 Authorization Server application based on 
 [spring-security-oauth2-authorization-server](https://spring.io/projects/spring-authorization-server) project.
 
 ```bash
-cd ./authorization-server
-mvn spring-boot:run
+../gradlew :spring-boot-oauth2-react-client:authorization-server:bootRun
 ```
 
 This Spring Boot application is configured using the simplest setup with only in-memory storage. This is for simplicity
@@ -52,8 +51,7 @@ Look at the `application.yml` files for more details on the security configurati
 The Backend is a REST API application based on Spring Boot and with an OAuth2 Resource Server security configuration.
 
 ```bash
-cd ./frontend-api
-mvn spring-boot:run
+../gradlew :spring-boot-oauth2-react-client:backend:bootRun
 ```
 
 This Spring Boot application is protected by Spring Security using the OAuth2 Authorization Code Grant login flow.
@@ -65,8 +63,7 @@ Look at the `WebSecurityConfig` class and the `application.yml` files for more d
 The Frontend API is a REST API application based on Spring Boot and with an OAuth2 Client security configuration.
 
 ```bash
-cd ./frontend-api
-mvn spring-boot:run
+../gradlew :spring-boot-oauth2-react-client:frontend-api:bootRun
 ```
 
 This Spring Boot application is protected by Spring Security using the OAuth2 Authorization Code Grant login flow.
