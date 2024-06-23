@@ -25,7 +25,7 @@ export const Home: FC = (): ReactElement => {
             <div className="description-box px-3 py-5 rounded-3">
                 <Row>
                     <Col>
-                        <h2 className="emphasized-text">Welcome to this Ktor example!</h2>
+                        <h2 className="emphasized-text">Welcome to this Spring Boot example!</h2>
                         <p>This example shows an OAuth2 client login for a React frontend with a Spring REST API</p>
                     </Col>
                 </Row>
