@@ -3,7 +3,7 @@ app:
   rest:
     consumer:
       backend:
-        url: http://lovalhost:8081
+        url: http://localhost:8081
 
 ### Spring ###
 spring:
@@ -30,7 +30,6 @@ spring:
 logging:
   level:
     root: INFO
-    org.springframework.security: DEBUG
     com.onlyteo: DEBUG
 
 ### Server ###

@@ -45,6 +45,8 @@ spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-star
 spring-security-oauth2-authorization-server = { module = "org.springframework.security:spring-security-oauth2-authorization-server" }
 # Spring Kafka
 spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
+# Jackson
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 # Logback
 logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-logback" }
 # Micrometer

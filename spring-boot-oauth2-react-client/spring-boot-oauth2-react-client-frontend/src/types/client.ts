@@ -1,7 +1,7 @@
 export interface ClientError {
     status: number,
     error: string,
-    message: string,
+    trace: string,
 }
 
 export interface ClientResponse<T> {

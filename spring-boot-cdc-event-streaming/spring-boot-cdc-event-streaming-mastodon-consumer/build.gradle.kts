@@ -14,6 +14,7 @@ dependencies {
     implementation(libs.spring.boot.starter.logging)
     implementation(libs.spring.boot.starter.validation)
     implementation(libs.spring.boot.starter.data.jpa)
+    implementation(libs.jackson.module.kotlin)
     implementation(libs.flyway.mysql)
     implementation(libs.mysql.connector)
     testImplementation(libs.spring.boot.starter.test)

@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.spring.security.oauth2.authorization.server)
     implementation(libs.thymeleaf.layout.dialect)
     implementation(libs.thymeleaf.extras.spring.security)
+    implementation(libs.jackson.module.kotlin)
     implementation(libs.h2.database)
     implementation(libs.bundles.webjars)
 }

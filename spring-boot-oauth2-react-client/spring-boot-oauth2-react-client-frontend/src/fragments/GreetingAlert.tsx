@@ -8,9 +8,11 @@ export interface GreetingAlertProps {
 
 export const GreetingAlert: FC<GreetingAlertProps> = (props: GreetingAlertProps): ReactElement => {
     const {greetingState} = props;
-    const {loading, data: greeting} = greetingState
+    const {loading, data: greeting, error} = greetingState
 
-    if (!loading && !greeting) {
+    if (error) {
+        return (<Alert variant="danger">{error}</Alert>);
+    } else if (!loading && !greeting) {
         return (<></>);
     } else if (loading && !greeting) {
         return (
@@ -20,8 +22,6 @@ export const GreetingAlert: FC<GreetingAlertProps> = (props: GreetingAlertProps)
         );
     } else {
         const {message} = greeting
-        return (
-            <Alert variant="light">{message}</Alert>
-        );
+        return (<Alert variant="light">{message}</Alert>);
     }
 };

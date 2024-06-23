@@ -27,6 +27,7 @@ export const GreetingForm: FC<GreetingFormProps> = (props: GreetingFormProps): R
         <Form onSubmit={onSubmit}>
             <Form.Group controlId="nameInput">
                 <Form.Control type="text" size="lg" placeholder="Enter your name here"
+                              isInvalid={!!greetingState.error}
                               value={formData.name}
                               onChange={onChange}/>
             </Form.Group>

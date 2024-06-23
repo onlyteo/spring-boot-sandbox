@@ -13,6 +13,7 @@ dependencies {
     implementation(libs.spring.boot.starter.web)
     implementation(libs.spring.boot.starter.validation)
     implementation(libs.spring.boot.starter.oauth2.client)
+    implementation(libs.jackson.module.kotlin)
     implementation(libs.bundles.webjars)
 }
 

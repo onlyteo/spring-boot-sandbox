@@ -16,7 +16,7 @@ export const greetingReducer = (state: State<Greeting>, action: Action<Greeting>
         case 'FAILED':
             return {
                 loading: false,
-                error: 'BOOM!'
+                error: 'An error occurred while fetching greeting'
             }
         default:
             return state
@@ -40,7 +40,7 @@ export const userReducer = (state: State<User>, action: Action<User>): State<Use
             return {
                 loading: false,
                 data: {sub: 'N/A'},
-                error: 'BOOM!'
+                error: 'An error occurred while fetching user'
             }
         default:
             return state

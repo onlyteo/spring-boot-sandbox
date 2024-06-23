@@ -13,6 +13,7 @@ dependencies {
     implementation(libs.spring.boot.starter.webflux)
     implementation(libs.spring.boot.starter.validation)
     implementation(libs.spring.boot.starter.logging)
+    implementation(libs.jackson.module.kotlin)
     implementation(libs.spring.kafka)
     implementation(libs.kafka.clients)
     implementation(libs.kafka.streams)
