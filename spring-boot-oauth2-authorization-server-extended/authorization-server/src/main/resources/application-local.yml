@@ -26,6 +26,8 @@ spring:
       authorizationserver:
         client:
           generic-client:
+            require-proof-key: true
+            require-authorization-consent: true
             registration:
               client-id: generic-client
               client-secret: "{noop}G4nd4lf"

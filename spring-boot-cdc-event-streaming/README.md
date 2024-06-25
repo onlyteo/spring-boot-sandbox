@@ -105,9 +105,9 @@ docker-compose up -d
 
 #### Config
 
-### Kafka Streams Consumer
+### Kafka Streams
 
 #### Run
 ```bash
-../gradlew :spring-boot-cdc-event-streaming:kafka-streams-consumer:bootRun
+../gradlew :spring-boot-cdc-event-streaming:kafka-streams:bootRun
 ```

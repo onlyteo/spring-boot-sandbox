@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer
 import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
+import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestCustomizers
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
@@ -36,9 +39,17 @@ class WebSecurityConfig {
     @Throws(Exception::class)
     fun webSecurityFilterChain(
         http: HttpSecurity,
-        logoutSuccessHandler: LogoutSuccessHandler?,
+        clientRegistrationRepository: ClientRegistrationRepository,
+        logoutSuccessHandler: LogoutSuccessHandler,
         securityProperties: AppSecurityProperties
     ): SecurityFilterChain {
+        val authorizationRequestBaseUri =
+            OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI
+        val authorizationRequestResolver =
+            DefaultOAuth2AuthorizationRequestResolver(clientRegistrationRepository, authorizationRequestBaseUri)
+        authorizationRequestResolver.setAuthorizationRequestCustomizer(
+            OAuth2AuthorizationRequestCustomizers.withPkce()
+        )
         return http
             .authorizeHttpRequests { config ->
                 config

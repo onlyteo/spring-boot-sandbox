@@ -43,7 +43,7 @@ class AuthorizationServerConfig {
      * setup.
      * Here the application is configured as an OAuth2 Authorization Server extended with Open ID Connect capabilities.
      * This customizes the basic OAuth2 Resource Server configuration with Authorization Server capabilities.
-     * See the JavaDoc of the [HttpSecurity.formLogin] method for more details.
+     * See the JavaDoc of the [OAuth2AuthorizationServerConfigurer] class for more details.
      *
      * @param http - HTTP security configuration builder.
      * @return The [SecurityFilterChain] bean.
