@@ -1,15 +1,13 @@
 package com.onlyteo.sandbox.config
 
-import com.onlyteo.sandbox.mapper.AppSecurityPropertiesMapper
-import com.onlyteo.sandbox.properties.AppSecurityProperties
-import org.springframework.boot.context.properties.EnableConfigurationProperties
+import com.onlyteo.sandbox.mapper.SecurityPropertiesMapper
+import com.onlyteo.sandbox.properties.ApplicationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -17,7 +15,6 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager
 import org.springframework.security.provisioning.UserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 
-@EnableConfigurationProperties(AppSecurityProperties::class)
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 class WebSecurityConfig {
@@ -30,7 +27,7 @@ class WebSecurityConfig {
      * See the JavaDoc of the [HttpSecurity.formLogin] method for more details.
      *
      * @param http               - HTTP security configuration builder.
-     * @param securityProperties - Custom security properties.
+     * @param properties - Custom properties.
      * @return The [SecurityFilterChain] bean.
      * @throws Exception -
      */
@@ -39,15 +36,15 @@ class WebSecurityConfig {
     @Throws(Exception::class)
     fun webSecurityFilterChain(
         http: HttpSecurity,
-        securityProperties: AppSecurityProperties
+        properties: ApplicationProperties
     ): SecurityFilterChain {
         return http
             .authorizeHttpRequests { config ->
                 config
-                    .requestMatchers(*securityProperties.whitelistedPaths.toTypedArray()).permitAll()
+                    .requestMatchers(*properties.security.whitelistedPaths.toTypedArray()).permitAll()
                     .anyRequest().authenticated()
             }
-            .formLogin { config: FormLoginConfigurer<HttpSecurity?> ->
+            .formLogin { config ->
                 config
                     .loginPage("/login").permitAll()
             }
@@ -60,22 +57,22 @@ class WebSecurityConfig {
      *
      * @param jdbcTemplate       - The default [JdbcTemplate] bean.
      * @param passwordEncoder    - The [PasswordEncoder] bean from below.
-     * @param securityProperties - Custom security properties.
+     * @param properties - Custom properties.
      * @return The [JdbcUserDetailsManager] bean.
      */
     @Bean
     fun userDetailsManager(
         jdbcTemplate: JdbcTemplate,
         passwordEncoder: PasswordEncoder,
-        securityProperties: AppSecurityProperties
+        properties: ApplicationProperties
     ): UserDetailsManager {
-        val propertiesMapper = AppSecurityPropertiesMapper(passwordEncoder, securityProperties)
+        val propertiesMapper = SecurityPropertiesMapper(passwordEncoder, properties)
         val userDetails = propertiesMapper.asUserDetails()
         val userDetailsManager = JdbcUserDetailsManager()
         userDetailsManager.jdbcTemplate = jdbcTemplate
         userDetails.stream()
-            .filter { user: UserDetails -> !userDetailsManager.userExists(user.username) }
-            .forEach { user: UserDetails? -> userDetailsManager.createUser(user) }
+            .filter { user -> !userDetailsManager.userExists(user.username) }
+            .forEach { user -> userDetailsManager.createUser(user) }
         return userDetailsManager
     }
 

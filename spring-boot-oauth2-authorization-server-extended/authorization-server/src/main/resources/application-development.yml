@@ -12,7 +12,7 @@ app:
         public-key-location: classpath:keys/public.pem
         private-key-location: classpath:keys/private.pem
 
-### Spring ###
+### SPRING ###
 spring:
   # Datasource
   datasource:
@@ -25,11 +25,11 @@ spring:
     oauth2:
       authorizationserver:
         client:
-          generic-client:
+          sandbox-oauth2-client:
             require-proof-key: true
-            require-authorization-consent: true
+            require-authorization-consent: false
             registration:
-              client-id: generic-client
+              client-id: sandbox-oauth2-client
               client-secret: "{noop}G4nd4lf"
               authorization-grant-types:
                 - authorization_code
@@ -39,17 +39,17 @@ spring:
                 - profile
                 - roles
               redirect-uris:
-                - http://localhost:8080/login/oauth2/code/generic-client
+                - http://localhost:8080/login/oauth2/code/sandbox-oauth2-client
               client-authentication-methods:
                 - client_secret_basic
 
-### Logging ###
+### LOGGING ###
 logging:
   level:
     root: INFO
     com.onlyteo: DEBUG
 
-### Server ###
+### SERVER ###
 server:
   port: 8888
   error:

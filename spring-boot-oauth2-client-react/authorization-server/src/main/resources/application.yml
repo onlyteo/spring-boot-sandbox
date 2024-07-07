@@ -8,14 +8,14 @@ app:
       - /favicon.ico
       - /error
 
-### Spring ###
+### SPRING ###
 spring:
   # Application
   application:
     name: spring-boot-oauth2-client-react-authorization-server
   # Profiles
   profiles:
-    active: local
+    active: development
   # Messages
   messages:
     basename: locale/messages
@@ -31,7 +31,7 @@ spring:
     generator:
       WRITE_BIGDECIMAL_AS_PLAIN: true
 
-### Server ###
+### SERVER ###
 server:
   error:
     whitelabel:

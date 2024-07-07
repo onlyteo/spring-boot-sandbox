@@ -26,7 +26,7 @@ export const Header: FC<HomeProps> = (props: HomeProps): ReactElement => {
                 <Navbar.Brand className="mx-4" href="/">
                     <h1>
                         <FontAwesomeIcon className="navbar-logo emphasized-text" icon="screwdriver-wrench"/><span
-                        className="navbar-title ms-3">Sandbox</span>
+                        className="navbar-title ms-3">Spring Boot Sandbox</span>
                     </h1>
                 </Navbar.Brand>
                 <Nav className="ms-auto">

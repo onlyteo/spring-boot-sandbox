@@ -1,4 +1,4 @@
-### Spring ###
+### SPRING ###
 spring:
   # Security
   security:
@@ -7,13 +7,13 @@ spring:
         jwt:
           issuer-uri: http://127.0.0.1:8888
 
-### Logging ###
+### LOGGING ###
 logging:
   level:
     root: INFO
     com.onlyteo: DEBUG
 
-### Server ###
+### SERVER ###
 server:
   port: 8081
   error:

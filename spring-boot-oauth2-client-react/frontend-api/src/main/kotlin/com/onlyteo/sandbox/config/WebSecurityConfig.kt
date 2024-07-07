@@ -2,9 +2,8 @@ package com.onlyteo.sandbox.config
 
 import com.onlyteo.sandbox.cache.ReferrerAwareHttpSessionRequestCache
 import com.onlyteo.sandbox.login.UnauthenticatedEntryPoint
-import com.onlyteo.sandbox.properties.AppSecurityProperties
+import com.onlyteo.sandbox.properties.ApplicationProperties
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties
-import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -24,8 +23,6 @@ import org.springframework.security.web.savedrequest.RequestCache
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.security.web.util.matcher.RequestMatcher
 
-
-@EnableConfigurationProperties(AppSecurityProperties::class)
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 class WebSecurityConfig {
@@ -41,7 +38,7 @@ class WebSecurityConfig {
      * @param requestCache             - Cache that saves request details when initiating authentication flow. See further description below.
      * @param authenticationEntryPoint - Bean that handles initiation of authentication flow. See further description below.
      * @param logoutSuccessHandler     - Bean that handles the logout flow. See further description below.
-     * @param securityProperties       - Custom security properties.
+     * @param properties       - Custom security properties.
      * @return The [SecurityFilterChain] bean.
      * @throws Exception -
      */
@@ -52,7 +49,7 @@ class WebSecurityConfig {
         requestCache: RequestCache?,
         authenticationEntryPoint: AuthenticationEntryPoint?,
         logoutSuccessHandler: LogoutSuccessHandler?,
-        securityProperties: AppSecurityProperties
+        properties: ApplicationProperties
     ): SecurityFilterChain {
         return http
             .csrf { config ->
@@ -60,7 +57,7 @@ class WebSecurityConfig {
             }
             .authorizeHttpRequests { config ->
                 config
-                    .requestMatchers(*securityProperties.whitelistedPaths.toTypedArray()).permitAll()
+                    .requestMatchers(*properties.security.whitelistedPaths.toTypedArray()).permitAll()
                     .anyRequest().authenticated()
             }
             .oauth2Login(Customizer.withDefaults<OAuth2LoginConfigurer<HttpSecurity>>())
@@ -85,7 +82,7 @@ class WebSecurityConfig {
     /**
      * The default behavior of Spring Security is to save the original request URL in the default request cache
      * ([HttpSessionRequestCache]) and redirect back to that URL after successful OAuth2 authentication.
-     * This doesn't work well for JavScript frontends where the request typically is an API call. This bean overrides
+     * This doesn't work well for JavaScript frontends where the request typically is an API call. This bean overrides
      * the default behavior to instead save the URL from the `Referer` HTTP header, if it is present in the
      * request. The `Referer` URL will be the URL of the JavScript frontend, as visible in the browser address bar.
      *

@@ -1,11 +1,11 @@
-### Spring ###
+### SPRING ###
 spring:
   # Application
   application:
     name: spring-boot-cdc-event-streaming-mastodon-consumer
   # Profiles
   profiles:
-    active: local
+    active: development
   # Jackson
   jackson:
     date-format: com.fasterxml.jackson.databind.util.StdDateFormat

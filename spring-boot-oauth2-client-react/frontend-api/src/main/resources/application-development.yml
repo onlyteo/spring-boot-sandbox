@@ -1,11 +1,10 @@
 ### APP ###
 app:
-  rest:
-    consumer:
-      backend:
-        url: http://localhost:8081
+  integrations:
+    backend:
+      url: http://localhost:8081
 
-### Spring ###
+### SPRING ###
 spring:
   # Security
   security:
@@ -26,13 +25,13 @@ spring:
           spring-authorization-server:
             issuer-uri: http://127.0.0.1:8888 # Use IP to avoid session cookie collision
 
-### Logging ###
+### LOGGING ###
 logging:
   level:
     root: INFO
     com.onlyteo: DEBUG
 
-### Server ###
+### SERVER ###
 server:
   port: 8080
   error:

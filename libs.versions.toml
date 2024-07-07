@@ -86,6 +86,21 @@ kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest"
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [bundles]
+spring-boot-web = [
+    "spring-boot-starter-web",
+    "spring-boot-starter-validation",
+    "spring-boot-starter-logging",
+    "jackson-module-kotlin"
+]
+spring-boot-thymeleaf = [
+    "spring-boot-starter-thymeleaf",
+    "thymeleaf-layout-dialect"
+]
+spring-boot-jdbc-h2 = [
+    "spring-boot-starter-jdbc",
+    "h2-database",
+    "flyway-core"
+]
 webjars = [
     "webjars-jquery",
     "webjars-bootstrap",

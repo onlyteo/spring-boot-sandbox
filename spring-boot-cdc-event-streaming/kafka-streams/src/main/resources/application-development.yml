@@ -6,7 +6,7 @@ app:
       account-source-topic: cdc.source.account
       status-source-topic: cdc.source.status
 
-### Spring ###
+### SPRING ###
 spring:
   # Kafka
   kafka:
@@ -18,7 +18,7 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
 
-### Logging ###
+### LOGGING ###
 logging:
   # Level
   level:
@@ -26,6 +26,6 @@ logging:
     org.springframework: INFO
     com.onlyteo: DEBUG
 
-### Server ###
+### SERVER ###
 server:
   port: 8081

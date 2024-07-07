@@ -8,14 +8,14 @@ app:
       - /favicon.ico
       - /error
 
-### Spring ###
+### SPRING ###
 spring:
   # Application
   application:
-    name: spring-boot-oauth2-authorization-server-extended-client
+    name: spring-boot-oauth2-authorization-server-extended-frontend
   # Profiles
   profiles:
-    active: local
+    active: development
   # Messages
   messages:
     basename: locale/messages

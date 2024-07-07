@@ -7,7 +7,7 @@ app:
         url: <MASTODON URL>
         bearer-token: <MASTODON BEARER TOKEN>
 
-### Spring ###
+### SPRING ###
 spring:
   # Datasource
   datasource:
@@ -16,13 +16,13 @@ spring:
     username: sandbox
     password: G4nd4lf
 
-### Logging ###
+### LOGGING ###
 logging:
   # Level
   level:
     org.springframework: INFO
     com.onlyteo: DEBUG
 
-### Server ###
+### SERVER ###
 server:
   port: 8080

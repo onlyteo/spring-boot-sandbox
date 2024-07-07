@@ -1,14 +1,37 @@
 # Spring Boot Sandbox
 This repository contain sandbox projects to showcase features of the Spring Boot framework.
 
-* ### OAuth2 React Client
-  - This example shows how to secure a React frontend and Spring Boot REST API using OAuth2.
-  - ➞ [/spring-boot-oauth2-react-client](./spring-boot-oauth2-react-client)
+## Use case
+Most examples implement a "hello world" style logic that returns a greeting message when the user inputs a name.
 
-* ### OAuth2 Authorization Server Extended
-  - This example shows how to extend the Spring Security Authorization Server with production ready features.
-  - ➞ [/spring-boot-oauth2-authorization-server-extended](./spring-boot-oauth2-authorization-server-extended)
+* A user inputs the name "John" and clicks "Submit"
+* The system generates a greeting "Hello John!" back to the user
 
-* ### CDC Event Streaming
-  - This example shows how to use Change Data Capture (CDC) to stream change events from database to Apache Kafka.
-  - ➞ [/spring-boot-cdc-event-streaming](./spring-boot-cdc-event-streaming)
+The examples typically consists of a `Frontend` and a `Backend` application. If the frontend is a JavaScript
+application then there is often a `Frontend API` application.
+
+```mermaid
+graph TD
+    A1[Spring Boot Frontend]
+    B1[Spring Boot Backend]
+
+    A2[React Frontend]
+    B2[Spring Boot Frontend API]
+    C2[Spring Boot Backend]
+
+    A1:::spring --> B1:::spring
+    
+    A2:::react --> B2:::spring
+    B2:::spring --> C2:::spring
+    
+    classDef react fill: #58c4dc, stroke: #000000, color: #000000
+    classDef spring fill: #80ea6e, stroke: #000000, color: #000000
+    classDef oauth2 fill: #c98979, stroke: #000000, color: #000000
+```
+
+## Examples
+Read details about the examples in their respective project roots.
+
+* [OAuth2 Client React](./spring-boot-oauth2-client-react)
+* [OAuth2 Authorization Server Extended](./spring-boot-oauth2-authorization-server-extended)
+* [CDC Event Streaming](./spring-boot-cdc-event-streaming)

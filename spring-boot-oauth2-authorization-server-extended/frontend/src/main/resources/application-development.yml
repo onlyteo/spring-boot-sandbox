@@ -1,31 +1,37 @@
-### Spring ###
+### APP ###
+app:
+  integrations:
+    backend:
+      url: http://localhost:8081
+
+### SPRING ###
 spring:
   # Security
   security:
     oauth2:
       client:
         registration:
-          generic-client:
+          sandbox-oauth2-client:
             provider: authorization-server
-            client-id: generic-client
+            client-id: sandbox-oauth2-client
             client-secret: G4nd4lf
             authorization-grant-type: authorization_code
             scope:
               - openid
               - profile
               - roles
-            redirect-uri: http://localhost:8080/login/oauth2/code/generic-client
+            redirect-uri: http://localhost:8080/login/oauth2/code/sandbox-oauth2-client
         provider:
           authorization-server:
             issuer-uri: http://127.0.0.1:8888 # Use IP to avoid session cookie collision
 
-### Logging ###
+### LOGGING ###
 logging:
   level:
     root: INFO
     com.onlyteo: DEBUG
 
-### Server ###
+### SERVER ###
 server:
   port: 8080
   error:

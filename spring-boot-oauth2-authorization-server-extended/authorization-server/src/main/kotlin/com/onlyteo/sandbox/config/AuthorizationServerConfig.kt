@@ -3,7 +3,7 @@ package com.onlyteo.sandbox.config
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
 import com.onlyteo.sandbox.mapper.OAuth2AuthorizationServerPropertiesMapper
-import com.onlyteo.sandbox.properties.AppSecurityProperties
+import com.onlyteo.sandbox.properties.ApplicationProperties
 import com.onlyteo.sandbox.serialize.PrivateKeyDeserializer
 import com.onlyteo.sandbox.serialize.PublicKeyDeserializer
 import com.onlyteo.sandbox.service.JwkService
@@ -106,7 +106,7 @@ class AuthorizationServerConfig {
      * to use a JDBC variant so that [RegisteredClient] instances are stored in a database.
      *
      * @param jdbcTemplate - The default [JdbcTemplate] bean.
-     * @param properties   -
+     * @param properties   - Authorization server properties.
      * @return The [JdbcRegisteredClientRepository] bean.
      */
     @Bean
@@ -138,16 +138,16 @@ class AuthorizationServerConfig {
      * JSON Web Tokens, but also for exposing the Open ID Connect JWK endpoint.
      * By overriding the [JWKSource] with this custom service the keys are loaded from static keys on the classpath.
      *
-     * @param securityProperties - Custom security properties.
-     * @param keyService         - The [KeyService] bean from below.
+     * @param properties - Custom security properties.
+     * @param keyService - The [KeyService] bean from below.
      * @return The [JwkService] bean.
      */
     @Bean
     fun jwkSource(
-        securityProperties: AppSecurityProperties,
+        properties: ApplicationProperties,
         keyService: KeyService
     ): JWKSource<SecurityContext> {
-        return JwkService(securityProperties, keyService)
+        return JwkService(properties, keyService)
     }
 
     /**

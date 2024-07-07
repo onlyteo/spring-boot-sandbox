@@ -2,22 +2,36 @@
 
 This example shows how to extend the Spring Security Authorization Server with production ready features.
 
+By default, Spring Security stores state in-memory. This examples adds persistent state stores. It will also
+harden the security setup.
+
+Extended features:
+* Storing OAuth2 registered clients in the database.
+* Storing OAuth2 authorizations in the database.
+* Storing OAUth2 consents in the database.
+* Storing user details in the database.
+* Using external RSA keys for OAuth2 token signing.
+* Requiring PKCE for OAuth2 clients using the Authorization Code Grant flow.
+
 ## Architecture
 
 ```mermaid
 graph TD
-    subgraph Frontend
-        A[OAuth2 Client]
-    end
     subgraph Authorization Server
         X[OAuth2 Login]
     end
+    subgraph Frontend
+        A[Web UI]
+    end
+    subgraph Backend
+        B[REST API]
+    end
 
-    A:::spring <-. Login Redirect .-> X:::oauth2
+    A:::react <-. Login Redirect .-> X:::oauth2
     A:::spring -- Fetch Token --> X:::oauth2
-    
-    classDef spring fill:#80ea6e,stroke:#000000,color:#000000
-    classDef oauth2 fill:#c98979,stroke:#000000,color:#000000
+    A:::spring -- REST --> B:::spring
+    classDef spring fill: #80ea6e, stroke: #000000, color: #000000
+    classDef oauth2 fill: #c98979, stroke: #000000, color: #000000
 ```
 
 ### Authorization Server
@@ -37,4 +51,11 @@ is only used to invoke a OAuth2 login flow together with the OAuth2 Authorizatio
 
 ```bash
 ../gradlew :spring-boot-oauth2-authorization-server-extended:frontend:bootRun
+```
+
+### Backend
+This is a Spring Boot app with a REST API, which is protected as an OAuth2 Resource Server.
+
+```bash
+../gradlew :spring-boot-oauth2-authorization-server-extended:backend:bootRun
 ```

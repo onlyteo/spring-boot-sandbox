@@ -9,14 +9,14 @@ app:
       - /error
       - /register
 
-### Spring ###
+### SPRING ###
 spring:
   # Application
   application:
     name: spring-boot-oauth2-authorization-server-extended-authorization-server
   # Profiles
   profiles:
-    active: local
+    active: development
   # Messages
   messages:
     basename: locale/messages

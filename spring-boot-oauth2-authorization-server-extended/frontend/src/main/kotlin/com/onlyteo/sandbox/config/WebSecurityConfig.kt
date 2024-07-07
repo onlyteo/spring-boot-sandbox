@@ -1,24 +1,21 @@
 package com.onlyteo.sandbox.config
 
-import com.onlyteo.sandbox.properties.AppSecurityProperties
-import org.springframework.boot.context.properties.EnableConfigurationProperties
+import com.onlyteo.sandbox.properties.ApplicationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
-import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer
 import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestCustomizers
-import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.security.web.util.matcher.RequestMatcher
 
-@EnableConfigurationProperties(AppSecurityProperties::class)
 @Configuration(proxyBeanMethods = false)
 class WebSecurityConfig {
 
@@ -29,9 +26,10 @@ class WebSecurityConfig {
      * Here the application is configured as an OAuth2 Client Login.
      * See the JavaDoc of the [HttpSecurity.oauth2Login] method for more details.
      *
-     * @param http                 - HTTP security configuration builder.
-     * @param logoutSuccessHandler - Bean that handles the logout flow. See further description below.
-     * @param securityProperties   - Custom security properties.
+     * @param http                               - HTTP security configuration builder.
+     * @param oAuth2AuthorizationRequestResolver - Bean that handles the resolution of the authorization request.
+     * @param logoutSuccessHandler               - Bean that handles the logout flow. See further description below.
+     * @param properties                         - Custom security properties.
      * @return The [SecurityFilterChain] bean.
      * @throws Exception -
      */
@@ -39,30 +37,50 @@ class WebSecurityConfig {
     @Throws(Exception::class)
     fun webSecurityFilterChain(
         http: HttpSecurity,
-        clientRegistrationRepository: ClientRegistrationRepository,
+        oAuth2AuthorizationRequestResolver: OAuth2AuthorizationRequestResolver,
         logoutSuccessHandler: LogoutSuccessHandler,
-        securityProperties: AppSecurityProperties
+        properties: ApplicationProperties
     ): SecurityFilterChain {
-        val authorizationRequestBaseUri =
-            OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI
-        val authorizationRequestResolver =
-            DefaultOAuth2AuthorizationRequestResolver(clientRegistrationRepository, authorizationRequestBaseUri)
-        authorizationRequestResolver.setAuthorizationRequestCustomizer(
-            OAuth2AuthorizationRequestCustomizers.withPkce()
-        )
         return http
             .authorizeHttpRequests { config ->
                 config
-                    .requestMatchers(*securityProperties.whitelistedPaths.toTypedArray()).permitAll()
+                    .requestMatchers(*properties.security.whitelistedPaths.toTypedArray()).permitAll()
                     .anyRequest().authenticated()
             }
-            .oauth2Login(Customizer.withDefaults())
-            .logout { config: LogoutConfigurer<HttpSecurity?> ->
+            .oauth2Login { config ->
+                config
+                    .authorizationEndpoint { auth ->
+                        auth.authorizationRequestResolver(oAuth2AuthorizationRequestResolver)
+                    }
+            }
+            .logout { config ->
                 config
                     .logoutRequestMatcher(logoutRequestMatcher())
                     .logoutSuccessHandler(logoutSuccessHandler)
             }
             .build()
+    }
+
+    /**
+     * Proof Key for Code Exchange (PKCE) is not enabled by default in OAuth 2.0 secured clients. In order to enable
+     * PKCE it is necessary to override the default resolution of the authorization request. This is done by adding the
+     * [OAuth2AuthorizationRequestCustomizers.withPkce] customizer.
+     *
+     * @param clientRegistrationRepository - Repository containing OAuth2 Registered Clients.
+     * @return The [OAuth2AuthorizationRequestResolver] bean.
+     */
+    @Bean
+    fun oAuth2AuthorizationRequestResolver(
+        clientRegistrationRepository: ClientRegistrationRepository
+    ): OAuth2AuthorizationRequestResolver {
+        val authorizationRequestResolver = DefaultOAuth2AuthorizationRequestResolver(
+            clientRegistrationRepository,
+            DEFAULT_AUTHORIZATION_REQUEST_BASE_URI
+        )
+        authorizationRequestResolver.setAuthorizationRequestCustomizer(
+            OAuth2AuthorizationRequestCustomizers.withPkce()
+        )
+        return authorizationRequestResolver
     }
 
     /**

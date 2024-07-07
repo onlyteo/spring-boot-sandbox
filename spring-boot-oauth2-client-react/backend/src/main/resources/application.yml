@@ -9,14 +9,14 @@ app:
       - /favicon.ico
       - /error
 
-### Spring ###
+### SPRING ###
 spring:
   # Application
   application:
     name: spring-boot-oauth2-client-react-backend
   # Profiles
   profiles:
-    active: local
+    active: development
   # Jackson
   jackson:
     date-format: com.fasterxml.jackson.databind.util.StdDateFormat
