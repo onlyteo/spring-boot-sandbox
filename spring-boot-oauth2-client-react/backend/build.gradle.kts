@@ -10,10 +10,9 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.reflect)
-    implementation(libs.spring.boot.starter.web)
-    implementation(libs.spring.boot.starter.validation)
+    implementation(libs.bundles.spring.boot.web)
+    implementation(libs.jackson.dataformat.csv)
     implementation(libs.spring.boot.starter.oauth2.resource.server)
-    implementation(libs.jackson.module.kotlin)
     implementation(libs.bundles.webjars)
 }
 

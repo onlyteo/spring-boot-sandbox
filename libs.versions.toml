@@ -47,6 +47,8 @@ spring-security-oauth2-authorization-server = { module = "org.springframework.se
 spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
 # Jackson
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" }
+jackson-dataformat-csv = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-csv" }
 # Logback
 logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-logback" }
 # Micrometer
@@ -92,6 +94,12 @@ spring-boot-web = [
     "spring-boot-starter-logging",
     "jackson-module-kotlin"
 ]
+spring-boot-webflux = [
+    "spring-boot-starter-webflux",
+    "spring-boot-starter-validation",
+    "spring-boot-starter-logging",
+    "jackson-module-kotlin"
+]
 spring-boot-thymeleaf = [
     "spring-boot-starter-thymeleaf",
     "thymeleaf-layout-dialect"
@@ -100,6 +108,16 @@ spring-boot-jdbc-h2 = [
     "spring-boot-starter-jdbc",
     "h2-database",
     "flyway-core"
+]
+spring-boot-jpa-mysql = [
+    "spring-boot-starter-data-jpa",
+    "mysql-connector",
+    "flyway-mysql"
+]
+spring-kafka = [
+    "spring-kafka",
+    "kafka-clients",
+    "kafka-streams"
 ]
 webjars = [
     "webjars-jquery",

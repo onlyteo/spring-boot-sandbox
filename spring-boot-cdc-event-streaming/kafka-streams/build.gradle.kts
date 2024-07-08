@@ -10,13 +10,8 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.reflect)
-    implementation(libs.spring.boot.starter.webflux)
-    implementation(libs.spring.boot.starter.validation)
-    implementation(libs.spring.boot.starter.logging)
-    implementation(libs.jackson.module.kotlin)
-    implementation(libs.spring.kafka)
-    implementation(libs.kafka.clients)
-    implementation(libs.kafka.streams)
+    implementation(libs.bundles.spring.boot.webflux)
+    implementation(libs.bundles.spring.kafka)
     testImplementation(libs.spring.boot.starter.test)
 }
 

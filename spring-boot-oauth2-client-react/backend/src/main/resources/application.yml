@@ -1,5 +1,8 @@
 ### APP ###
 app:
+  # Resources
+  resources:
+    prefixes-file: /data/prefixes.csv
   # Security
   security:
     # Paths that should be without security

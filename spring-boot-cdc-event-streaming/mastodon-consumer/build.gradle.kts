@@ -10,13 +10,8 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.reflect)
-    implementation(libs.spring.boot.starter.web)
-    implementation(libs.spring.boot.starter.logging)
-    implementation(libs.spring.boot.starter.validation)
-    implementation(libs.spring.boot.starter.data.jpa)
-    implementation(libs.jackson.module.kotlin)
-    implementation(libs.flyway.mysql)
-    implementation(libs.mysql.connector)
+    implementation(libs.bundles.spring.boot.web)
+    implementation(libs.bundles.spring.boot.jpa.mysql)
     testImplementation(libs.spring.boot.starter.test)
 }
 

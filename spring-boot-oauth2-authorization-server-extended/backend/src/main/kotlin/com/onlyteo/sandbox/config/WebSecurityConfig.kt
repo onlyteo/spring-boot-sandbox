@@ -17,8 +17,8 @@ class WebSecurityConfig {
      * Here the application is configured as an OAuth2 Resource Server.
      * See the JavaDoc of the [HttpSecurity.oauth2Login] method for more details.
      *
-     * @param http                     - HTTP security configuration builder.
-     * @param securityProperties       - Custom security properties.
+     * @param http       - HTTP security configuration builder.
+     * @param properties - Custom security properties.
      * @return The [SecurityFilterChain] bean.
      * @throws Exception -
      */

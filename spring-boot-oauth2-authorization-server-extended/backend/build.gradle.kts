@@ -11,6 +11,7 @@ plugins {
 dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.bundles.spring.boot.web)
+    implementation(libs.jackson.dataformat.csv)
     implementation(libs.spring.boot.starter.oauth2.resource.server)
     implementation(libs.bundles.webjars)
 }
