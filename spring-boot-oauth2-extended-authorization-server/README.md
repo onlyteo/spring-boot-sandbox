@@ -1,4 +1,4 @@
-# Spring Boot OAuth2 Authorization Server Extended
+# Spring Boot OAuth2 Extended Authorization Server
 
 This example shows how to extend the Spring Security Authorization Server with production ready features.
 
@@ -8,7 +8,7 @@ harden the security setup.
 Extended features:
 * Storing OAuth2 registered clients in the database.
 * Storing OAuth2 authorizations in the database.
-* Storing OAUth2 consents in the database.
+* Storing OAuth2 consents in the database.
 * Storing user details in the database.
 * Using external RSA keys for OAuth2 token signing.
 * Requiring PKCE for OAuth2 clients using the Authorization Code Grant flow.

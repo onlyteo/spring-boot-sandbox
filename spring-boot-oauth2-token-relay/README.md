@@ -1,10 +1,10 @@
-# Spring Boot OAuth2 Client React
+# Spring Boot OAuth2 Token Relay
 
-This example shows how to secure a React frontend and Spring Boot REST API using OAuth2.
+This example shows how to secure a React frontend and Spring Boot REST API using OAuth2 Token Relay.
 
 It uses the OAuth2 Authorization Code
 Grant ([RFC6749 section 4.1](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1))
-login flow with PKCE ([RFC7636](https://datatracker.ietf.org/doc/html/rfc7636)) to authenticate the end users.
+login flow to authenticate the end users.
 
 ## Architecture
 

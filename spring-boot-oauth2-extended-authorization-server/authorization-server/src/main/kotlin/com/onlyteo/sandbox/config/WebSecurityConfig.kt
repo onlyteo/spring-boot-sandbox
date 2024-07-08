@@ -33,7 +33,6 @@ class WebSecurityConfig {
      */
     @Bean
     @Order(2)
-    @Throws(Exception::class)
     fun webSecurityFilterChain(
         http: HttpSecurity,
         properties: ApplicationProperties

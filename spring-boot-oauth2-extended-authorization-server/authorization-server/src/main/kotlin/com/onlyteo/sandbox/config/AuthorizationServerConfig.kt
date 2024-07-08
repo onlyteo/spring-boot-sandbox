@@ -47,11 +47,9 @@ class AuthorizationServerConfig {
      *
      * @param http - HTTP security configuration builder.
      * @return The [SecurityFilterChain] bean.
-     * @throws Exception -
      */
     @Bean
     @Order(1)
-    @Throws(Exception::class)
     fun authorizationServerSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http)
         http

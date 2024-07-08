@@ -25,11 +25,9 @@ class WebSecurityConfig {
      * @param http               - HTTP security configuration builder.
      * @param securityProperties - Custom security properties.
      * @return The [SecurityFilterChain] bean.
-     * @throws Exception -
      */
     @Bean
     @Order(2)
-    @Throws(Exception::class)
     fun webSecurityFilterChain(
         http: HttpSecurity,
         securityProperties: AppSecurityProperties
