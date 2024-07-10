@@ -10,27 +10,26 @@ spring:
     oauth2:
       authorizationserver:
         client:
-          sandbox-oauth2-client:
+          sandbox-frontend:
             registration:
-              client-id: sandbox-oauth2-client
+              client-id: sandbox-frontend
               client-secret: "{noop}G4nd4lf"
-              authorization-grant-types:
-                - authorization_code
-                - refresh_token
               scopes:
                 - openid
                 - profile
                 - roles
-              redirect-uris:
-                - http://localhost:3000/login/oauth2/code/sandbox-oauth2-client # Use frontend host to allow login flow to go through browser
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
               client-authentication-methods:
                 - client_secret_basic
+              redirect-uris:
+                - http://localhost:3000/login/oauth2/code/sandbox-frontend # Use frontend host to allow login flow to go through browser
 
 ### LOGGING ###
 logging:
   level:
     root: INFO
-    org.springframework.security: DEBUG
     com.onlyteo: DEBUG
 
 ### SERVER ###

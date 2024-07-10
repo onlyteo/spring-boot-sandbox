@@ -26,7 +26,8 @@ export const Home: FC = (): ReactElement => {
                 <Row>
                     <Col>
                         <h2 className="emphasized-text">Welcome to this Spring Boot example!</h2>
-                        <p>This example shows an OAuth2 client login for a React frontend with a Spring REST API</p>
+                        <p>This example shows how to secure a React frontend and Spring Boot REST API using OAuth2 Token
+                            Relay</p>
                     </Col>
                 </Row>
                 <Row className="mt-5">

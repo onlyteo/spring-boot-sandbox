@@ -25,23 +25,23 @@ spring:
     oauth2:
       authorizationserver:
         client:
-          sandbox-oauth2-client:
+          sandbox-frontend:
             require-proof-key: true
             require-authorization-consent: false
             registration:
-              client-id: sandbox-oauth2-client
+              client-id: sandbox-frontend
               client-secret: "{noop}G4nd4lf"
-              authorization-grant-types:
-                - authorization_code
-                - refresh_token
               scopes:
                 - openid
                 - profile
                 - roles
-              redirect-uris:
-                - http://localhost:8080/login/oauth2/code/sandbox-oauth2-client
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
               client-authentication-methods:
                 - client_secret_basic
+              redirect-uris:
+                - http://localhost:8080/login/oauth2/code/sandbox-frontend
 
 ### LOGGING ###
 logging:

@@ -28,7 +28,7 @@ class ViewController(private val greetingService: GreetingService) {
         model: Model,
         @ModelAttribute @Valid formData: FormData,
         bindingResult: BindingResult,
-        @RegisteredOAuth2AuthorizedClient("sandbox-oauth2-client") authorizedClient: OAuth2AuthorizedClient
+        @RegisteredOAuth2AuthorizedClient("sandbox-frontend") authorizedClient: OAuth2AuthorizedClient
     ): String {
         if (!bindingResult.hasErrors()) {
             val greeting = greetingService.getGreeting(authorizedClient, formData.toPerson())

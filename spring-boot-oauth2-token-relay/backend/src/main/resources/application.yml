@@ -16,7 +16,7 @@ app:
 spring:
   # Application
   application:
-    name: spring-boot-oauth2-client-react-backend
+    name: spring-boot-oauth2-token-relay-backend
   # Profiles
   profiles:
     active: development

@@ -1,0 +1,38 @@
+### APP ###
+app:
+  # Security
+  security:
+    whitelisted-paths:
+      - /webjars/**
+      - /assets/**
+      - /favicon.ico
+      - /error
+
+### SPRING ###
+spring:
+  # Application
+  application:
+    name: spring-boot-oauth2-token-exchange-authorization-server
+  # Profiles
+  profiles:
+    active: development
+  # Messages
+  messages:
+    basename: locale/messages
+  # Jackson
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.StdDateFormat
+    default-property-inclusion: NON_NULL
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+      WRITE_DURATIONS_AS_TIMESTAMPS: false
+    deserialization:
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+    generator:
+      WRITE_BIGDECIMAL_AS_PLAIN: true
+
+### SERVER ###
+server:
+  error:
+    whitelabel:
+      enabled: false

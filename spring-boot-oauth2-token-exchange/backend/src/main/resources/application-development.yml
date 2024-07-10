@@ -1,0 +1,22 @@
+### SPRING ###
+spring:
+  # Security
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8888
+          audiences:
+            - backend
+
+### LOGGING ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+
+### SERVER ###
+server:
+  port: 8081
+  error:
+    include-stacktrace: ALWAYS

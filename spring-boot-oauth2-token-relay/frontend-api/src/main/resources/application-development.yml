@@ -11,16 +11,17 @@ spring:
     oauth2:
       client:
         registration:
-          sandbox-oauth2-client:
+          sandbox-frontend:
             provider: spring-authorization-server
-            client-id: sandbox-oauth2-client
+            client-id: sandbox-frontend
             client-secret: G4nd4lf
             authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_basic
             scope:
               - openid
               - profile
               - roles
-            redirect-uri: http://localhost:3000/login/oauth2/code/sandbox-oauth2-client # Use frontend host to allow login flow to go through browser
+            redirect-uri: http://localhost:3000/login/oauth2/code/sandbox-frontend # Use frontend host to allow login flow to go through browser
         provider:
           spring-authorization-server:
             issuer-uri: http://127.0.0.1:8888 # Use IP to avoid session cookie collision

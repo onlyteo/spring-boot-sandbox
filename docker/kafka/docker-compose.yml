@@ -1,0 +1,84 @@
+services:
+  sandbox.kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: sandbox.kafka
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
+      KAFKA_LISTENERS: "INTERNAL://sandbox.kafka:29092,CONTROLLER://sandbox.kafka:29093,EXTERNAL://0.0.0.0:9092"
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://sandbox.kafka:29092,EXTERNAL://localhost:9092"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@sandbox.kafka:29093"
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_JMX_PORT: 9992
+      KAFKA_JMX_HOSTNAME: sandbox.kafka
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      CLUSTER_ID: "PMntZ445QqCTKnIDecTkcg"
+      KAFKA_LOG_DIRS: "/tmp/kraft-combined-logs"
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka.secrets:/etc/kafka/secrets
+      - kafka.data:/var/lib/kafka/data
+    networks:
+      - kafka
+
+  sandbox.schema-registry:
+    image: confluentinc/cp-schema-registry:latest
+    container_name: sandbox.schema-registry
+    depends_on:
+      - sandbox.kafka
+    ports:
+      - "9081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: sandbox.schema-registry
+      SCHEMA_REGISTRY_LISTENERS: http://sandbox.schema-registry:8081
+      SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL: PLAINTEXT
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: sandbox.kafka:29092
+    #  SCHEMA_REGISTRY_DEBUG: "true"
+    networks:
+      - kafka
+
+  sandbox.kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: sandbox.kafka-ui
+    depends_on:
+      - sandbox.kafka
+    ports:
+      - "9080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: sandbox
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: sandbox.kafka:29092
+      KAFKA_CLUSTERS_0_METRICS_PORT: 9992
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://sandbox.schema-registry:8081
+      DYNAMIC_CONFIG_ENABLED: "true"
+      # LOGGING_LEVEL_ROOT: 'DEBUG'
+    networks:
+      - kafka
+
+#  sandbox.kafka-rest:
+#    image: confluentinc/cp-kafka-rest:latest
+#    container_name: sandbox.kafka-rest
+#    depends_on:
+#      - sandbox.kafka
+#    ports:
+#      - "9082:8082"
+#    environment:
+#      KAFKA_REST_HOST_NAME: sandbox.kafka-rest
+#      KAFKA_REST_BOOTSTRAP_SERVERS: sandbox.kafka:9092
+#      KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
+#    networks:
+#      - kafka
+
+volumes:
+  kafka.secrets:
+    name: sandbox.kafka.secrets
+  kafka.data:
+    name: sandbox.kafka.data
+
+networks:
+  kafka:
+    name: sandbox.kafka

@@ -27,6 +27,11 @@ include(":spring-boot-oauth2-token-relay:frontend-api")
 include(":spring-boot-oauth2-token-relay:backend")
 include(":spring-boot-oauth2-token-relay:authorization-server")
 
+include(":spring-boot-oauth2-token-exchange:frontend")
+include(":spring-boot-oauth2-token-exchange:frontend-api")
+include(":spring-boot-oauth2-token-exchange:backend")
+include(":spring-boot-oauth2-token-exchange:authorization-server")
+
 include(":spring-boot-oauth2-extended-authorization-server:frontend")
 include(":spring-boot-oauth2-extended-authorization-server:backend")
 include(":spring-boot-oauth2-extended-authorization-server:authorization-server")

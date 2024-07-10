@@ -12,7 +12,7 @@ app:
 spring:
   # Application
   application:
-    name: spring-boot-oauth2-client-react-authorization-server
+    name: spring-boot-oauth2-token-relay-authorization-server
   # Profiles
   profiles:
     active: development
