@@ -1,4 +1,4 @@
-# CDC Event Streaming
+# Kafka CDC
 
 This example implements a Change Data Capture (CDC) pipeline with Apache Kafka.
 

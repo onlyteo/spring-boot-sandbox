@@ -33,5 +33,6 @@ graph TD
 Read details about the examples in their respective project roots.
 
 * [OAuth2 Token Relay](./spring-boot-oauth2-token-relay)
+* [OAuth2 Token Exchange](./spring-boot-oauth2-token-exchange)
 * [OAuth2 Extended Authorization Server](./spring-boot-oauth2-extended-authorization-server)
 * [CDC Event Streaming](./spring-boot-cdc-event-streaming)
