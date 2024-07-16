@@ -36,5 +36,9 @@ include(":spring-boot-oauth2-extended-authorization-server:frontend")
 include(":spring-boot-oauth2-extended-authorization-server:backend")
 include(":spring-boot-oauth2-extended-authorization-server:authorization-server")
 
+include(":spring-boot-kafka-cqrs:frontend")
+include(":spring-boot-kafka-cqrs:frontend-api")
+include(":spring-boot-kafka-cqrs:backend")
+
 include(":spring-boot-kafka-cdc:mastodon-consumer")
 include(":spring-boot-kafka-cdc:kafka-streams")

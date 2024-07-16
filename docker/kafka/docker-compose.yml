@@ -1,4 +1,6 @@
+### SERVICES ###
 services:
+  # Kafka
   sandbox.kafka:
     image: confluentinc/cp-kafka:latest
     container_name: sandbox.kafka
@@ -11,8 +13,6 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
       KAFKA_CONTROLLER_QUORUM_VOTERS: "1@sandbox.kafka:29093"
       KAFKA_PROCESS_ROLES: "broker,controller"
-      KAFKA_JMX_PORT: 9992
-      KAFKA_JMX_HOSTNAME: sandbox.kafka
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
@@ -21,11 +21,25 @@ services:
     ports:
       - "9092:9092"
     volumes:
-      - kafka.secrets:/etc/kafka/secrets
-      - kafka.data:/var/lib/kafka/data
+      - sandbox.kafka-data:/var/lib/kafka/data
+      - sandbox.kafka-secrets:/etc/kafka/secrets
     networks:
-      - kafka
+      - sandbox.kafka
 
+  # Kafka Init
+  sandbox.kafka-init:
+    image: confluentinc/cp-kafka:latest
+    container_name: sandbox.kafka-init
+    environment:
+      BOOTSTRAP_SERVER: sandbox.kafka:29092
+      CREATE_TOPICS: persons,greetings
+    volumes:
+      - ./resources/kafka_init.sh:/kafka_init.sh
+    networks:
+      - sandbox.kafka
+    command: /kafka_init.sh
+
+  # Schema Registry
   sandbox.schema-registry:
     image: confluentinc/cp-schema-registry:latest
     container_name: sandbox.schema-registry
@@ -40,8 +54,9 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: sandbox.kafka:29092
     #  SCHEMA_REGISTRY_DEBUG: "true"
     networks:
-      - kafka
+      - sandbox.kafka
 
+  # Kafka UI
   sandbox.kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: sandbox.kafka-ui
@@ -57,8 +72,9 @@ services:
       DYNAMIC_CONFIG_ENABLED: "true"
       # LOGGING_LEVEL_ROOT: 'DEBUG'
     networks:
-      - kafka
+      - sandbox.kafka
 
+  # Kafka REST
 #  sandbox.kafka-rest:
 #    image: confluentinc/cp-kafka-rest:latest
 #    container_name: sandbox.kafka-rest
@@ -71,14 +87,16 @@ services:
 #      KAFKA_REST_BOOTSTRAP_SERVERS: sandbox.kafka:9092
 #      KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
 #    networks:
-#      - kafka
+#      - sandbox.kafka
 
+### VOLUMES ###
 volumes:
-  kafka.secrets:
-    name: sandbox.kafka.secrets
-  kafka.data:
-    name: sandbox.kafka.data
+  sandbox.kafka-secrets:
+    name: sandbox.kafka-secrets
+  sandbox.kafka-data:
+    name: sandbox.kafka-data
 
+### NETWORKS ###
 networks:
-  kafka:
+  sandbox.kafka:
     name: sandbox.kafka

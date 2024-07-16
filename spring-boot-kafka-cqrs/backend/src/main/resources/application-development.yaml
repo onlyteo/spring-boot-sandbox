@@ -1,0 +1,38 @@
+### APP ###
+app:
+  # Resources
+  resources:
+    prefixes-file: /data/prefixes.csv
+  # Kafka
+  kafka:
+    streams:
+      source-topic: persons
+      target-topic: greetings
+      state-store: persons
+      processor: personProcessor
+      punctuator-schedule: PT10S
+      processing-delay: PT60S
+
+### SPRING ###
+spring:
+  kafka:
+    bootstrap-servers:
+      - "localhost:9092"
+    streams:
+      application-id: spring-boot-kafka-cqrs-backend-streams
+
+### LOGGING ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+    org.apache.kafka.clients.admin.AdminClientConfig: WARN
+    org.apache.kafka.clients.consumer.ConsumerConfig: WARN
+    org.apache.kafka.clients.producer.ProducerConfig: WARN
+    org.apache.kafka.streams.StreamsConfig: WARN
+
+### SERVER ###
+server:
+  port: 8081
+  error:
+    include-stacktrace: ALWAYS
