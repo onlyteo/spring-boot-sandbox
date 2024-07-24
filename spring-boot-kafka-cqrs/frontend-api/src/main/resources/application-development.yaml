@@ -1,23 +1,10 @@
-### APP ###
-app:
-  kafka:
-    producer:
-      target-topic: persons
-    consumer:
-      source-topic: greetings
-
 ### SPRING ###
 spring:
   kafka:
     producer:
-      client-id: spring-boot-kafka-cqrs-frontend-api-producer
       bootstrap-servers:
         - "localhost:9092"
-      acks: all
-      retries: 0
     consumer:
-      client-id: spring-boot-kafka-cqrs-frontend-api-consumer
-      group-id: spring-boot-kafka-cqrs-frontend-api-consumer-group
       bootstrap-servers:
         - "localhost:9092"
 

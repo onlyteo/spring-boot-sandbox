@@ -35,6 +35,8 @@ services:
       CREATE_TOPICS: persons,greetings
     volumes:
       - ./resources/kafka_init.sh:/kafka_init.sh
+      - sandbox.kafka-init-data:/var/lib/kafka/data
+      - sandbox.kafka-init-secrets:/etc/kafka/secrets
     networks:
       - sandbox.kafka
     command: /kafka_init.sh
@@ -53,6 +55,8 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL: PLAINTEXT
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: sandbox.kafka:29092
     #  SCHEMA_REGISTRY_DEBUG: "true"
+    volumes:
+      - sandbox.schema-registry-secrets:/etc/schema-registry/secrets
     networks:
       - sandbox.kafka
 
@@ -95,6 +99,12 @@ volumes:
     name: sandbox.kafka-secrets
   sandbox.kafka-data:
     name: sandbox.kafka-data
+  sandbox.kafka-init-secrets:
+    name: sandbox.kafka-init-secrets
+  sandbox.kafka-init-data:
+    name: sandbox.kafka-init-data
+  sandbox.schema-registry-secrets:
+    name: sandbox.schema-registry-secrets
 
 ### NETWORKS ###
 networks:

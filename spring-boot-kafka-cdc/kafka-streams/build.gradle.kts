@@ -11,7 +11,7 @@ plugins {
 dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.bundles.spring.boot.webflux)
-    implementation(libs.bundles.spring.kafka)
+    implementation(libs.bundles.spring.kafka.streams)
     testImplementation(libs.spring.boot.starter.test)
 }
 

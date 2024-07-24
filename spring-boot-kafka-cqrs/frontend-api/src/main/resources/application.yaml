@@ -2,9 +2,9 @@
 app:
   kafka:
     producer:
-      targetTopic: persons
+      target-topic: persons
     consumer:
-      sourceTopic: greetings
+      source-topic: greetings
 
 ### SPRING ###
 spring:
@@ -25,4 +25,16 @@ spring:
       ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
     generator:
       WRITE_BIGDECIMAL_AS_PLAIN: true
-
+  # Kafka
+  kafka:
+    consumer:
+      client-id: spring-boot-kafka-cqrs-frontend-api-consumer
+      group-id: spring-boot-kafka-cqrs-frontend-api-consumer-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        "spring.json.trusted.packages": "com.onlyteo.sandbox.*"
+    producer:
+      client-id: spring-boot-kafka-cqrs-frontend-api-producer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
