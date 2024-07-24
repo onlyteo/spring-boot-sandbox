@@ -2,6 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val jvmMajorVersion: String by project
 val jvmVersion = JavaVersion.toVersion(jvmMajorVersion)
+val projectGroupId: String by project
+val projectVersion: String by project
 
 plugins {
     alias(libs.plugins.kotlin.jvm) apply false
@@ -14,8 +16,8 @@ plugins {
 }
 
 allprojects {
-    group = "com.onlyteo.sandbox"
-    version = "0.0.1-SNAPSHOT"
+    group = projectGroupId
+    version = projectVersion
 }
 
 subprojects {
