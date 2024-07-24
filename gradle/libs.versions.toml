@@ -1,3 +1,4 @@
+### VERSIONS ###
 [versions]
 kotlin = "1.9.24"
 spring-boot = "3.3.0"
@@ -17,6 +18,7 @@ mockk = "1.13.11"
 google-cloud-jib = "3.4.3"
 git-properties = "2.4.2"
 
+### PLUGINS ###
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
@@ -26,6 +28,7 @@ spring-dependencies = { id = "io.spring.dependency-management", version.ref = "s
 google-cloud-jib = { id = "com.google.cloud.tools.jib", version.ref = "google-cloud-jib" }
 git-properties = { id = "com.gorylenko.gradle-git-properties", version.ref = "git-properties" }
 
+### LIBRARIES ###
 [libraries]
 # Kotlin
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
@@ -89,6 +92,7 @@ kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest"
 # Mockk
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
+### BUNDLES ###
 [bundles]
 spring-boot-web = [
     "spring-boot-starter-web",
