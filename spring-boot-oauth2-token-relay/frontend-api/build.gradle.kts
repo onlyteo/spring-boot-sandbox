@@ -10,9 +10,10 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.reflect)
-    implementation(libs.bundles.spring.boot.web)
+    implementation(libs.bundles.spring.web)
     implementation(libs.spring.boot.starter.oauth2.client)
     implementation(libs.bundles.webjars)
+    testImplementation(libs.bundles.spring.test)
 }
 
 java {

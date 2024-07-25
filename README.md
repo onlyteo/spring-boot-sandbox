@@ -1,11 +1,12 @@
 # Spring Boot Sandbox
 
 [![Kotlin](https://img.shields.io/badge/kotlin-1.9.24-8d53f9.svg?logo=kotlin&logoColor=8d53f9)](http://kotlinlang.org)
+[![TypeScript](https://img.shields.io/badge/typescript-5.2.2-3178c6.svg?logo=typescript&logoColor=3178c6)](https://www.typescriptlang.org)
 [![Spring Boot](https://img.shields.io/badge/spring%20boot-3.3.0-6cb52d.svg?logo=spring-boot&logoColor=6cb52d)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/react-18.3.1-58c4dc.svg?logo=react&logoColor=58c4dc)](https://react.dev)
 [![Gradle](https://img.shields.io/badge/gradle-stable-209bc4.svg?logo=gradle&logoColor=209bc4)](https://gradle.org)
 [![Gradle](https://img.shields.io/badge/node.js-stable-417e38.svg?logo=nodedotjs&logoColor=417e38)](https://nodejs.org)
-[![GitHub license](https://img.shields.io/badge/license-Apache%202.0-e97726.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![GitHub license](https://img.shields.io/badge/license-Apache_2.0-e97726.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 This repository contain sandbox projects to showcase features of the
 [Spring Boot framework](https://spring.io/projects/spring-boot).
@@ -19,7 +20,7 @@ Read details about the examples in their respective project roots.
 * [OAuth2 Token Exchange](./spring-boot-oauth2-token-exchange)
 * [OAuth2 Extended Authorization Server](./spring-boot-oauth2-extended-authorization-server)
 * [Kafka CQRS](./spring-boot-kafka-cqrs)
-* [Kafka CDC](./spring-boot-kafka-cdc)
+* [Kafka CDC](./spring-boot-kafka-cdc) - WIP
 
 ## Architecture
 Spring Boot is a framework for building applications for the

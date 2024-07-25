@@ -10,16 +10,13 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.reflect)
-    implementation(libs.spring.boot.starter.web)
-    implementation(libs.spring.boot.starter.jdbc)
-    implementation(libs.spring.boot.starter.validation)
-    implementation(libs.spring.boot.starter.thymeleaf)
+    implementation(libs.bundles.spring.web)
+    implementation(libs.bundles.spring.thymeleaf)
+    implementation(libs.bundles.spring.jdbc.h2)
     implementation(libs.spring.security.oauth2.authorization.server)
-    implementation(libs.thymeleaf.layout.dialect)
     implementation(libs.thymeleaf.extras.spring.security)
-    implementation(libs.jackson.module.kotlin)
-    implementation(libs.h2.database)
     implementation(libs.bundles.webjars)
+    testImplementation(libs.bundles.spring.test)
 }
 
 java {

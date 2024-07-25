@@ -35,5 +35,6 @@ include(":spring-boot-kafka-cqrs:frontend")
 include(":spring-boot-kafka-cqrs:frontend-api")
 include(":spring-boot-kafka-cqrs:backend")
 
-include(":spring-boot-kafka-cdc:mastodon-consumer")
-include(":spring-boot-kafka-cdc:kafka-streams")
+include(":spring-boot-kafka-cdc:frontend")
+include(":spring-boot-kafka-cdc:frontend-api")
+include(":spring-boot-kafka-cdc:backend")

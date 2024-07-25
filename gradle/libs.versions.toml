@@ -94,30 +94,33 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 ### BUNDLES ###
 [bundles]
-spring-boot-web = [
+spring-web = [
     "spring-boot-starter-web",
     "spring-boot-starter-validation",
     "spring-boot-starter-logging",
     "spring-boot-configuration-processor",
     "jackson-module-kotlin"
 ]
-spring-boot-webflux = [
+spring-webflux = [
     "spring-boot-starter-webflux",
     "spring-boot-starter-validation",
     "spring-boot-starter-logging",
     "spring-boot-configuration-processor",
     "jackson-module-kotlin"
 ]
-spring-boot-thymeleaf = [
+spring-thymeleaf = [
     "spring-boot-starter-thymeleaf",
     "thymeleaf-layout-dialect"
 ]
-spring-boot-jdbc-h2 = [
+spring-websocket = [
+    "spring-boot-starter-websocket"
+]
+spring-jdbc-h2 = [
     "spring-boot-starter-jdbc",
     "h2-database",
     "flyway-core"
 ]
-spring-boot-jpa-mysql = [
+spring-jpa-mysql = [
     "spring-boot-starter-data-jpa",
     "mysql-connector",
     "flyway-mysql"
@@ -130,6 +133,9 @@ spring-kafka-streams = [
     "spring-kafka",
     "kafka-clients",
     "kafka-streams"
+]
+spring-test = [
+    "spring-boot-starter-test"
 ]
 webjars = [
     "webjars-jquery",

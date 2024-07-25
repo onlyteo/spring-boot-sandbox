@@ -1,0 +1,24 @@
+### SPRING ###
+spring:
+  kafka:
+    producer:
+      bootstrap-servers:
+        - "localhost:9092"
+    consumer:
+      bootstrap-servers:
+        - "localhost:9092"
+
+### LOGGING ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+    org.apache.kafka.clients.admin.AdminClientConfig: WARN
+    org.apache.kafka.clients.consumer.ConsumerConfig: WARN
+    org.apache.kafka.clients.producer.ProducerConfig: WARN
+
+### SERVER ###
+server:
+  port: 8080
+  error:
+    include-stacktrace: ALWAYS
