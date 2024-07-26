@@ -1,3 +1,4 @@
+### SERVICES ###
 services:
   sandbox.postgres:
     image: postgres
@@ -13,10 +14,12 @@ services:
     networks:
       - sandbox.postgres
 
+### VOLUMES ###
 volumes:
   sandbox.postgres.data:
     name: sandbox.postgres.data
 
+### NETWORKS ###
 networks:
   sandbox.postgres:
     name: sandbox.postgres

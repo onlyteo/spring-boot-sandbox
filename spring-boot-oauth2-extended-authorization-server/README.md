@@ -18,18 +18,19 @@ Extended features:
 ```mermaid
 graph TD
     subgraph Authorization Server
-        X[OAuth2 Login]
+        X[OAuth2 Login]:::oauth2
     end
     subgraph Frontend
-        A[Web UI]
+        A[Web UI]:::spring
     end
     subgraph Backend
-        B[REST API]
+        B[REST API]:::spring
     end
 
-    A:::react <-. Login Redirect .-> X:::oauth2
-    A:::spring -- Fetch Token --> X:::oauth2
-    A:::spring -- REST --> B:::spring
+    A <-. Login Redirect .-> X
+    A -- Fetch Token --> X
+    A -- REST --> B
+
     classDef spring fill: #80ea6e, stroke: #000000, color: #000000
     classDef oauth2 fill: #c98979, stroke: #000000, color: #000000
 ```

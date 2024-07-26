@@ -1,6 +1,7 @@
+### SERVICES ###
 services:
   sandbox.mysql:
-    image: mysql
+    image: mysql:8.0 # Must use MySQL version < 8.4 until DBZ-7838 is fixed - https://issues.redhat.com/browse/DBZ-7838
     container_name: sandbox.mysql
     environment:
       MYSQL_USER: sandbox
@@ -12,17 +13,19 @@ services:
       - "3306:3306"
     volumes:
       - ./resources/initdb.d:/docker-entrypoint-initdb.d
-      - mysql.conf:/etc/mysql/conf.d
-      - mysql.data:/var/lib/mysql
+      - sandbox.mysql.conf:/etc/mysql/conf.d
+      - sandbox.mysql.data:/var/lib/mysql
     networks:
-      - mysql
+      - sandbox.mysql
 
+### VOLUMES ###
 volumes:
-  mysql.conf:
+  sandbox.mysql.conf:
     name: sandbox.mysql.conf
-  mysql.data:
+  sandbox.mysql.data:
     name: sandbox.mysql.data
 
+### NETWORKS ###
 networks:
-  mysql:
+  sandbox.mysql:
     name: sandbox.mysql

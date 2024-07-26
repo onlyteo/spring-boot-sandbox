@@ -1,9 +1,13 @@
 ### SPRING ###
 spring:
+  # Datasource
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sandbox
+    username: sandbox
+    password: G4nd4lf
+  # Kafka
   kafka:
-    producer:
-      bootstrap-servers:
-        - "localhost:9092"
     consumer:
       bootstrap-servers:
         - "localhost:9092"

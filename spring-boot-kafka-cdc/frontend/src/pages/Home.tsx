@@ -51,7 +51,7 @@ export const Home: FC = (): ReactElement => {
                 <Row>
                     <Col>
                         <h2 className="emphasized-text">Welcome to this Spring Boot example!</h2>
-                        <p>This example shows a Kafka CQSR architecture</p>
+                        <p>This example shows a Kafka CDC architecture</p>
                     </Col>
                 </Row>
                 <Row className="mt-5">

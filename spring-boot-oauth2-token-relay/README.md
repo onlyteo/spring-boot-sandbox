@@ -11,22 +11,23 @@ login flow to authenticate the end users.
 ```mermaid
 graph TD
     subgraph Authorization Server
-        X[OAuth2 Login]
+        X[OAuth2 Login]:::oauth2
     end
     subgraph Frontend
-        A[REST Client]
+        A[REST Client]:::react
     end
     subgraph Frontend API
-        B[REST API]
+        B[REST API]:::spring
     end
     subgraph Backend
-        C[REST API]
+        C[REST API]:::spring
     end
 
-    A:::react -- REST --> B:::spring
-    B:::spring -- REST --> C:::spring
-    A:::react <-. Login Redirect .-> X:::oauth2
-    B:::spring -- Fetch Token --> X:::oauth2
+    A -- REST --> B
+    B-- REST --> C
+    A <-. Login Redirect .-> X
+    B -- Fetch Token --> X
+
     classDef react fill: #087ea4, stroke: #000000, color: #000000
     classDef spring fill: #80ea6e, stroke: #000000, color: #000000
     classDef oauth2 fill: #c98979, stroke: #000000, color: #000000

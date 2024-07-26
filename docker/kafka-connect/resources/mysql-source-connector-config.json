@@ -6,7 +6,7 @@
     "connector.class" : "io.debezium.connector.mysql.MySqlConnector",
     "tasks.max" : "1",
     "topic.prefix" : "cdc.source",
-    "table.include.list" : "sandbox.account,sandbox.status",
+    "table.include.list" : "sandbox.persons",
     "topic.creation.enable" : "true",
     "topic.creation.default.replication.factor" : 1,
     "topic.creation.default.partitions" : 1,

@@ -1,8 +1,7 @@
 ### APP ###
 app:
+  # Kafka
   kafka:
-    producer:
-      target-topic: persons
     consumer:
       source-topic: greetings
 
@@ -10,7 +9,7 @@ app:
 spring:
   # Application
   application:
-    name: spring-boot-kafka-cqrs-frontend-api
+    name: spring-boot-kafka-cdc-frontend-api
   # Profiles
   profiles:
     active: development
@@ -25,16 +24,15 @@ spring:
       ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
     generator:
       WRITE_BIGDECIMAL_AS_PLAIN: true
+  # JPA
+  jpa:
+    open-in-view: false
   # Kafka
   kafka:
     consumer:
-      client-id: spring-boot-kafka-cqrs-frontend-api-consumer
-      group-id: spring-boot-kafka-cqrs-frontend-api-consumer-group
+      client-id: ${spring.application.name}-consumer
+      group-id: ${spring.application.name}-consumer-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         "spring.json.trusted.packages": "com.onlyteo.sandbox.*"
-    producer:
-      client-id: spring-boot-kafka-cqrs-frontend-api-producer
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

@@ -1,5 +1,6 @@
 package com.onlyteo.sandbox.config
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.onlyteo.sandbox.model.Greeting
 import com.onlyteo.sandbox.model.Person
 import com.onlyteo.sandbox.properties.ApplicationProperties
@@ -49,8 +50,11 @@ class KafkaConfig {
     }
 
     @Bean
-    fun sourceValueSerde(kafkaProperties: KafkaProperties): Serde<Person> {
-        val jsonSerde = JsonSerde<Person>()
+    fun sourceValueSerde(
+        kafkaProperties: KafkaProperties,
+        objectMapper: ObjectMapper
+    ): Serde<Person> {
+        val jsonSerde = JsonSerde<Person>(objectMapper)
         jsonSerde.configure(kafkaProperties.streams.properties, false)
         return jsonSerde
     }
@@ -61,8 +65,11 @@ class KafkaConfig {
     }
 
     @Bean
-    fun sinkValueSerde(kafkaProperties: KafkaProperties): Serde<Greeting> {
-        val jsonSerde = JsonSerde<Greeting>()
+    fun sinkValueSerde(
+        kafkaProperties: KafkaProperties,
+        objectMapper: ObjectMapper
+    ): Serde<Greeting> {
+        val jsonSerde = JsonSerde<Greeting>(objectMapper)
         jsonSerde.configure(kafkaProperties.streams.properties, false)
         return jsonSerde
     }

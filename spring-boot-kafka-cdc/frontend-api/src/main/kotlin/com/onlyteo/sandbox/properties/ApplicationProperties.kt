@@ -11,12 +11,7 @@ data class ApplicationProperties(
 )
 
 data class KafkaProperties(
-    @field:Valid @field:NotNull val producer: KafkaProducerProperties,
     @field:Valid @field:NotNull val consumer: KafkaConsumerProperties
-)
-
-data class KafkaProducerProperties(
-    @field:NotBlank val targetTopic: String
 )
 
 data class KafkaConsumerProperties(

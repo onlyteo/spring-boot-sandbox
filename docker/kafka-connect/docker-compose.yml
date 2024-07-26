@@ -1,10 +1,11 @@
+### SERVICES ###
 services:
   sandbox.kafka-connect:
     image: confluentinc/cp-kafka-connect:latest
     container_name: sandbox.kafka-connect
     environment:
       CONNECT_BOOTSTRAP_SERVERS: sandbox.kafka:29092
-      CONNECT_GROUP_ID: kafka-connect
+      CONNECT_GROUP_ID: sandbox.kafka-connect
       CONNECT_CONFIG_STORAGE_TOPIC: __connect_configs
       CONNECT_OFFSET_STORAGE_TOPIC: __connect_offsets
       CONNECT_STATUS_STORAGE_TOPIC: __connect_status
@@ -23,36 +24,39 @@ services:
       - -c
       - |
         echo "Installing Connectors"
-        confluent-hub install --no-prompt debezium/debezium-connector-mysql:2.2.1
+        confluent-hub install --no-prompt debezium/debezium-connector-mysql:2.4.2
         echo "Launching Kafka Connect Worker"
         /etc/confluent/docker/run &
         sleep infinity
     ports:
       - "8083:8083"
     volumes:
-      - ./resources/connectors:/usr/share/kafka-connect/connectors
-      - kafka.secrets:/etc/kafka/secrets
-      - kafka.data:/var/lib/kafka/data
-      - kafka-connect.secrets:/etc/kafka-connect/secrets
-      - kafka-connect.jars:/etc/kafka-connect/jars
+      #- ./resources/connectors:/usr/share/kafka-connect/connectors
+      - ./resources/log4j.properties.template:/etc/confluent/docker/log4j.properties.template
+      - sandbox.kafka.data:/var/lib/kafka/data
+      - sandbox.kafka.secrets:/etc/kafka/secrets
+      - sandbox.kafka-connect.secrets:/etc/kafka-connect/secrets
+      - sandbox.kafka-connect.jars:/etc/kafka-connect/jars
     networks:
-      - kafka
-      - mssql
+      - sandbox.kafka
+      - sandbox.mssql
 
+### VOLUMES ###
 volumes:
-  kafka.secrets:
-    name: sandbox.kafka-connect.kafka-secrets
-  kafka.data:
+  sandbox.kafka.data:
     name: sandbox.kafka-connect.kafka-data
-  kafka-connect.secrets:
+  sandbox.kafka.secrets:
+    name: sandbox.kafka-connect.kafka-secrets
+  sandbox.kafka-connect.secrets:
     name: sandbox.kafka-connect.connect-secrets
-  kafka-connect.jars:
+  sandbox.kafka-connect.jars:
     name: sandbox.kafka-connect.connect-jars
 
+### NETWORKS ###
 networks:
-  kafka:
+  sandbox.kafka:
     name: sandbox.kafka
     external: true
-  mssql:
-    name: sandbox.mssql
+  sandbox.mssql:
+    name: sandbox.mysql
     external: true

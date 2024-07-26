@@ -2,20 +2,24 @@ package com.onlyteo.sandbox.service
 
 import com.onlyteo.sandbox.config.buildLogger
 import com.onlyteo.sandbox.model.Person
-import com.onlyteo.sandbox.properties.ApplicationProperties
-import org.springframework.kafka.core.KafkaTemplate
+import com.onlyteo.sandbox.model.PersonEntity
+import com.onlyteo.sandbox.repository.PersonRepository
 import org.springframework.stereotype.Service
 
 @Service
 class GreetingService(
-    private val applicationProperties: ApplicationProperties,
-    private val kafkaTemplate: KafkaTemplate<Any, Any>
+    private val personRepository: PersonRepository
 ) {
     private val logger = buildLogger
 
     fun sendGreeting(person: Person) {
-        val producerProperties = applicationProperties.kafka.producer
-        logger.info("Sending person \"{}\" on topic \"{}\"", person.name, producerProperties.targetTopic)
-        kafkaTemplate.send(producerProperties.targetTopic, person.name, person)
+        logger.info("Saving person \"{}\" on table \"PERSON\"", person.name)
+        val personEntity = personRepository.findByName(person.name)
+        if (personEntity == null) {
+            personRepository.save(PersonEntity(name = person.name))
+        } else {
+            personEntity.name = person.name
+            personRepository.save(personEntity)
+        }
     }
 }

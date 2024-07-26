@@ -1,5 +1,5 @@
 {
-  "name": "ktor-kafka-streams-frontend",
+  "name": "spring-boot-kafka-cqrs-frontend",
   "version": "1.0.0",
   "private": true,
   "license": "Apache-2.0",

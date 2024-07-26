@@ -7,8 +7,8 @@ import org.springframework.boot.runApplication
 
 @EnableConfigurationProperties(ApplicationProperties::class)
 @SpringBootApplication
-class KafkaCqrsFrontendApiApplication
+class KafkaCdcBackendApplication
 
 fun main(args: Array<String>) {
-    runApplication<KafkaCqrsFrontendApiApplication>(*args)
+    runApplication<KafkaCdcBackendApplication>(*args)
 }

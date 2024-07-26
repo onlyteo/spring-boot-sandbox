@@ -1,11 +1,11 @@
 package com.onlyteo.sandbox.topology
 
 import com.onlyteo.sandbox.config.buildLogger
-import com.onlyteo.sandbox.model.Greeting
-import com.onlyteo.sandbox.model.Person
+import com.onlyteo.sandbox.model.*
 import com.onlyteo.sandbox.properties.KafkaStreamsProperties
 import com.onlyteo.sandbox.service.GreetingService
 import org.apache.kafka.common.serialization.Serdes
+import org.apache.kafka.streams.KeyValue
 import org.apache.kafka.streams.StreamsBuilder
 import org.apache.kafka.streams.Topology
 import org.apache.kafka.streams.errors.StreamsUncaughtExceptionHandler
@@ -27,7 +27,7 @@ import java.time.Instant
 
 fun StreamsBuilder.buildKafkaStreamsTopology(
     properties: KafkaStreamsProperties,
-    consumed: Consumed<String, Person>,
+    consumed: Consumed<CdcEnvelope<CdcKey>, CdcEnvelope<CdcValue<PersonEntity>>>,
     produced: Produced<String, Greeting>,
     greetingService: GreetingService
 ): Topology {
@@ -37,12 +37,14 @@ fun StreamsBuilder.buildKafkaStreamsTopology(
         Stores.timestampedKeyValueStoreBuilder(
             Stores.inMemoryKeyValueStore(properties.stateStore),
             Serdes.StringSerde(),
-            JsonSerde<Person>()
+            JsonSerde(PersonEntity::class.java)
         )
     )
 
     this.stream(properties.sourceTopic, consumed)
-        .peek { name, _ -> logger.info("Received person \"${name}\" on Kafka topic \"${properties.sourceTopic}\"") }
+        .peek { key, _ -> logger.info("Received CDC event \"${key.payload.id}\" on Kafka topic \"${properties.sourceTopic}\"") }
+        .filter { _, value -> value.payload.after != null } // Remove "delete" events
+        .map { key, value -> KeyValue(key.payload.id, value.payload.after) }
         .process(
             buildPersonProcessorSupplier(properties, greetingService),
             Named.`as`(properties.processor),
@@ -64,11 +66,11 @@ private fun buildPersonProcessor(
     properties: KafkaStreamsProperties,
     greetingService: GreetingService
 ) =
-    object : Processor<String, Person, String, Greeting> {
+    object : Processor<String, PersonEntity, String, Greeting> {
 
         private val logger = buildLogger
         private lateinit var processorContext: ProcessorContext<String, Greeting>
-        private lateinit var keyValueStore: TimestampedKeyValueStore<String, Person>
+        private lateinit var keyValueStore: TimestampedKeyValueStore<String, PersonEntity>
 
         override fun init(processorContext: ProcessorContext<String, Greeting>?) {
             this.processorContext = checkNotNull(processorContext) { "ProcessorContext cannot be null" }
@@ -82,7 +84,7 @@ private fun buildPersonProcessor(
             )
         }
 
-        override fun process(record: Record<String, Person>?) {
+        override fun process(record: Record<String, PersonEntity>?) {
             val person = record?.value() ?: return
             if (setOf("John", "Julie", "James", "Jenny").contains(person.name)) {
                 // Delay greeting for these names by 1 minute
@@ -91,7 +93,7 @@ private fun buildPersonProcessor(
             } else {
                 // Otherwise forward greeting
                 logger.info("Completed processing for \"{}\"", person.name)
-                val greeting = greetingService.getGreeting(person)
+                val greeting = greetingService.getGreeting(person.name)
                 this.processorContext.forward(Record(person.name, greeting, Instant.now().toEpochMilli()))
             }
         }
@@ -99,7 +101,7 @@ private fun buildPersonProcessor(
 
 private fun buildPersonPunctuator(
     processorContext: ProcessorContext<String, Greeting>,
-    keyValueStore: TimestampedKeyValueStore<String, Person>,
+    keyValueStore: TimestampedKeyValueStore<String, PersonEntity>,
     greetingService: GreetingService
 ) = object : Punctuator {
 
@@ -114,7 +116,7 @@ private fun buildPersonPunctuator(
                     val person = value.value()
                     logger.info("Completed delayed processing for \"{}\"", person.name)
                     keyValueStore.delete(person.name)
-                    val greeting = greetingService.getGreeting(person)
+                    val greeting = greetingService.getGreeting(person.name)
                     processorContext.forward(Record(person.name, greeting, Instant.now().toEpochMilli()))
                 }
             }

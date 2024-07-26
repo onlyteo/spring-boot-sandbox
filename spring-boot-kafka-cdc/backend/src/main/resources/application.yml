@@ -1,17 +1,26 @@
+### APP ###
+app:
+  # Resources
+  resources:
+    prefixes-file: /data/prefixes.csv
+  # Kafka
+  kafka:
+    streams:
+      source-topic: cdc.source.sandbox.persons
+      sink-topic: greetings
+      state-store: persons
+      processor: personProcessor
+      punctuator-schedule: PT10S
+      processing-delay: PT60S
+
 ### SPRING ###
 spring:
   # Application
   application:
-    name: spring-boot-cdc-event-streaming-kafka-streams-pipeline
+    name: spring-boot-kafka-cdc-backend
   # Profiles
   profiles:
     active: development
-  # AOP
-  aop:
-    proxy-target-class: true
-  # JMX
-  jmx:
-    enabled: false
   # Jackson
   jackson:
     date-format: com.fasterxml.jackson.databind.util.StdDateFormat
@@ -25,3 +34,12 @@ spring:
       WRITE_BIGDECIMAL_AS_PLAIN: true
     mapper:
       ACCEPT_CASE_INSENSITIVE_PROPERTIES: true
+  # Kafka
+  kafka:
+    consumer:
+      client-id: ${spring.application.name}-consumer
+      group-id: ${spring.application.name}-consumer-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        "spring.json.trusted.packages": "com.onlyteo.sandbox.*"

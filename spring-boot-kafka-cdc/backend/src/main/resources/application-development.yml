@@ -1,22 +1,10 @@
-### APP ###
-app:
-  # Kafka
-  kafka:
-    stream:
-      account-source-topic: cdc.source.account
-      status-source-topic: cdc.source.status
-
 ### SPRING ###
 spring:
   # Kafka
   kafka:
-    bootstrap-servers:
-      - localhost:9092
     consumer:
-      client-id: ${spring.application.name}
-      group-id: ${spring.application.name}
-      properties:
-        spring.json.trusted.packages: "*"
+      bootstrap-servers:
+        - "localhost:9092"
 
 ### LOGGING ###
 logging:

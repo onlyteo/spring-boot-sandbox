@@ -11,10 +11,10 @@ plugins {
 dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.bundles.spring.web)
-    implementation(libs.bundles.webjars)
     implementation(libs.bundles.spring.kafka)
     implementation(libs.bundles.spring.websocket)
     implementation(libs.bundles.spring.jpa.mysql)
+    implementation(libs.bundles.webjars)
     testImplementation(libs.bundles.spring.test)
 }
 

@@ -7,7 +7,7 @@ app:
   kafka:
     streams:
       source-topic: persons
-      target-topic: greetings
+      sink-topic: greetings
       state-store: persons
       processor: personProcessor
       punctuator-schedule: PT10S
@@ -35,6 +35,6 @@ spring:
   # Kafka
   kafka:
     streams:
-      application-id: spring-boot-kafka-cqrs-backend-streams
+      application-id: ${spring.application.name}-streams
       properties:
         "spring.json.trusted.packages": "com.onlyteo.sandbox.*"
