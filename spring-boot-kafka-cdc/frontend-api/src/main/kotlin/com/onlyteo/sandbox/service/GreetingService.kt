@@ -16,9 +16,9 @@ class GreetingService(
         logger.info("Saving person \"{}\" on table \"PERSON\"", person.name)
         val personEntity = personRepository.findByName(person.name)
         if (personEntity == null) {
-            personRepository.save(PersonEntity(name = person.name))
+            personRepository.save(PersonEntity(name = person.name, count = 1))
         } else {
-            personEntity.name = person.name
+            personEntity.increaseCount()
             personRepository.save(personEntity)
         }
     }

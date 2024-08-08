@@ -31,8 +31,6 @@ services:
     ports:
       - "8083:8083"
     volumes:
-      #- ./resources/connectors:/usr/share/kafka-connect/connectors
-      - ./resources/log4j.properties.template:/etc/confluent/docker/log4j.properties.template
       - sandbox.kafka.data:/var/lib/kafka/data
       - sandbox.kafka.secrets:/etc/kafka/secrets
       - sandbox.kafka-connect.secrets:/etc/kafka-connect/secrets

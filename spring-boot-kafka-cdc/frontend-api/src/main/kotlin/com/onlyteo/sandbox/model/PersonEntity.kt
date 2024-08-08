@@ -9,5 +9,15 @@ class PersonEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
     @Column(nullable = false)
-    var name: String? = null
-)
+    val name: String? = null,
+    @Column(nullable = false)
+    var count: Int? = null
+) {
+    fun increaseCount() {
+        count = if (count == null) {
+            1
+        } else {
+            count!! + 1
+        }
+    }
+}

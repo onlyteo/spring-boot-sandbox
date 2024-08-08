@@ -13,6 +13,29 @@ Extended features:
 * Using external RSA keys for OAuth2 token signing.
 * Requiring PKCE for OAuth2 clients using the Authorization Code Grant flow.
 
+## Prerequisites
+
+* Java Runtime - e.g. [Temurin JDK](https://adoptium.net), [OpenJDK](https://openjdk.org) or [Oracle JDK](https://www.oracle.com/java)
+* [Docker](https://www.docker.com)
+
+## Run
+
+Start Authorization Server application:
+```bash
+../gradlew :spring-boot-oauth2-extended-authorization-server:authorization-server:bootRun
+```
+
+Start Backend application:
+```bash
+../gradlew :spring-boot-oauth2-extended-authorization-server:backend:bootRun
+```
+
+Start Frontend API application:
+
+```bash
+../gradlew :spring-boot-oauth2-extended-authorization-server:frontend-api:bootRun
+```
+
 ## Architecture
 
 ```mermaid
@@ -39,24 +62,12 @@ graph TD
 The Authorization Server is an OAuth2 Authorization Server application based on Spring Boot and the
 [spring-security-oauth2-authorization-server](https://spring.io/projects/spring-authorization-server) project.
 
-```bash
-../gradlew :spring-boot-oauth2-authorization-server-extended:authorization-server:bootRun
-```
-
 Look at the `WebSecurityConfig` and the `AuthorizationServerConfig` class, as well as the `application.yml` files for
 more details on the security configuration.
-
-### Frontend
-This is a Thymeleaf webapp based on Spring Boot and with an OAuth2 Client security configuration. This application
-is only used to invoke a OAuth2 login flow together with the OAuth2 Authorization Server.
-
-```bash
-../gradlew :spring-boot-oauth2-authorization-server-extended:frontend:bootRun
-```
 
 ### Backend
 This is a Spring Boot app with a REST API, which is protected as an OAuth2 Resource Server.
 
-```bash
-../gradlew :spring-boot-oauth2-authorization-server-extended:backend:bootRun
-```
+### Frontend
+This is a Thymeleaf webapp based on Spring Boot and with an OAuth2 Client security configuration. This application
+is only used to invoke a OAuth2 login flow together with the OAuth2 Authorization Server.

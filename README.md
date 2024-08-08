@@ -20,7 +20,7 @@ Read details about the examples in their respective project roots.
 * [OAuth2 Token Exchange](./spring-boot-oauth2-token-exchange)
 * [OAuth2 Extended Authorization Server](./spring-boot-oauth2-extended-authorization-server)
 * [Kafka CQRS](./spring-boot-kafka-cqrs)
-* [Kafka CDC](./spring-boot-kafka-cdc) - WIP
+* [Kafka CDC](./spring-boot-kafka-cdc)
 
 ## Architecture
 Spring Boot is a framework for building applications for the
@@ -35,10 +35,10 @@ The examples typically consists of a `Frontend` and a `Backend` application.
 
 ```mermaid
 graph TD
-    A[Spring Boot Frontend]
-    B[Spring Boot Backend]
+    A[Spring Boot Frontend]:::spring
+    B[Spring Boot Backend]:::spring
 
-    A:::spring --> B:::spring
+    A --> B
     
     classDef react fill: #58c4dc, stroke: #000000, color: #000000
     classDef spring fill: #6cb52d, stroke: #000000, color: #000000
@@ -48,12 +48,12 @@ If the frontend is a JavaScript application then there is often a `Frontend API`
 
 ```mermaid
 graph TD
-    A[React Frontend]
-    B[Spring Boot Frontend API]
-    C[Spring Boot Backend]
+    A[React Frontend]:::react
+    B[Spring Boot Frontend API]:::spring
+    C[Spring Boot Backend]:::spring
     
-    A:::react --> B:::spring
-    B:::spring --> C:::spring
+    A --> B
+    B --> C
     
     classDef react fill: #58c4dc, stroke: #000000, color: #000000
     classDef spring fill: #6cb52d, stroke: #000000, color: #000000
