@@ -1,0 +1,17 @@
+### APP ###
+app:
+  integrations:
+    backend:
+      url: http://localhost:8081
+
+### LOGGING ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+
+### SERVER ###
+server:
+  port: 8080
+  error:
+    include-stacktrace: ALWAYS

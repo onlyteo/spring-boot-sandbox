@@ -1,0 +1,25 @@
+### APP ###
+app:
+  # Resources
+  resources:
+    prefixes-file: /data/prefixes.csv
+
+### SPRING ###
+spring:
+  # Application
+  application:
+    name: spring-boot-rest-api-backend
+  # Profiles
+  profiles:
+    active: development
+  # Jackson
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.StdDateFormat
+    default-property-inclusion: NON_NULL
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+      WRITE_DURATIONS_AS_TIMESTAMPS: false
+    deserialization:
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+    generator:
+      WRITE_BIGDECIMAL_AS_PLAIN: true

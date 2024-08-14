@@ -17,6 +17,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "spring-boot-sandbox"
 
+include(":spring-boot-rest-api:frontend")
+include(":spring-boot-rest-api:frontend-api")
+include(":spring-boot-rest-api:backend")
+
 include(":spring-boot-oauth2-token-relay:frontend")
 include(":spring-boot-oauth2-token-relay:frontend-api")
 include(":spring-boot-oauth2-token-relay:backend")
