@@ -1,0 +1,67 @@
+### RECEIVERS ###
+receivers:
+  # OTLP
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+### EXPORTERS ###
+exporters:
+  # OTLP
+  otlp:
+    endpoint: sandbox.grafana-tempo:4317
+    tls:
+      insecure: true
+  prometheus:
+    endpoint: 0.0.0.0:9090
+    namespace: sandbox
+    send_timestamps: true
+    enable_open_metrics: true
+    add_metric_suffixes: false
+    resource_to_telemetry_conversion:
+      enabled: true
+#  prometheusremotewrite:
+#    endpoint: sandbox.prometheus:9090/api/v1/write
+#    tls:
+#      insecure: true
+  # Debug
+  debug:
+    verbosity: detailed
+
+### PROCESSORS ###
+#processors:
+#  # Filter
+#  filter:
+#    error_mode: ignore
+#    traces:
+#      span:
+#        - IsMatch(attributes["url.path"], "/metrics")
+
+### SERVICE ###
+service:
+  # Pipelines
+  pipelines:
+    traces:
+      receivers:
+        - otlp
+#      processors:
+#        - filter
+      exporters:
+        - otlp
+    metrics:
+      receivers:
+        - otlp
+#      processors:
+#        - batch
+      exporters:
+        - prometheus
+  #  logs:
+  #    receivers:
+  #      - otlp
+  #    processors:
+  #      - batch
+  #    exporters:
+  #      - otlp

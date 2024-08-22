@@ -4,8 +4,8 @@ kotlin = "1.9.24"
 spring-boot = "3.3.0"
 spring-dependencies = "1.1.5"
 logstash-logback = "7.4"
-micrometer = "1.12.5"
-opentelemetry = "1.39.0"
+#micrometer = "1.13.3"
+#opentelemetry = "1.39.0"
 opentelemetry-instrumentation = "2.4.0"
 kafka = "3.7.0"
 webjars-jquery = "3.7.0"
@@ -40,6 +40,7 @@ spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-star
 spring-boot-starter-logging = { module = "org.springframework.boot:spring-boot-starter-logging" }
 spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
 spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
 spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
 spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
@@ -57,9 +58,12 @@ jackson-dataformat-csv = { module = "com.fasterxml.jackson.dataformat:jackson-da
 # Logback
 logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-logback" }
 # Micrometer
-micrometer-prometheus-registry = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "micrometer" }
+micrometer-tracing-bridge-otel = { module = "io.micrometer:micrometer-tracing-bridge-otel" }
+micrometer-registry-otlp = { module = "io.micrometer:micrometer-registry-otlp" }
+micrometer-registry-prometheus = { module = "io.micrometer:micrometer-registry-prometheus" }
 # OpenTelemetry
-opentelemetry-kotlin = { module = "io.opentelemetry:opentelemetry-extension-kotlin", version.ref = "opentelemetry" }
+opentelemetry-kotlin = { module = "io.opentelemetry:opentelemetry-extension-kotlin" }
+opentelemetry-exporter-otlp = { module = "io.opentelemetry:opentelemetry-exporter-otlp" }
 opentelemetry-instrumentation-annotations = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations", version.ref = "opentelemetry-instrumentation" }
 opentelemetry-java-agent = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent", version.ref = "opentelemetry-instrumentation" }
 # Flyway
@@ -132,6 +136,17 @@ spring-kafka-streams = [
     "spring-kafka",
     "kafka-clients",
     "kafka-streams"
+]
+spring-micrometer-prometheus = [
+    "spring-boot-starter-actuator",
+    "micrometer-registry-prometheus"
+]
+spring-micrometer-opentelemetry = [
+    "spring-boot-starter-actuator",
+    "micrometer-registry-otlp",
+    "micrometer-tracing-bridge-otel",
+    "opentelemetry-kotlin",
+    "opentelemetry-exporter-otlp"
 ]
 spring-test = [
     "spring-boot-starter-test"

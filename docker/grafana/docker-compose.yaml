@@ -1,0 +1,116 @@
+### SERVICES ###
+services:
+  # Grafana
+  sandbox.grafana:
+    image: grafana/grafana:latest
+    container_name: sandbox.grafana
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor traceQLStreaming metricsSummary
+    ports:
+      - "3030:3000"
+    volumes:
+      - ./config/grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./config/grafana-dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
+      - ./config/dashboards:/usr/share/grafana/dashboards
+      - sandbox.grafana-data:/var/lib/grafana
+      - sandbox.grafana-logs:/var/log/grafana
+    networks:
+      - sandbox.grafana
+
+  # Grafana Tempo
+  sandbox.grafana-tempo:
+    image: grafana/tempo:latest
+    container_name: sandbox.grafana-tempo
+    command:
+      - -config.file=/etc/tempo.yaml
+  #  ports:
+  #    - "3200:3200"    # tempo http
+  #    - "9095:9095"    # tempo grpc
+  #    - "4317:4317"    # otlp grpc
+  #    - "4318:4318"    # otlp http
+  #    - "9411:9411"    # zipkin
+  #    - "14268:14268"  # jaeger ingest
+    volumes:
+      - ./config/grafana-tempo.yaml:/etc/tempo.yaml
+      - sandbox.grafana-tempo-data:/var/tempo
+    networks:
+      - sandbox.grafana
+
+  # Grafana Loki
+  #  sandbox.grafana-loki:
+  #    image: grafana/loki:latest
+  #    container_name: sandbox.grafana-loki
+  #    entrypoint:
+  #      - /usr/bin/loki
+  #      - -config.file=/etc/loki.yaml
+  #    ports:
+  #      - "3100:3100"
+  #    volumes:
+  #      - ./config/grafana-loki.yaml:/etc/loki.yaml
+  #      - sandbox.grafana-loki-data:/var/lib/loki
+  #    networks:
+  #      - sandbox.grafana
+
+  # Grafana K6 Tracing
+  #  sandbox.grafana-k6-tracing:
+  #    image: ghcr.io/grafana/xk6-client-tracing:latest
+  #    container_name: sandbox.grafana-k6-tracing
+  #    environment:
+  #      - ENDPOINT=sandbox.grafana-tempo:4317
+  #    depends_on:
+  #      - sandbox.grafana-tempo
+  #    networks:
+  #      - sandbox.grafana
+
+  # Prometheus
+  sandbox.prometheus:
+    image: prom/prometheus:latest
+    container_name: sandbox.prometheus
+    command:
+      - --config.file=/etc/prometheus.yaml
+      - --web.enable-remote-write-receiver
+      - --enable-feature=exemplar-storage
+  #  ports:
+  #    - "9090:9090"
+    volumes:
+      - ./config/prometheus.yaml:/etc/prometheus.yaml
+      - sandbox.prometheus-data:/prometheus
+    networks:
+      - sandbox.grafana
+
+  # OTEL Collector
+  sandbox.otel-collector:
+    image: otel/opentelemetry-collector:latest
+    container_name: sandbox.otel-collector
+    command:
+      - --config=/etc/otel-collector.yaml
+    ports:
+      - "4317:4317"    # otlp grpc
+      - "4318:4318"    # otlp http
+  #    - "55679:55679"
+  #    - "55680:55680"
+    volumes:
+      - ./config/otel-collector.yaml:/etc/otel-collector.yaml
+    networks:
+      - sandbox.grafana
+
+### VOLUMES ###
+volumes:
+  sandbox.grafana-data:
+    name: sandbox.grafana-data
+  sandbox.grafana-logs:
+    name: sandbox.grafana-logs
+  sandbox.grafana-loki-data:
+    name: sandbox.grafana-loki-data
+  sandbox.grafana-tempo-data:
+    name: sandbox.grafana-tempo-data
+  sandbox.prometheus-data:
+    name: sandbox.prometheus-data
+
+### NETWORKS ###
+networks:
+  sandbox.grafana:
+    name: sandbox.grafana

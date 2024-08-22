@@ -1,0 +1,25 @@
+### LOGGING ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+
+### MANAGEMENT ###
+management:
+  # OTLP
+  otlp:
+    metrics:
+      export:
+        url: http://localhost:4318/v1/metrics
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
+  # Tracing
+  tracing:
+    sampling:
+      probability: 1.0
+
+### SERVER ###
+server:
+  port: 8081
+  error:
+    include-stacktrace: ALWAYS
