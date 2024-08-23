@@ -1,20 +1,15 @@
 ### VERSIONS ###
 [versions]
-kotlin = "1.9.24"
-spring-boot = "3.3.0"
-spring-dependencies = "1.1.5"
-logstash-logback = "7.4"
-#micrometer = "1.13.3"
-#opentelemetry = "1.39.0"
-opentelemetry-instrumentation = "2.4.0"
-kafka = "3.7.0"
+kotlin = "2.0.10"
+spring-boot = "3.3.2"
+spring-dependencies = "1.1.6"
 webjars-jquery = "3.7.0"
 webjars-bootstrap = "5.3.1"
 webjars-popper = "2.11.7"
 webjars-locator = "0.47"
 webjars-fontawesome = "6.4.2"
-kotest = "5.9.0"
-mockk = "1.13.11"
+kotest = "5.9.1"
+mockk = "1.13.12"
 google-cloud-jib = "3.4.3"
 git-properties = "2.4.2"
 
@@ -55,8 +50,6 @@ spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" }
 jackson-dataformat-csv = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-csv" }
-# Logback
-logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-logback" }
 # Micrometer
 micrometer-tracing-bridge-otel = { module = "io.micrometer:micrometer-tracing-bridge-otel" }
 micrometer-registry-otlp = { module = "io.micrometer:micrometer-registry-otlp" }
@@ -64,8 +57,6 @@ micrometer-registry-prometheus = { module = "io.micrometer:micrometer-registry-p
 # OpenTelemetry
 opentelemetry-kotlin = { module = "io.opentelemetry:opentelemetry-extension-kotlin" }
 opentelemetry-exporter-otlp = { module = "io.opentelemetry:opentelemetry-exporter-otlp" }
-opentelemetry-instrumentation-annotations = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations", version.ref = "opentelemetry-instrumentation" }
-opentelemetry-java-agent = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent", version.ref = "opentelemetry-instrumentation" }
 # Flyway
 flyway-core = { module = "org.flywaydb:flyway-core" }
 flyway-mysql = { module = "org.flywaydb:flyway-mysql" }
@@ -74,9 +65,9 @@ h2-database = { module = "com.h2database:h2" }
 # MySQL
 mysql-connector = { module = "com.mysql:mysql-connector-j" }
 # Kafka
-kafka-clients = { module = "org.apache.kafka:kafka-clients", version.ref = "kafka" }
-kafka-streams = { module = "org.apache.kafka:kafka-streams", version.ref = "kafka" }
-kafka-streams-test-utils = { module = "org.apache.kafka:kafka-streams-test-utils", version.ref = "kafka" }
+kafka-clients = { module = "org.apache.kafka:kafka-clients" }
+kafka-streams = { module = "org.apache.kafka:kafka-streams" }
+kafka-streams-test-utils = { module = "org.apache.kafka:kafka-streams-test-utils" }
 # Thymeleaf
 thymeleaf-layout-dialect = { module = "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect" }
 thymeleaf-extras-spring-security = { module = "org.thymeleaf.extras:thymeleaf-extras-springsecurity6" }

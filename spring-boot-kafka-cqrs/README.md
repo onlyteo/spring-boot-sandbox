@@ -32,3 +32,27 @@ Start Frontend application (this should open a browser window):
 yarn --cwd ./frontend install
 yarn --cwd ./frontend start
 ```
+
+## Architecture
+
+```mermaid
+graph TD
+    A[React Frontend]:::react
+    B[Spring Boot Frontend API]:::spring
+    C[Spring Boot Backend]:::spring
+    
+    subgraph Kafka
+        E[Person Topic]:::kafka
+        F[Greeting Topic]:::kafka
+    end
+    
+    A --> B
+    B --> E
+    E --> C
+    C --> F
+    F --> B
+    
+    classDef react fill: #58c4dc, stroke: #000000, color: #000000
+    classDef spring fill: #6cb52d, stroke: #000000, color: #000000
+    classDef kafka fill: #ffa500, stroke: #000000, color: #000000
+```

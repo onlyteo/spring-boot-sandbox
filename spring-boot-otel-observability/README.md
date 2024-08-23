@@ -41,22 +41,39 @@ graph TD
     subgraph Backend
         C[REST API]:::spring
     end
+    subgraph OTEL Collector
+        D[OTEL]:::otel
+    end
+    subgraph Prometheus
+        E[Scrape]:::prometheus
+    end
+    subgraph Grafana
+        F[Tempo]:::grafana
+    end
 
     A -- REST --> B
-    B-- REST --> C
+    B -- REST --> C
+    A -.-> D
+    B -.-> D
+    C -.-> D
+    D -.-> E
+    D -.-> F
 
     classDef react fill: #087ea4, stroke: #000000, color: #000000
     classDef spring fill: #80ea6e, stroke: #000000, color: #000000
+    classDef otel fill: #4f62ad, stroke: #000000, color: #000000
+    classDef prometheus fill: #e6522c, stroke: #000000, color: #000000
+    classDef grafana fill: #ffa500, stroke: #000000, color: #000000
 ```
 
-### Backend
+### Frontend
 
-The Backend is a REST API application based on Spring Boot.
+The Frontend is a JavaScript web application based on ReactJS and using the React Bootstrap framework.
 
 ### Frontend API
 
 The Frontend API is a REST API application based on Spring Boot.
 
-### Frontend
+### Backend
 
-The Frontend is a JavaScript web application based on ReactJS and using the React Bootstrap framework.
+The Backend is a REST API application based on Spring Boot.
