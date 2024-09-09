@@ -1,8 +1,8 @@
 # Spring Boot Sandbox
 
-[![Kotlin](https://img.shields.io/badge/kotlin-1.9.24-8d53f9.svg?logo=kotlin&logoColor=8d53f9)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-2.0.20-8d53f9.svg?logo=kotlin&logoColor=8d53f9)](http://kotlinlang.org)
+[![Spring Boot](https://img.shields.io/badge/spring%20boot-3.3.3-6cb52d.svg?logo=spring-boot&logoColor=6cb52d)](https://spring.io/projects/spring-boot)
 [![TypeScript](https://img.shields.io/badge/typescript-5.2.2-3178c6.svg?logo=typescript&logoColor=3178c6)](https://www.typescriptlang.org)
-[![Spring Boot](https://img.shields.io/badge/spring%20boot-3.3.0-6cb52d.svg?logo=spring-boot&logoColor=6cb52d)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/react-18.3.1-58c4dc.svg?logo=react&logoColor=58c4dc)](https://react.dev)
 [![Gradle](https://img.shields.io/badge/gradle-stable-209bc4.svg?logo=gradle&logoColor=209bc4)](https://gradle.org)
 [![Gradle](https://img.shields.io/badge/node.js-stable-417e38.svg?logo=nodedotjs&logoColor=417e38)](https://nodejs.org)
@@ -62,7 +62,7 @@ graph TD
 ```
 
 ## Use case
-Most examples implement a "hello world" style logic that returns a greeting message when the user inputs a name.
+Most examples implement a *"hello world"* style logic that returns a greeting message when the user inputs a name.
 
 * A user inputs the name "John" and clicks "Submit"
 * The system generates a greeting "Hello John!" back to the user
