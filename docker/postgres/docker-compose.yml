@@ -9,7 +9,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./resources/postgres-init.sql:/docker-entrypoint-initdb.d/postgres-init.sql
+      - ./resources/initdb.d:/docker-entrypoint-initdb.d
       - sandbox.postgres.data:/var/lib/postgresql/data
     networks:
       - sandbox.postgres

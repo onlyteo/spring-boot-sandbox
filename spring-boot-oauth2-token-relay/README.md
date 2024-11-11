@@ -44,14 +44,10 @@ graph TD
     subgraph Authorization Server
         X[OAuth2 Login]:::oauth2
     end
-    subgraph Frontend
-        A[REST Client]:::react
-    end
-    subgraph Frontend API
-        B[REST API]:::spring
-    end
-    subgraph Backend
-        C[REST API]:::spring
+    subgraph Apps
+        A[React Frontend]:::react
+        B[Spring Frontend API]:::spring
+        C[Spring Backend]:::spring
     end
 
     A -- REST --> B
@@ -59,8 +55,8 @@ graph TD
     A <-. Login Redirect .-> X
     B -- Fetch Token --> X
 
-    classDef react fill: #087ea4, stroke: #000000, color: #000000
-    classDef spring fill: #80ea6e, stroke: #000000, color: #000000
+    classDef react fill: #58c4dc, stroke: #000000, color: #000000
+    classDef spring fill: #6cb52d, stroke: #000000, color: #000000
     classDef oauth2 fill: #c98979, stroke: #000000, color: #000000
 ```
 

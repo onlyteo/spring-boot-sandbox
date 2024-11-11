@@ -2,10 +2,10 @@
 
 [![Kotlin](https://img.shields.io/badge/kotlin-2.0.20-8d53f9.svg?logo=kotlin&logoColor=8d53f9)](http://kotlinlang.org)
 [![Spring Boot](https://img.shields.io/badge/spring%20boot-3.3.3-6cb52d.svg?logo=spring-boot&logoColor=6cb52d)](https://spring.io/projects/spring-boot)
+[![Gradle](https://img.shields.io/badge/gradle-stable-209bc4.svg?logo=gradle&logoColor=209bc4)](https://gradle.org)
 [![TypeScript](https://img.shields.io/badge/typescript-5.2.2-3178c6.svg?logo=typescript&logoColor=3178c6)](https://www.typescriptlang.org)
 [![React](https://img.shields.io/badge/react-18.3.1-58c4dc.svg?logo=react&logoColor=58c4dc)](https://react.dev)
-[![Gradle](https://img.shields.io/badge/gradle-stable-209bc4.svg?logo=gradle&logoColor=209bc4)](https://gradle.org)
-[![Gradle](https://img.shields.io/badge/node.js-stable-417e38.svg?logo=nodedotjs&logoColor=417e38)](https://nodejs.org)
+[![Node.js](https://img.shields.io/badge/node.js-stable-417e38.svg?logo=nodedotjs&logoColor=417e38)](https://nodejs.org)
 [![GitHub license](https://img.shields.io/badge/license-Apache_2.0-e97726.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 This repository contain sandbox projects to showcase features of the
@@ -37,8 +37,8 @@ The examples typically consists of a `Frontend` and a `Backend` application.
 
 ```mermaid
 graph TD
-    A[Spring Boot Frontend]:::spring
-    B[Spring Boot Backend]:::spring
+    A[Spring Frontend]:::spring
+    B[Spring Backend]:::spring
 
     A --> B
     
@@ -51,8 +51,8 @@ If the frontend is a JavaScript application then there is often a `Frontend API`
 ```mermaid
 graph TD
     A[React Frontend]:::react
-    B[Spring Boot Frontend API]:::spring
-    C[Spring Boot Backend]:::spring
+    B[Spring Frontend API]:::spring
+    C[Spring Backend]:::spring
     
     A --> B
     B --> C
