@@ -55,7 +55,7 @@ class WebSecurityConfig {
             }
             .logout { config ->
                 config
-                    .logoutRequestMatcher(logoutRequestMatcher())
+                    .logoutRequestMatcher(logoutRequestMatcher)
                     .logoutSuccessHandler(logoutSuccessHandler)
             }
             .build()
@@ -73,14 +73,12 @@ class WebSecurityConfig {
     fun oAuth2AuthorizationRequestResolver(
         clientRegistrationRepository: ClientRegistrationRepository
     ): OAuth2AuthorizationRequestResolver {
-        val authorizationRequestResolver = DefaultOAuth2AuthorizationRequestResolver(
+        return DefaultOAuth2AuthorizationRequestResolver(
             clientRegistrationRepository,
             DEFAULT_AUTHORIZATION_REQUEST_BASE_URI
-        )
-        authorizationRequestResolver.setAuthorizationRequestCustomizer(
-            OAuth2AuthorizationRequestCustomizers.withPkce()
-        )
-        return authorizationRequestResolver
+        ).apply {
+            setAuthorizationRequestCustomizer(OAuth2AuthorizationRequestCustomizers.withPkce()) // Enables PKCE
+        }
     }
 
     /**
@@ -93,7 +91,9 @@ class WebSecurityConfig {
      * @return The [OidcClientInitiatedLogoutSuccessHandler] bean.
      */
     @Bean
-    fun logoutSuccessHandler(clientRegistrationRepository: ClientRegistrationRepository?): LogoutSuccessHandler {
+    fun logoutSuccessHandler(
+        clientRegistrationRepository: ClientRegistrationRepository
+    ): LogoutSuccessHandler {
         return OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository)
     }
 
@@ -102,10 +102,6 @@ class WebSecurityConfig {
      * endpoint. This works well for regular frontends where it is possible to use a regular form to invoke logout.
      * For JavaScript based frontends it is more convenient to just navigate to the logout endpoint using HTTP GET.
      * We therefore override the logout URL request matcher to allow GET requests.
-     *
-     * @return The [AntPathRequestMatcher] object.
      */
-    private fun logoutRequestMatcher(): RequestMatcher {
-        return AntPathRequestMatcher("/logout", HttpMethod.GET.name())
-    }
+    private val logoutRequestMatcher: RequestMatcher = AntPathRequestMatcher("/logout", HttpMethod.GET.name())
 }

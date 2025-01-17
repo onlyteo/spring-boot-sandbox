@@ -6,17 +6,16 @@ By default, Spring Security stores state in-memory. This examples adds persisten
 harden the security setup.
 
 Extended features:
+* Storing user credentials in the database.
 * Storing OAuth2 registered clients in the database.
 * Storing OAuth2 authorizations in the database.
-* Storing OAuth2 consents in the database.
-* Storing user details in the database.
+* Storing OAuth2 authorization consents in the database.
 * Using external RSA keys for OAuth2 token signing.
 * Requiring PKCE for OAuth2 clients using the Authorization Code Grant flow.
 
 ## Prerequisites
 
-* Java Runtime - e.g. [Temurin JDK](https://adoptium.net), [OpenJDK](https://openjdk.org) or [Oracle JDK](https://www.oracle.com/java)
-* [Docker](https://www.docker.com)
+* Java Runtime - e.g. [Temurin JDK](https://adoptium.net) or [OpenJDK](https://openjdk.org)
 
 ## Run
 

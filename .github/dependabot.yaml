@@ -1,0 +1,37 @@
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin"
+      spring:
+        patterns:
+          - "org.springframework"
+      logging:
+        patterns:
+          - "org.slf4j"
+          - "ch.qos.logback"
+      jackson:
+        patterns:
+          - "com.fasterxml.jackson"
+      kafka:
+        patterns:
+          - "org.apache.kafka"
+          - "io.confluent"
+          - "org.apache.avro"
+      micrometer:
+        patterns:
+          - "io.micrometer"
+      opentelemetry:
+        patterns:
+          - "io.opentelemetry"
+      webjars:
+        patterns:
+          - "org.webjars"
+      kotest:
+        patterns:
+          - "io.kotest"

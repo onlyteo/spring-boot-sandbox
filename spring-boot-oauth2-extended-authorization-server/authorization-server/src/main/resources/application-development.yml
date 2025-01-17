@@ -26,7 +26,7 @@ spring:
       authorizationserver:
         client:
           sandbox-frontend:
-            require-proof-key: true
+            require-proof-key: true # Enables PKCE
             require-authorization-consent: false
             registration:
               client-id: sandbox-frontend

@@ -68,7 +68,7 @@ class WebSecurityConfig {
         val propertiesMapper = SecurityPropertiesMapper(passwordEncoder, properties)
         val userDetails = propertiesMapper.asUserDetails()
         val userDetailsManager = JdbcUserDetailsManager()
-        userDetailsManager.jdbcTemplate = jdbcTemplate
+            .apply { setJdbcTemplate(jdbcTemplate) }
         userDetails.stream()
             .filter { user -> !userDetailsManager.userExists(user.username) }
             .forEach { user -> userDetailsManager.createUser(user) }

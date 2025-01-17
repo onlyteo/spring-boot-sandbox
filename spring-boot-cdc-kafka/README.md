@@ -6,7 +6,7 @@ CDC is used to publish records of data changes in a database.
 
 ## Prerequisites
 
-* Java Runtime - e.g. [Temurin JDK](https://adoptium.net), [OpenJDK](https://openjdk.org) or [Oracle JDK](https://www.oracle.com/java)
+* Java Runtime - e.g. [Temurin JDK](https://adoptium.net) or [OpenJDK](https://openjdk.org)
 * [NodeJS Runtime](https://nodejs.org)
 * [NPM](https://www.npmjs.com) or [Yarn](https://yarnpkg.com)
 * [Docker](https://www.docker.com)
