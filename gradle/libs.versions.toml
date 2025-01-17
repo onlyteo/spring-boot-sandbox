@@ -10,7 +10,7 @@ webjars-locator = "0.47"
 webjars-fontawesome = "6.4.2"
 kotest = "5.9.1"
 mockk = "1.13.12"
-google-cloud-jib = "3.4.3"
+google-cloud-jib = "3.4.4"
 git-properties = "2.4.2"
 
 ### PLUGINS ###
