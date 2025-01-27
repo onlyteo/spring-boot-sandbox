@@ -1,6 +1,6 @@
 ### VERSIONS ###
 [versions]
-kotlin = "2.1.0"
+kotlin = "2.1.10"
 spring-boot = "3.4.1"
 spring-dependencies = "1.1.7"
 webjars-jquery = "3.7.0"
