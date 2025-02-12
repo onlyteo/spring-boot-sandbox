@@ -1,13 +1,12 @@
 package com.onlyteo.sandbox.config
 
+import com.nimbusds.jose.jwk.JWKSet
+import com.nimbusds.jose.jwk.source.ImmutableJWKSet
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
-import com.onlyteo.sandbox.mapper.OAuth2AuthorizationServerPropertiesMapper
+import com.onlyteo.sandbox.handler.KeyHandler
+import com.onlyteo.sandbox.mapper.asRegisteredClients
 import com.onlyteo.sandbox.properties.ApplicationProperties
-import com.onlyteo.sandbox.serialize.PrivateKeyDeserializer
-import com.onlyteo.sandbox.serialize.PublicKeyDeserializer
-import com.onlyteo.sandbox.service.JwkService
-import com.onlyteo.sandbox.service.KeyService
 import org.springframework.boot.autoconfigure.security.oauth2.server.servlet.OAuth2AuthorizationServerProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -30,8 +29,6 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher
-import java.security.KeyFactory
-import java.security.NoSuchAlgorithmException
 import java.util.function.Consumer
 
 @Configuration(proxyBeanMethods = false)
@@ -51,11 +48,13 @@ class AuthorizationServerConfig {
     @Bean
     @Order(1)
     fun authorizationServerSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http)
-        http
-            .getConfigurer(OAuth2AuthorizationServerConfigurer::class.java)
+        val authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer
+            .authorizationServer()
             .oidc(Customizer.withDefaults()) // Enable OpenID Connect 1.0
         return http
+            .securityMatcher(authorizationServerConfigurer.endpointsMatcher)
+            .with(authorizationServerConfigurer, Customizer.withDefaults())
+            .authorizeHttpRequests { it.anyRequest().authenticated() }
             .exceptionHandling { config ->
                 config
                     .defaultAuthenticationEntryPointFor(
@@ -63,7 +62,6 @@ class AuthorizationServerConfig {
                         MediaTypeRequestMatcher(MediaType.TEXT_HTML)
                     )
             }
-            .oauth2ResourceServer { config -> config.jwt(Customizer.withDefaults()) }
             .build()
     }
 
@@ -112,8 +110,7 @@ class AuthorizationServerConfig {
         jdbcTemplate: JdbcTemplate,
         properties: OAuth2AuthorizationServerProperties
     ): RegisteredClientRepository {
-        val propertiesMapper = OAuth2AuthorizationServerPropertiesMapper(properties)
-        val registeredClients = propertiesMapper.asRegisteredClients()
+        val registeredClients = properties.asRegisteredClients()
         val registeredClientRepository = JdbcRegisteredClientRepository(jdbcTemplate)
         registeredClients.forEach(Consumer { registeredClientRepository.save(it) })
         return registeredClientRepository
@@ -132,48 +129,24 @@ class AuthorizationServerConfig {
 
     /**
      * The default behaviour of Spring Security is to use an in-memory [JWKSource] that generates new
-     * JSON Web Keys each time the application starts. The JSON Web Keys are used for both signing and decoding
+     * JSON Web Keys each time the application starts. The JSON Web Keys are used for both signing and verifying
      * JSON Web Tokens, but also for exposing the Open ID Connect JWK endpoint.
-     * By overriding the [JWKSource] with this custom service the keys are loaded from static keys on the classpath.
+     * By overriding the [JWKSource] the keys are loaded from static keys on the classpath.
      *
-     * @param properties - Custom security properties.
-     * @param keyService - The [KeyService] bean from below.
-     * @return The [JwkService] bean.
+     * @param properties     - Custom security properties.
+     * @param resourceLoader - Utility bean for loading resources.
+     * @return The [JWKSource] bean.
      */
     @Bean
     fun jwkSource(
         properties: ApplicationProperties,
-        keyService: KeyService
+        resourceLoader: ResourceLoader
     ): JWKSource<SecurityContext> {
-        return JwkService(properties, keyService)
-    }
-
-    /**
-     * A service for loading key resources from file or classpath.
-     *
-     * @param resourceLoader         - Utility bean for loading resources.
-     * @param publicKeyDeserializer  - Deserializer bean for public keys.
-     * @param privateKeyDeserializer - Deserializer bean for private keys.
-     * @return The [KeyService] bean.
-     */
-    @Bean
-    fun keyService(
-        resourceLoader: ResourceLoader,
-        publicKeyDeserializer: PublicKeyDeserializer,
-        privateKeyDeserializer: PrivateKeyDeserializer
-    ): KeyService {
-        return KeyService(resourceLoader, publicKeyDeserializer, privateKeyDeserializer)
-    }
-
-    /**
-     * An RSA [KeyFactory] bean.
-     *
-     * @return The [KeyFactory] bean.
-     * @throws NoSuchAlgorithmException -
-     */
-    @Bean
-    @Throws(NoSuchAlgorithmException::class)
-    fun rsaKeyFactory(): KeyFactory {
-        return KeyFactory.getInstance("RSA")
+        val rsaKeys = properties.security.keys.map { key ->
+            val publicKeyFile = resourceLoader.getResource(key.publicKeyLocation).file
+            val privateKeyFile = resourceLoader.getResource(key.privateKeyLocation).file
+            KeyHandler.readRsaKey(key.keyId, publicKeyFile, privateKeyFile)
+        }
+        return ImmutableJWKSet(JWKSet(rsaKeys))
     }
 }

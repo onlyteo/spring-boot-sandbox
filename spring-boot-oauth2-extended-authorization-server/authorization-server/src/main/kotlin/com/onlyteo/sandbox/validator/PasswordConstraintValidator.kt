@@ -9,8 +9,8 @@ import org.springframework.beans.BeanWrapperImpl
  */
 class PasswordConstraintValidator : ConstraintValidator<ValidPassword, Any> {
 
-    private var field: String? = null
-    private var confirmField: String? = null
+    private lateinit var field: String
+    private lateinit var confirmField: String
     private var message: String? = null
 
     override fun initialize(annotation: ValidPassword) {
@@ -21,9 +21,11 @@ class PasswordConstraintValidator : ConstraintValidator<ValidPassword, Any> {
 
     override fun isValid(value: Any, context: ConstraintValidatorContext): Boolean {
         val beanWrapper = BeanWrapperImpl(value)
-        val fieldValue = beanWrapper.getPropertyValue(field!!)
-        val confirmFieldValue = beanWrapper.getPropertyValue(confirmField!!)!!
-        if (fieldValue != null && fieldValue != confirmFieldValue) {
+        val fieldValue = beanWrapper.getPropertyValue(field)
+        val confirmFieldValue = beanWrapper.getPropertyValue(confirmField)
+        if (fieldValue != null && fieldValue == confirmFieldValue) {
+            return true
+        } else {
             context.disableDefaultConstraintViolation()
             context.buildConstraintViolationWithTemplate(message)
                 .addPropertyNode(field)
@@ -32,8 +34,6 @@ class PasswordConstraintValidator : ConstraintValidator<ValidPassword, Any> {
                 .addPropertyNode(confirmField)
                 .addConstraintViolation()
             return false
-        } else {
-            return true
         }
     }
 }

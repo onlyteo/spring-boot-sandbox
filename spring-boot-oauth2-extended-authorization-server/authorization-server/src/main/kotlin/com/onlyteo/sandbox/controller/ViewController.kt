@@ -1,11 +1,11 @@
 package com.onlyteo.sandbox.controller
 
+import com.onlyteo.sandbox.mapper.asUserDetails
 import com.onlyteo.sandbox.model.RegisterFormData
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotNull
-import org.springframework.core.convert.ConversionService
 import org.springframework.security.core.Authentication
-import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.core.oidc.user.OidcUser
 import org.springframework.security.provisioning.UserDetailsManager
 import org.springframework.stereotype.Controller
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 @Controller
 class ViewController(
-    private val conversionService: ConversionService,
+    private val passwordEncoder: PasswordEncoder,
     private val userDetailsManager: UserDetailsManager
 ) {
 
@@ -49,7 +49,7 @@ class ViewController(
             model.addAttribute("registerFormData", registerFormData)
             return "register"
         }
-        val userDetails = conversionService.convert(registerFormData, UserDetails::class.java)
+        val userDetails = registerFormData?.asUserDetails(passwordEncoder::encode)
         userDetailsManager.createUser(userDetails)
         redirectAttributes.addFlashAttribute("registration", "success")
         return "redirect:/login"

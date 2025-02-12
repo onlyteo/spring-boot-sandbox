@@ -1,13 +1,12 @@
 package com.onlyteo.sandbox.config
 
-import com.onlyteo.sandbox.mapper.SecurityPropertiesMapper
+import com.onlyteo.sandbox.mapper.asUserDetailsList
 import com.onlyteo.sandbox.properties.ApplicationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -15,7 +14,6 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager
 import org.springframework.security.provisioning.UserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 
-@EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 class WebSecurityConfig {
 
@@ -65,11 +63,10 @@ class WebSecurityConfig {
         passwordEncoder: PasswordEncoder,
         properties: ApplicationProperties
     ): UserDetailsManager {
-        val propertiesMapper = SecurityPropertiesMapper(passwordEncoder, properties)
-        val userDetails = propertiesMapper.asUserDetails()
+        val users = properties.security.asUserDetailsList(passwordEncoder::encode)
         val userDetailsManager = JdbcUserDetailsManager()
             .apply { setJdbcTemplate(jdbcTemplate) }
-        userDetails.stream()
+        users
             .filter { user -> !userDetailsManager.userExists(user.username) }
             .forEach { user -> userDetailsManager.createUser(user) }
         return userDetailsManager
