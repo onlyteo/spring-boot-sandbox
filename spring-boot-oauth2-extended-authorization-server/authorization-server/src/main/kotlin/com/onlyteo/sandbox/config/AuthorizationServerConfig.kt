@@ -55,12 +55,11 @@ class AuthorizationServerConfig {
             .securityMatcher(authorizationServerConfigurer.endpointsMatcher)
             .with(authorizationServerConfigurer, Customizer.withDefaults())
             .authorizeHttpRequests { it.anyRequest().authenticated() }
-            .exceptionHandling { config ->
-                config
-                    .defaultAuthenticationEntryPointFor(
-                        LoginUrlAuthenticationEntryPoint("/login"),
-                        MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-                    )
+            .exceptionHandling {
+                it.defaultAuthenticationEntryPointFor(
+                    LoginUrlAuthenticationEntryPoint("/login"),
+                    MediaTypeRequestMatcher(MediaType.TEXT_HTML)
+                )
             }
             .build()
     }

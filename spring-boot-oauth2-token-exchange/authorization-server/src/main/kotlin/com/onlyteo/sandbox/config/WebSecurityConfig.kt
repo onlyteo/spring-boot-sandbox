@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer
 import org.springframework.security.web.SecurityFilterChain
 
 @EnableConfigurationProperties(AppSecurityProperties::class)
@@ -33,15 +32,11 @@ class WebSecurityConfig {
         securityProperties: AppSecurityProperties
     ): SecurityFilterChain {
         return http
-            .authorizeHttpRequests { config ->
-                config
-                    .requestMatchers(*securityProperties.whitelistedPaths.toTypedArray()).permitAll()
+            .authorizeHttpRequests {
+                it.requestMatchers(*securityProperties.whitelistedPaths.toTypedArray()).permitAll()
                     .anyRequest().authenticated()
             }
-            .formLogin { config: FormLoginConfigurer<HttpSecurity?> ->
-                config
-                    .loginPage("/login").permitAll()
-            }
+            .formLogin { it.loginPage("/login").permitAll() }
             .build()
     }
 }

@@ -36,15 +36,11 @@ class WebSecurityConfig {
         properties: ApplicationProperties
     ): SecurityFilterChain {
         return http
-            .authorizeHttpRequests { config ->
-                config
-                    .requestMatchers(*properties.security.whitelistedPaths.toTypedArray()).permitAll()
+            .authorizeHttpRequests {
+                it.requestMatchers(*properties.security.whitelistedPaths.toTypedArray()).permitAll()
                     .anyRequest().authenticated()
             }
-            .formLogin { config ->
-                config
-                    .loginPage("/login").permitAll()
-            }
+            .formLogin { it.loginPage("/login").permitAll() }
             .build()
     }
 

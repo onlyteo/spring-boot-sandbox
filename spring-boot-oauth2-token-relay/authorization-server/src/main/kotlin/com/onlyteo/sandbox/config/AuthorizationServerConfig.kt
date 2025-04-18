@@ -6,7 +6,6 @@ import org.springframework.core.annotation.Order
 import org.springframework.http.MediaType
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
@@ -29,11 +28,16 @@ class AuthorizationServerConfig {
     @Bean
     @Order(1)
     fun authorizationServerSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http)
-        http
-            .getConfigurer(OAuth2AuthorizationServerConfigurer::class.java)
+        val authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer
+            .authorizationServer()
             .oidc(Customizer.withDefaults()) // Enable OpenID Connect 1.0
         return http
+            .securityMatcher(authorizationServerConfigurer.endpointsMatcher)
+            .with(authorizationServerConfigurer, Customizer.withDefaults())
+            .authorizeHttpRequests { config ->
+                config
+                    .anyRequest().authenticated()
+            }
             .exceptionHandling { config ->
                 config
                     .defaultAuthenticationEntryPointFor(
@@ -41,7 +45,6 @@ class AuthorizationServerConfig {
                         MediaTypeRequestMatcher(MediaType.TEXT_HTML)
                     )
             }
-            .oauth2ResourceServer { config -> config.jwt(Customizer.withDefaults()) }
             .build()
     }
 }

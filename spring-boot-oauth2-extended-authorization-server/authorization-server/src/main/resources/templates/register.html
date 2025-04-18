@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/default}">
 <body>
 <main layout:fragment="content" class="container" role="main">
-    <div class="login-box px-3 py-5 mx-auto rounded-3">
+    <section class="login-box px-3 py-5 mx-auto rounded-3">
         <h2 class="emphasized-text" th:text="#{register.page.title}"></h2>
         <form th:action="@{/register}" th:object="${registerFormData}" method="post">
             <div class="form-group mb-3">
@@ -40,10 +40,10 @@
             </div>
             <input th:type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-    </div>
-    <div class="alert alert-danger" role="alert" th:if="${param.error != null}">
-        <span th:text="#{register.message.error}"></span>
-    </div>
+        <div class="alert alert-danger fs-6 m-0" role="alert" th:if="${#fields.hasErrors('registerFormData.*')}">
+            <span th:text="#{register.message.error}"></span>
+        </div>
+    </section>
 </main>
 </body>
 </html>

@@ -7,13 +7,13 @@ import org.springframework.beans.BeanWrapperImpl
 /**
  * Constraint validator to check that two passwords match.
  */
-class PasswordConstraintValidator : ConstraintValidator<ValidPassword, Any> {
+class PasswordsMatchConstraintValidator : ConstraintValidator<PasswordsMatch, Any> {
 
     private lateinit var field: String
     private lateinit var confirmField: String
     private var message: String? = null
 
-    override fun initialize(annotation: ValidPassword) {
+    override fun initialize(annotation: PasswordsMatch) {
         this.field = annotation.field
         this.confirmField = annotation.confirmField
         this.message = annotation.message

@@ -1,11 +1,9 @@
-val jvmMajorVersion: String by project
-val jvmVersion = JavaVersion.toVersion(jvmMajorVersion)
-
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.spring)
-    alias(libs.plugins.spring.boot)
-    alias(libs.plugins.spring.dependencies)
+    kotlin("jvm")
+    kotlin("plugin.spring")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    application
 }
 
 dependencies {
@@ -14,10 +12,4 @@ dependencies {
     implementation(libs.spring.boot.starter.oauth2.client)
     implementation(libs.bundles.webjars)
     testImplementation(libs.bundles.spring.test)
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(jvmVersion.toString()))
-    }
 }
