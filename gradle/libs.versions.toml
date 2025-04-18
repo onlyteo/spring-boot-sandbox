@@ -1,6 +1,6 @@
 ### VERSIONS ###
 [versions]
-webjars-jquery = "3.7.0"
+webjars-jquery = "3.7.1"
 webjars-bootstrap = "5.3.1"
 webjars-popper = "2.11.7"
 webjars-locator = "0.47"
