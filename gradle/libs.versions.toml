@@ -6,7 +6,7 @@ webjars-popper = "2.11.7"
 webjars-locator = "0.52"
 webjars-fontawesome = "6.7.2"
 kotest = "5.9.1"
-mockk = "1.13.16"
+mockk = "1.14.0"
 
 ### LIBRARIES ###
 [libraries]
