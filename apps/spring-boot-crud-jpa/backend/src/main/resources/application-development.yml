@@ -1,0 +1,19 @@
+### SPRING ###
+spring:
+  # Datasource
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sandbox
+    username: sandbox
+    password: G4nd4lf
+
+### LOGGING ###
+logging:
+  level:
+    root: INFO
+    com.onlyteo: DEBUG
+
+### SERVER ###
+server:
+  port: 8081
+  error:
+    include-stacktrace: ALWAYS

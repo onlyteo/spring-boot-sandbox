@@ -45,10 +45,13 @@ opentelemetry-exporter-otlp = { module = "io.opentelemetry:opentelemetry-exporte
 # Flyway
 flyway-core = { module = "org.flywaydb:flyway-core" }
 flyway-mysql = { module = "org.flywaydb:flyway-mysql" }
+flyway-postgresql = { module = "org.flywaydb:flyway-database-postgresql" }
 # H2
 h2-database = { module = "com.h2database:h2" }
 # MySQL
-mysql-connector = { module = "com.mysql:mysql-connector-j" }
+mysql-driver = { module = "com.mysql:mysql-connector-j" }
+# PostgreSQL
+postgresql-driver = { module = "org.postgresql:postgresql" }
 # Kafka
 kafka-clients = { module = "org.apache.kafka:kafka-clients" }
 kafka-streams = { module = "org.apache.kafka:kafka-streams" }
@@ -102,7 +105,13 @@ spring-jdbc-h2 = [
 ]
 spring-jpa-mysql = [
     "spring-boot-starter-data-jpa",
-    "mysql-connector"
+    "mysql-driver",
+    "flyway-mysql"
+]
+spring-jpa-postgresql = [
+    "spring-boot-starter-data-jpa",
+    "postgresql-driver",
+    "flyway-postgresql"
 ]
 spring-kafka = [
     "spring-kafka",

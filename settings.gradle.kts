@@ -1,4 +1,3 @@
-
 // PROJECT
 rootProject.name = "spring-boot-sandbox"
 
@@ -23,6 +22,7 @@ dependencyResolutionManagement {
 // PLUGINS
 plugins {
     kotlin("jvm") version "2.1.21" apply false
+    kotlin("plugin.noarg") version "2.1.21" apply false
     kotlin("plugin.spring") version "2.1.21" apply false
     kotlin("plugin.serialization") version "2.1.21" apply false
     id("org.springframework.boot") version "3.5.0" apply false
@@ -40,6 +40,9 @@ plugins {
 include(":apps:spring-boot-rest-api:frontend")
 include(":apps:spring-boot-rest-api:frontend-api")
 include(":apps:spring-boot-rest-api:backend")
+
+include(":apps:spring-boot-crud-jpa:frontend")
+include(":apps:spring-boot-crud-jpa:backend")
 
 include(":apps:spring-boot-oauth2-token-relay:frontend")
 include(":apps:spring-boot-oauth2-token-relay:frontend-api")
