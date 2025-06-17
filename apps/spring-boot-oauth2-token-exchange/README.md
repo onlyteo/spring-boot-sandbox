@@ -16,18 +16,18 @@ login flow to authenticate the end users.
 
 Start Authorization Server application:
 ```bash
-../gradlew :spring-boot-oauth2-token-exchange:authorization-server:bootRun
+../../gradlew :apps:spring-boot-oauth2-token-exchange:authorization-server:bootRun
 ```
 
 Start Backend application:
 ```bash
-../gradlew :spring-boot-oauth2-token-exchange:backend:bootRun
+../../gradlew :apps:spring-boot-oauth2-token-exchange:backend:bootRun
 ```
 
 Start Frontend API application:
 
 ```bash
-../gradlew :spring-boot-oauth2-token-exchange:frontend-api:bootRun
+../../gradlew :apps:spring-boot-oauth2-token-exchange:frontend-api:bootRun
 ```
 
 Start Frontend application (this should open a browser window):

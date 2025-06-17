@@ -21,18 +21,18 @@ Extended features:
 
 Start Authorization Server application:
 ```bash
-../gradlew :spring-boot-oauth2-extended-authorization-server:authorization-server:bootRun
+../../gradlew :apps:spring-boot-oauth2-extended-authorization-server:authorization-server:bootRun
 ```
 
 Start Backend application:
 ```bash
-../gradlew :spring-boot-oauth2-extended-authorization-server:backend:bootRun
+../../gradlew :apps:spring-boot-oauth2-extended-authorization-server:backend:bootRun
 ```
 
 Start Frontend API application:
 
 ```bash
-../gradlew :spring-boot-oauth2-extended-authorization-server:frontend-api:bootRun
+../../gradlew :apps:spring-boot-oauth2-extended-authorization-server:frontend-api:bootRun
 ```
 
 ## Architecture

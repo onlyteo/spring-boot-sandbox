@@ -10,13 +10,13 @@ This example shows a Spring Boot CRUD app using Thymeleaf and JPA.
 
 Start Backend application:
 ```bash
-../gradlew :spring-boot-crud-jpa:backend:bootRun
+../../gradlew :apps:spring-boot-crud-jpa:backend:bootRun
 ```
 
 Start Frontend application:
 
 ```bash
-../gradlew :spring-boot-crud-jpa:frontend:bootRun
+../../gradlew :apps:spring-boot-crud-jpa:frontend:bootRun
 ```
 
 ## Architecture

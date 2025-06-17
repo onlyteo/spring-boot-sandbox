@@ -13,18 +13,18 @@ This example shows an observability enabled architecture with Open Telemetry and
 
 Start Kafka Docker container:
 ```bash
-docker compose -f ../docker/kafka/docker-compose.yml up -d
+docker compose -f ../../docker/kafka/docker-compose.yml up -d
 ```
 
 Start Backend application:
 ```bash
-../gradlew :spring-boot-otel-observability:backend:bootRun
+../../gradlew :apps:spring-boot-otel-observability:backend:bootRun
 ```
 
 Start Frontend API application:
 
 ```bash
-../gradlew :spring-boot-otel-observability:frontend-api:bootRun
+../../gradlew :apps:spring-boot-otel-observability:frontend-api:bootRun
 ```
 
 Start Frontend application (this should open a browser window):

@@ -16,6 +16,9 @@ import org.springframework.security.config.annotation.web.configurers.RequestCac
 import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProvider
 import org.springframework.security.oauth2.client.TokenExchangeOAuth2AuthorizedClientProvider
+import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient
+import org.springframework.security.oauth2.client.endpoint.RestClientTokenExchangeTokenResponseClient
+import org.springframework.security.oauth2.client.endpoint.TokenExchangeGrantRequest
 import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
 import org.springframework.security.web.AuthenticationEntryPoint
@@ -24,6 +27,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.savedrequest.RequestCache
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher
 import org.springframework.security.web.util.matcher.RequestMatcher
+
 
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
@@ -48,9 +52,9 @@ class WebSecurityConfig {
     @Throws(Exception::class)
     fun webSecurityFilterChain(
         http: HttpSecurity,
-        requestCache: RequestCache?,
-        authenticationEntryPoint: AuthenticationEntryPoint?,
-        logoutSuccessHandler: LogoutSuccessHandler?,
+        requestCache: RequestCache,
+        authenticationEntryPoint: AuthenticationEntryPoint,
+        logoutSuccessHandler: LogoutSuccessHandler,
         properties: ApplicationProperties
     ): SecurityFilterChain {
         return http
@@ -113,11 +117,21 @@ class WebSecurityConfig {
     }
 
     /**
+     * The bean is required when using the token exchange grant.
      *
+     * @return The [TokenExchangeOAuth2AuthorizedClientProvider] bean.
      */
     @Bean
-    fun oAuth2AuthorizedClientProvider(): OAuth2AuthorizedClientProvider {
+    fun tokenExchangeOAuth2AuthorizedClientProvider(): OAuth2AuthorizedClientProvider {
         return TokenExchangeOAuth2AuthorizedClientProvider()
+    }
+
+    /**
+     *
+     */
+    //@Bean
+    fun accessTokenResponseClient(): OAuth2AccessTokenResponseClient<TokenExchangeGrantRequest> {
+        return RestClientTokenExchangeTokenResponseClient()
     }
 
     /**

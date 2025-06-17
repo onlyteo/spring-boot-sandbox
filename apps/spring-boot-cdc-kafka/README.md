@@ -15,17 +15,17 @@ CDC is used to publish records of data changes in a database.
 
 Start MySQL Docker container:
 ```bash
-docker compose -f ../docker/mysql/docker-compose.yml up -d
+docker compose -f ../../docker/mysql/docker-compose.yml up -d
 ```
 
 Start Kafka Docker container:
 ```bash
-docker compose -f ../docker/kafka/docker-compose.yml up -d
+docker compose -f ../../docker/kafka/docker-compose.yml up -d
 ```
 
 Start Kafka Connect Docker container:
 ```bash
-docker compose -f ../docker/kafka-connect/docker-compose.yml up -d
+docker compose -f ../../docker/kafka-connect/docker-compose.yml up -d
 ```
 
 Enable Debezium Kafka Connector using Kafka Connect REST API:
@@ -35,13 +35,13 @@ curl -X POST "http://localhost:8083/connectors" -H "Content-Type: application/js
 
 Start Backend application:
 ```bash
-../gradlew :spring-boot-kafka-cdc:backend:bootRun
+../../gradlew :apps:spring-boot-kafka-cdc:backend:bootRun
 ```
 
 Start Frontend API application:
 
 ```bash
-../gradlew :spring-boot-kafka-cdc:frontend-api:bootRun
+../../gradlew :apps:spring-boot-kafka-cdc:frontend-api:bootRun
 ```
 
 Start Frontend application (this should open a browser window):

@@ -1,5 +1,6 @@
 ### APP ###
 app:
+  # Integrations
   integrations:
     backend:
       url: http://localhost:8081

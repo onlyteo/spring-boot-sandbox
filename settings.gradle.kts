@@ -44,6 +44,9 @@ include(":apps:spring-boot-rest-api:backend")
 include(":apps:spring-boot-crud-jpa:frontend")
 include(":apps:spring-boot-crud-jpa:backend")
 
+include(":apps:spring-boot-form-login:frontend")
+include(":apps:spring-boot-form-login:backend")
+
 include(":apps:spring-boot-oauth2-token-relay:frontend")
 include(":apps:spring-boot-oauth2-token-relay:frontend-api")
 include(":apps:spring-boot-oauth2-token-relay:backend")

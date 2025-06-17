@@ -1,0 +1,37 @@
+### APP ###
+app:
+  # Integrations
+  integrations:
+    backend:
+      url: http://localhost:8081
+      username: frontend
+      password: 4r4g0rn
+  # Security
+  security:
+    users:
+      - username: bilbo
+        password: G4nd4lf
+        roles:
+          - USER
+
+### SPRING ###
+spring:
+  # Datasource
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:sandbox;MODE=PostgreSQL;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+
+### LOGGING ###
+logging:
+  level:
+    root: INFO
+    "org.springframework.security": DEBUG
+    "com.onlyteo": DEBUG
+
+### SERVER ###
+server:
+  port: 8080
+  error:
+    include-stacktrace: ALWAYS

@@ -13,18 +13,18 @@ This example shows a CQRS architecture using Ktor applications and messaging usi
 
 Start Kafka Docker container:
 ```bash
-docker compose -f ../docker/kafka/docker-compose.yml up -d
+docker compose -f ../../docker/kafka/docker-compose.yml up -d
 ```
 
 Start Backend application:
 ```bash
-../gradlew :spring-boot-kafka-cqrs:backend:bootRun
+../../gradlew :apps:spring-boot-kafka-cqrs:backend:bootRun
 ```
 
 Start Frontend API application:
 
 ```bash
-../gradlew :spring-boot-kafka-cqrs:frontend-api:bootRun
+../../gradlew :apps:spring-boot-kafka-cqrs:frontend-api:bootRun
 ```
 
 Start Frontend application (this should open a browser window):

@@ -20,7 +20,7 @@ class GreetingResource(
     @PostMapping
     fun post(
         @RequestBody person: Person,
-        @RegisteredOAuth2AuthorizedClient("sandbox-frontend") authorizedClient: OAuth2AuthorizedClient
+        @RegisteredOAuth2AuthorizedClient("sandbox-backend") authorizedClient: OAuth2AuthorizedClient
     ): ResponseEntity<Greeting> {
         val greeting = greetingService.getGreeting(authorizedClient, person)
         return ResponseEntity.ok(greeting)

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{site.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" th:href="@{~/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{~/webjars/font-awesome/css/all.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{~/assets/css/style.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<main class="container" role="main">
+    <div class="description-box px-3 py-5 rounded-3">
+        <div class="row">
+            <div class="col">
+                <h2 class="emphasized-text" th:text="#{index.page.title}"></h2>
+                <p th:text="#{index.page.description}"></p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col"></div>
+            <div class="col-5">
+                <form action="#" method="post" th:action="@{~/}">
+                    <div class="input-group has-validation">
+                        <input id="name" name="name" type="text" class="form-control form-control-lg"
+                               th:classappend="${error ? 'is-invalid' : ''}"
+                               th:placeholder="#{index.page.form.name.placeholder}">
+                        <div id="nameFeedback" class="invalid-feedback" th:text="#{index.page.form.name.error}"></div>
+                    </div>
+                    <div class="mt-3 d-grid d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit" th:text="#{index.page.form.submit}"></button>
+                    </div>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row mt-4">
+            <div class="col"></div>
+            <div class="col-5">
+                <div class="alert alert-success" th:if="${greeting != null}" th:text="${greeting.message}"></div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script type="text/javascript" th:src="@{~/webjars/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{~/webjars/popper.js/umd/popper.js}"></script>
+<script type="text/javascript" th:src="@{~/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

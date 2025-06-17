@@ -1,0 +1,29 @@
+<header class="header mb-5"
+        th:fragment="header"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <nav class="navbar navbar-dark navbar-expand-lg p-4">
+        <a class="navbar-brand mx-4" th:href="@{/}">
+            <h1>
+                <i class="navbar-logo emphasized-text fa-solid fa-screwdriver-wrench"></i><span
+                    class="navbar-title ms-3" th:text="#{site.title}"></span>
+            </h1>
+        </a>
+        <ul class="navbar-nav ms-auto" sec:authorize="isAuthenticated()">
+            <li class="nav-item dropdown">
+                <a id="profile-dropdown" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                   role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="profile-dropdown">
+                    <div class="dropdown-item disabled" sec:authentication="name"></div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/logout}">
+                        <i class="fa-solid fa-right-from-bracket"></i><span class="ms-2"
+                                                                            th:text="#{site.logout-button}"></span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<body>
+<main layout:fragment="content" class="container" role="main">
+    <div class="login-box px-3 py-5 mx-auto rounded-3">
+        <h2 class="emphasized-text" th:text="#{login.page.title}"></h2>
+        <div class="clearfix mb-3">
+            <form th:action="@{/login}" method="post">
+                <div class="form-group mb-3">
+                    <label for="username" th:text="#{login.form.username}"></label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password" th:text="#{login.form.password}" role="button"></label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <div class="form-group mb-3">
+                    <button class="btn btn-success float-end" th:type="submit"
+                            th:text="#{login.form.login-button}"></button>
+                </div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
+        </div>
+        <div class="alert alert-danger fs-6" role="alert" th:if="${param.error != null}">
+            <span th:text="#{login.message.login-error}"></span>
+        </div>
+        <div class="alert alert-success fs-6" role="alert" th:if="${param.logout != null}">
+            <span th:text="#{login.message.logout-successful}"></span>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -12,13 +12,13 @@ This example shows a React frontend and Spring Boot REST API.
 
 Start Backend application:
 ```bash
-../gradlew :spring-boot-rest-api:backend:bootRun
+../../gradlew :apps:spring-boot-rest-api:backend:bootRun
 ```
 
 Start Frontend API application:
 
 ```bash
-../gradlew :spring-boot-rest-api:frontend-api:bootRun
+../../gradlew :apps:spring-boot-rest-api:frontend-api:bootRun
 ```
 
 Start Frontend application (this should open a browser window):

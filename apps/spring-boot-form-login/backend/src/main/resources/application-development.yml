@@ -1,0 +1,22 @@
+### APP ###
+app:
+  # Security
+  security:
+    users:
+      - username: frontend
+        password: 4r4g0rn
+        roles:
+          - APPLICATION
+
+### LOGGING ###
+logging:
+  level:
+    root: INFO
+    "org.springframework.security": DEBUG
+    "com.onlyteo": DEBUG
+
+### SERVER ###
+server:
+  port: 8081
+  error:
+    include-stacktrace: ALWAYS
