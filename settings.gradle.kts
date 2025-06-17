@@ -37,9 +37,9 @@ plugins {
 
 
 // APPS
-include(":apps:spring-boot-rest-api:frontend")
-include(":apps:spring-boot-rest-api:frontend-api")
-include(":apps:spring-boot-rest-api:backend")
+include(":apps:spring-boot-api-rest:frontend")
+include(":apps:spring-boot-api-rest:frontend-api")
+include(":apps:spring-boot-api-rest:backend")
 
 include(":apps:spring-boot-crud-jpa:frontend")
 include(":apps:spring-boot-crud-jpa:backend")
