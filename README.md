@@ -16,12 +16,13 @@ All examples are written in [Kotlin](https://kotlinlang.org) and built using [Gr
 ## Examples
 Read details about the examples in their respective project roots.
 
-* [REST API](./apps/spring-boot-rest-api)
+* [REST API](./apps/spring-boot-api-rest)
+* [CRUD JPA](./apps/spring-boot-crud-jpa)
 * [OAuth2 Token Relay](./apps/spring-boot-oauth2-token-relay)
 * [OAuth2 Token Exchange](./apps/spring-boot-oauth2-token-exchange)
 * [OAuth2 Extended Authorization Server](./apps/spring-boot-oauth2-extended-authorization-server)
-* [CQRS Kafka](./apps/spring-boot-cqrs-kafka)
-* [CDC Kafka](./apps/spring-boot-cdc-kafka)
+* [CQRS Kafka](./apps/spring-boot-kafka-cqrs)
+* [CDC Kafka](./apps/spring-boot-kafka-cdc)
 * [OTEL Observability](./apps/spring-boot-otel-observability)
 
 ## Architecture

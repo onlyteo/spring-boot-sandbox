@@ -21,10 +21,10 @@ dependencyResolutionManagement {
 
 // PLUGINS
 plugins {
-    kotlin("jvm") version "2.1.21" apply false
-    kotlin("plugin.noarg") version "2.1.21" apply false
-    kotlin("plugin.spring") version "2.1.21" apply false
-    kotlin("plugin.serialization") version "2.1.21" apply false
+    kotlin("jvm") version "2.2.0" apply false
+    kotlin("plugin.noarg") version "2.2.0" apply false
+    kotlin("plugin.spring") version "2.2.0" apply false
+    kotlin("plugin.serialization") version "2.2.0" apply false
     id("org.springframework.boot") version "3.5.3" apply false
     id("io.spring.dependency-management") version "1.1.7" apply false
     id("com.google.cloud.tools.jib") version "3.4.5" apply false
@@ -61,13 +61,13 @@ include(":apps:spring-boot-oauth2-extended-authorization-server:frontend")
 include(":apps:spring-boot-oauth2-extended-authorization-server:backend")
 include(":apps:spring-boot-oauth2-extended-authorization-server:authorization-server")
 
-include(":apps:spring-boot-cqrs-kafka:frontend")
-include(":apps:spring-boot-cqrs-kafka:frontend-api")
-include(":apps:spring-boot-cqrs-kafka:backend")
+include(":apps:spring-boot-kafka-cqrs:frontend")
+include(":apps:spring-boot-kafka-cqrs:frontend-api")
+include(":apps:spring-boot-kafka-cqrs:backend")
 
-include(":apps:spring-boot-cdc-kafka:frontend")
-include(":apps:spring-boot-cdc-kafka:frontend-api")
-include(":apps:spring-boot-cdc-kafka:backend")
+include(":apps:spring-boot-kafka-cdc:frontend")
+include(":apps:spring-boot-kafka-cdc:frontend-api")
+include(":apps:spring-boot-kafka-cdc:backend")
 
 include(":apps:spring-boot-otel-observability:frontend")
 include(":apps:spring-boot-otel-observability:frontend-api")
