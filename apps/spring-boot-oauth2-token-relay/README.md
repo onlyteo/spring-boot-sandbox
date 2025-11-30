@@ -14,23 +14,23 @@ login flow to authenticate the end users.
 
 ## Run
 
-Start Authorization Server application:
+Start the Authorization Server application:
 ```bash
 ../../gradlew :apps:spring-boot-oauth2-token-relay:authorization-server:bootRun
 ```
 
-Start Backend application:
+Start the Backend application:
 ```bash
 ../../gradlew :apps:spring-boot-oauth2-token-relay:backend:bootRun
 ```
 
-Start Frontend API application:
+Start the Frontend API application:
 
 ```bash
 ../../gradlew :apps:spring-boot-oauth2-token-relay:frontend-api:bootRun
 ```
 
-Start Frontend application (this should open a browser window):
+Start the Frontend application (this should open a browser window):
 ```bash
 yarn --cwd ./frontend install
 yarn --cwd ./frontend start

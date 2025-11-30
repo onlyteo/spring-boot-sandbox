@@ -10,10 +10,9 @@ class RestConsumerConfig {
 
     @Bean
     fun backendRestClient(
-        builder: RestClient.Builder,
         properties: ApplicationProperties
     ): RestClient {
-        return builder
+        return RestClient.builder()
             .baseUrl(properties.integrations.backend.url.toString())
             .build()
     }

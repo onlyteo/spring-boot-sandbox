@@ -8,10 +8,10 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.reflect)
-    implementation(libs.bundles.spring.web)
-    implementation(libs.bundles.spring.kafka)
-    implementation(libs.bundles.spring.websocket)
-    implementation(libs.bundles.spring.jpa.mysql)
+    implementation(libs.bundles.spring.boot.web)
+    implementation(libs.bundles.spring.boot.kafka)
+    implementation(libs.bundles.spring.boot.websocket)
+    implementation(libs.bundles.spring.boot.jpa.mysql)
     implementation(libs.bundles.webjars)
-    testImplementation(libs.bundles.spring.test)
+    testImplementation(libs.bundles.spring.boot.test)
 }

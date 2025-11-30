@@ -1,6 +1,5 @@
 package com.onlyteo.sandbox.app.config
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.onlyteo.sandbox.app.model.CdcEnvelope
 import com.onlyteo.sandbox.app.model.CdcKey
 import com.onlyteo.sandbox.app.model.CdcValue
@@ -15,12 +14,12 @@ import org.apache.kafka.streams.StreamsBuilder
 import org.apache.kafka.streams.Topology
 import org.apache.kafka.streams.kstream.Consumed
 import org.apache.kafka.streams.kstream.Produced
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties
+import org.springframework.boot.kafka.autoconfigure.KafkaProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.annotation.EnableKafka
 import org.springframework.kafka.annotation.EnableKafkaStreams
-import org.springframework.kafka.support.serializer.JsonSerde
+import org.springframework.kafka.support.serializer.JacksonJsonSerde
 
 @EnableKafkaStreams
 @EnableKafka
@@ -49,32 +48,18 @@ class KafkaConfig {
 
     @Bean
     fun sourceKeySerde(
-        kafkaProperties: KafkaProperties,
-        objectMapper: ObjectMapper
+        kafkaProperties: KafkaProperties
     ): Serde<CdcEnvelope<CdcKey>> {
-        val cdcEnvelopeType = objectMapper.typeFactory.constructParametricType(
-            CdcEnvelope::class.java,
-            CdcKey::class.java
-        )
-        val jsonSerde = JsonSerde<CdcEnvelope<CdcKey>>(cdcEnvelopeType, objectMapper)
+        val jsonSerde = JacksonJsonSerde<CdcEnvelope<CdcKey>>()
         jsonSerde.configure(kafkaProperties.streams.properties, true)
         return jsonSerde
     }
 
     @Bean
     fun sourceValueSerde(
-        kafkaProperties: KafkaProperties,
-        objectMapper: ObjectMapper
+        kafkaProperties: KafkaProperties
     ): Serde<CdcEnvelope<CdcValue<PersonEntity>>> {
-        val cdcValueType = objectMapper.typeFactory.constructParametricType(
-            CdcValue::class.java,
-            PersonEntity::class.java
-        )
-        val cdcEnvelopeType = objectMapper.typeFactory.constructParametricType(
-            CdcEnvelope::class.java,
-            cdcValueType
-        )
-        val jsonSerde = JsonSerde<CdcEnvelope<CdcValue<PersonEntity>>>(cdcEnvelopeType, objectMapper)
+        val jsonSerde = JacksonJsonSerde<CdcEnvelope<CdcValue<PersonEntity>>>()
         jsonSerde.configure(kafkaProperties.streams.properties, false)
         return jsonSerde
     }
@@ -86,10 +71,9 @@ class KafkaConfig {
 
     @Bean
     fun sinkValueSerde(
-        kafkaProperties: KafkaProperties,
-        objectMapper: ObjectMapper
+        kafkaProperties: KafkaProperties
     ): Serde<Greeting> {
-        val jsonSerde = JsonSerde<Greeting>(objectMapper)
+        val jsonSerde = JacksonJsonSerde<Greeting>()
         jsonSerde.configure(kafkaProperties.streams.properties, false)
         return jsonSerde
     }

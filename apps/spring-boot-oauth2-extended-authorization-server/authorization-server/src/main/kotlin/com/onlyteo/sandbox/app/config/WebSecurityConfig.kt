@@ -5,7 +5,6 @@ import com.onlyteo.sandbox.app.properties.ApplicationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
-import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
@@ -13,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.JdbcUserDetailsManager
 import org.springframework.security.provisioning.UserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
+import javax.sql.DataSource
 
 @Configuration(proxyBeanMethods = false)
 class WebSecurityConfig {
@@ -45,23 +45,23 @@ class WebSecurityConfig {
     }
 
     /**
-     * The default behaviour of Spring Security is to use an in-memory [UserDetailsManager]. This changes
+     * The default behavior of Spring Security is to use an in-memory [UserDetailsManager]. This changes
      * to use a JDBC variant so that [UserDetails] instances are stored in a database.
      *
-     * @param jdbcTemplate       - The default [JdbcTemplate] bean.
+     * @param dataSource       - The default [DataSource] bean.
      * @param passwordEncoder    - The [PasswordEncoder] bean from below.
      * @param properties - Custom properties.
      * @return The [JdbcUserDetailsManager] bean.
      */
     @Bean
     fun userDetailsManager(
-        jdbcTemplate: JdbcTemplate,
+        dataSource: DataSource,
         passwordEncoder: PasswordEncoder,
         properties: ApplicationProperties
     ): UserDetailsManager {
-        val users = properties.security.asUserDetailsList(passwordEncoder::encode)
-        val userDetailsManager = JdbcUserDetailsManager()
-            .apply { setJdbcTemplate(jdbcTemplate) }
+        val users = properties.security
+            .asUserDetailsList { password -> passwordEncoder.encode(password).toString() }
+        val userDetailsManager = JdbcUserDetailsManager(dataSource)
         users
             .filter { user -> !userDetailsManager.userExists(user.username) }
             .forEach { user -> userDetailsManager.createUser(user) }

@@ -3,7 +3,7 @@ package com.onlyteo.sandbox.app.config
 import com.onlyteo.sandbox.app.cache.ReferrerAwareHttpSessionRequestCache
 import com.onlyteo.sandbox.app.login.UnauthenticatedEntryPoint
 import com.onlyteo.sandbox.app.properties.ApplicationProperties
-import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties
+import org.springframework.boot.security.oauth2.client.autoconfigure.OAuth2ClientProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer
 import org.springframework.security.config.annotation.web.configurers.RequestCacheConfigurer
-import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer
 import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
 import org.springframework.security.web.AuthenticationEntryPoint
@@ -35,7 +34,7 @@ class WebSecurityConfig {
      * See the JavaDoc of the [HttpSecurity.oauth2Login] method for more details.
      *
      * @param http                     - HTTP security configuration builder.
-     * @param requestCache             - Cache that saves request details when initiating authentication flow. See further description below.
+     * @param requestCache             - Cache that saves request details when initiating the authentication flow. See further description below.
      * @param authenticationEntryPoint - Bean that handles initiation of authentication flow. See further description below.
      * @param logoutSuccessHandler     - Bean that handles the logout flow. See further description below.
      * @param properties       - Custom security properties.
@@ -60,7 +59,7 @@ class WebSecurityConfig {
                     .requestMatchers(*properties.security.whitelistedPaths.toTypedArray()).permitAll()
                     .anyRequest().authenticated()
             }
-            .oauth2Login(Customizer.withDefaults<OAuth2LoginConfigurer<HttpSecurity>>())
+            .oauth2Login(Customizer.withDefaults())
             .requestCache { config: RequestCacheConfigurer<HttpSecurity?> ->
                 config.requestCache(
                     requestCache
@@ -94,12 +93,12 @@ class WebSecurityConfig {
     }
 
     /**
-     * The default behaviour of Spring Security when protecting the application as an OAuth2 Client is to redirect
+     * The default behavior of Spring Security when protecting the application as an OAuth2 Client is to redirect
      * unauthenticated requests to the OAuth2 Authorization Server for login. This works well for server-side rendered
      * web applications. But for applications that only provide a REST API for JavaScript based frontend like ReactJS
-     * this is not the desired behavior. This [AuthenticationEntryPoint] alters that behaviour to instead return
+     * this is not the desired behavior. This [AuthenticationEntryPoint] alters that behavior to instead return
      * a `401 Unauthorized` HTTP status together with a `Location` HTTP header containing the relative URL
-     * to the OAuth2 login endpoint. When the JavScript frontend tries to fetch data from the REST API and receives a
+     * to the OAuth2 login endpoint. When the JavaScript frontend tries to fetch data from the REST API and receives a
      * 401 HTTP status it can retrieve the login URL from the `Location` HTTP header and redirect the browser to
      * that URL in order to initiate the OAuth2 Authorization Code Grant login flow.
      * @param clientProperties - OAuth2 client properties.
@@ -111,8 +110,8 @@ class WebSecurityConfig {
     }
 
     /**
-     * The default behaviour of Spring Security when making a request to the logout endpoint is to clear the
-     * user session in the application. The user is however still logged in at the OAuth2 Authorization Server.
+     * The default behavior of Spring Security when making a request to the logout endpoint is to clear the
+     * user session in the application. However, the user is still logged in at the OAuth2 Authorization Server.
      * By using this [LogoutSuccessHandler] the user is also logged out of the Authorization Server by
      * redirecting the browser to the logout endpoint of the Authorization Server.
      *

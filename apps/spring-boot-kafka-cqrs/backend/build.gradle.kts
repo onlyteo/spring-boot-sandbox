@@ -8,9 +8,9 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.reflect)
-    implementation(libs.bundles.spring.web)
+    implementation(libs.bundles.spring.boot.web)
     implementation(libs.jackson.dataformat.csv)
     implementation(libs.bundles.webjars)
-    implementation(libs.bundles.spring.kafka.streams)
-    testImplementation(libs.bundles.spring.test)
+    implementation(libs.bundles.spring.boot.kafka.streams)
+    testImplementation(libs.bundles.spring.boot.test)
 }

@@ -8,9 +8,9 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.reflect)
-    implementation(libs.bundles.spring.web)
-    implementation(libs.bundles.spring.websocket)
+    implementation(libs.bundles.spring.boot.web)
+    implementation(libs.bundles.spring.boot.websocket)
     implementation(libs.bundles.webjars)
-    implementation(libs.bundles.spring.kafka)
-    testImplementation(libs.bundles.spring.test)
+    implementation(libs.bundles.spring.boot.kafka)
+    testImplementation(libs.bundles.spring.boot.test)
 }

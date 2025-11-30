@@ -1,0 +1,7 @@
+### POST request
+POST http://localhost:8081/api/greetings
+Content-Type: application/json
+
+{
+   "name": "Andreas"
+}

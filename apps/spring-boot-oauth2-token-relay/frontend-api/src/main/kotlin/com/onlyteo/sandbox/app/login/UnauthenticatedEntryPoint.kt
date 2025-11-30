@@ -2,7 +2,7 @@ package com.onlyteo.sandbox.app.login
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties
+import org.springframework.boot.security.oauth2.client.autoconfigure.OAuth2ClientProperties
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.AuthenticationException

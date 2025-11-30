@@ -5,7 +5,7 @@ webjars-bootstrap = "5.3.7"
 webjars-popper = "2.11.7"
 webjars-locator = "0.52"
 webjars-fontawesome = "7.0.0"
-kotest = "5.9.1"
+kotest = "6.0.1"
 mockk = "1.14.5"
 
 ### LIBRARIES ###
@@ -26,12 +26,10 @@ spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
 spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
 spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
+spring-boot-starter-oauth2-authorization-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-authorization-server" }
+spring-boot-starter-kafka = { module = "org.springframework.boot:spring-boot-starter-kafka" }
 spring-boot-starter-websocket = { module = "org.springframework.boot:spring-boot-starter-websocket" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
-# Spring Security
-spring-security-oauth2-authorization-server = { module = "org.springframework.security:spring-security-oauth2-authorization-server" }
-# Spring Kafka
-spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
 # Jackson
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" }
@@ -78,63 +76,63 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 ### BUNDLES ###
 [bundles]
-spring-web = [
+spring-boot-web = [
     "spring-boot-starter-web",
     "spring-boot-starter-validation",
     "spring-boot-starter-logging",
     "spring-boot-configuration-processor",
     "jackson-module-kotlin"
 ]
-spring-webflux = [
+spring-boot-webflux = [
     "spring-boot-starter-webflux",
     "spring-boot-starter-validation",
     "spring-boot-starter-logging",
     "spring-boot-configuration-processor",
     "jackson-module-kotlin"
 ]
-spring-thymeleaf = [
+spring-boot-thymeleaf = [
     "spring-boot-starter-thymeleaf",
     "thymeleaf-layout-dialect"
 ]
-spring-websocket = [
+spring-boot-websocket = [
     "spring-boot-starter-websocket"
 ]
-spring-jdbc-h2 = [
+spring-boot-jdbc-h2 = [
     "spring-boot-starter-jdbc",
     "h2-database",
     "flyway-core"
 ]
-spring-jpa-mysql = [
+spring-boot-jpa-mysql = [
     "spring-boot-starter-data-jpa",
     "mysql-driver",
     "flyway-mysql"
 ]
-spring-jpa-postgresql = [
+spring-boot-jpa-postgresql = [
     "spring-boot-starter-data-jpa",
     "postgresql-driver",
     "flyway-postgresql"
 ]
-spring-kafka = [
-    "spring-kafka",
+spring-boot-kafka = [
+    "spring-boot-starter-kafka",
     "kafka-clients"
 ]
-spring-kafka-streams = [
-    "spring-kafka",
+spring-boot-kafka-streams = [
+    "spring-boot-starter-kafka",
     "kafka-clients",
     "kafka-streams"
 ]
-spring-micrometer-prometheus = [
+spring-boot-micrometer-prometheus = [
     "spring-boot-starter-actuator",
     "micrometer-registry-prometheus"
 ]
-spring-micrometer-opentelemetry = [
+spring-boot-micrometer-opentelemetry = [
     "spring-boot-starter-actuator",
     "micrometer-registry-otlp",
     "micrometer-tracing-bridge-otel",
     "opentelemetry-kotlin",
     "opentelemetry-exporter-otlp"
 ]
-spring-test = [
+spring-boot-test = [
     "spring-boot-starter-test"
 ]
 webjars = [
